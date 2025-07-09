@@ -71,14 +71,16 @@
 
 ## 🖼️ Captures d’écran / Screenshots
 
-### 🇫🇷 Ajoutez vos captures d’écran ici pour illustrer l’interface, l’extension, ou l’utilisation d’ODIN.
-### 🇬🇧 Add your screenshots here to showcase the interface, extension, or ODIN usage.
+### 🇫🇷 L’interface, l’extension, ou l’utilisation d’ODIN.
+### 🇬🇧 Showcase the interface, extension, or ODIN usage.
 
 
 ![Exemple d’utilisation ODIN](image-1.png)
+
 *Exemple d’utilisation dans VSCode (FR) / Example usage in VSCode (EN)*
 
 ![Extension Chrome ODIN](image.png)
+
 *Extension Chrome ODIN (FR/EN)*
 ---
 
