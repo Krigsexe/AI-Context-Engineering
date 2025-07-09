@@ -155,51 +155,34 @@ If this work inspires you, **please leave a star on GitHub!** ⭐️
 <div align="center">
 
 ```mermaid
-flowchart TD
-    A[User Input / Entrée Utilisateur] -->|Prompt + Context| B(ODIN Agent)
-    B --> C{Validation}
-    C -->|Valid / Valide| D[Execute Action / Exécuter Action]
-    C -->|Invalid / Invalide| E[Request Clarification / Demander Clarification]
-    D --> F[Auto-Documentation]
-    F --> G[Checkpoint Save / Sauvegarde Checkpoint]
-    G --> H{User Feedback / Feedback Utilisateur}
-    H -->|"Faux"| I[Rollback & Learn / Retour & Apprentissage]
-    H -->|"Parfait"| J[Save Pattern / Sauvegarder Pattern]
-    I --> B
-    J --> K[Next Task / Tâche Suivante]
-```
-
-</div>
-
-
 graph TB
     subgraph "ODIN Framework"
-        A[User Input] --> B{ODIN Agent}
-        B --> C[Validation Layer]
-        C --> D{Source Check}
-        D -->|Valid Sources| E[Execution Engine]
-        D -->|Invalid Sources| F[Block & Request]
+        A[User Input / Entrée Utilisateur] --> B{ODIN Agent}
+        B --> C[Validation Layer / Couche de Validation]
+        C --> D{Source Check / Vérification Sources}
+        D -->|Valid Sources / Sources Valides| E[Execution Engine / Moteur d'Exécution]
+        D -->|Invalid Sources / Sources Invalides| F[Block & Request / Bloquer & Demander]
         
-        E --> G[Action Execution]
+        E --> G[Action Execution / Exécution Action]
         G --> H[Auto Documentation]
-        H --> I[State Management]
+        H --> I[State Management / Gestion d'État]
         
         I --> J[(AI_CHECKPOINT.json)]
         I --> K[(learning_log.json)]
         I --> L[(patterns.json)]
         
-        J --> M[Backup System]
+        J --> M[Backup System / Système Sauvegarde]
         M --> N[(AI_CHECKPOINT.bak.json)]
         
-        G --> O{User Feedback}
-        O -->|"Faux"| P[Rollback]
-        P --> Q[Error Analysis]
+        G --> O{User Feedback / Feedback Utilisateur}
+        O -->|"Faux"| P[Rollback / Retour Arrière]
+        P --> Q[Error Analysis / Analyse Erreur]
         Q --> R[(anti_patterns.json)]
         R --> B
         
-        O -->|"Parfait"| S[Pattern Learning]
+        O -->|"Parfait"| S[Pattern Learning / Apprentissage Pattern]
         S --> L
-        S --> T[Next Task]
+        S --> T[Next Task / Tâche Suivante]
         T --> B
     end
     
@@ -210,6 +193,9 @@ graph TB
     style K fill:#c8e6c9
     style L fill:#c8e6c9
     style R fill:#ffcdd2
+```
+
+</div>
 
 
 ---
