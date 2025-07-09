@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # JSON Validation Script
+# Warning: Do not leave test files (test_invalid.json, etc.) in the repository
+# as they will cause validation to fail
 echo "🔍 Validating JSON files..."
 
 json_files_found=false
