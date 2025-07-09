@@ -135,12 +135,9 @@ A folder `exemple/` is provided to show how to start an ODIN project, structure 
 
 ```text
 /
-├── agent/             # Scripts pour l'agent local (cryptage, etc.) / Local agent scripts (encryption, etc.)
 ├── docs/              # Documentation détaillée / Detailed documentation
-├── extension/         # Extension Chrome / Chrome extension
-├── prompts/           # Prompts structurés / Structured prompts
-│   ├── economic_models/ # Modèles économiques / Economic models
 ├── exemple/           # Exemples d'utilisation ODIN / ODIN usage examples
+├── prompts/           # Prompts structurés / Structured prompts
 ├── .gitignore         # Fichiers ignorés / Ignored files
 ├── LICENSE            # Licence / License
 └── README.md          # Présentation générale / General overview
@@ -151,7 +148,7 @@ A folder `exemple/` is provided to show how to start an ODIN project, structure 
 ## 🇫🇷 Comment démarrer ? / 🇬🇧 Getting Started
 
 1. **Clonez le dépôt / Clone the repo**  
-   `git clone [URL_DU_REPO_GITHUB]`
+   `git clone [AI-Context-Engineering]`
 2. **Ouvrez dans votre IDE / Open in your IDE**  
    VSCode, Cursor, etc.
 3. **(Optionnel) Installez l’extension Chrome / (Optional) Install the Chrome extension**
