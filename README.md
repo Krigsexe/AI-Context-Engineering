@@ -3,9 +3,9 @@
 **Par / By Julien Gelee aka Krigs**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/krigs/odin/actions)
-[![Coverage Status](https://img.shields.io/badge/coverage-100%25-success)](https://github.com/krigs/odin/coverage)
-[![Stars](https://img.shields.io/github/stars/krigs/odin?style=social)](https://github.com/krigs/odin)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Krigsexe/AI-Context-Engineering/actions)
+[![Coverage Status](https://img.shields.io/badge/coverage-100%25-success)](https://github.com/Krigsexe/AI-Context-Engineering/coverage)
+[![Stars](https://img.shields.io/github/stars/krigs/odin?style=social)](https://github.com/Krigsexe/AI-Context-Engineering)
 
 ---
 
@@ -21,9 +21,9 @@
 
 ## 🏅 Badges supplémentaires / Extra Badges
 
-[![GitHub issues](https://img.shields.io/github/issues/krigs/odin.svg)](https://github.com/krigs/odin/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/krigs/odin.svg)](https://github.com/krigs/odin/pulls)
-[![Last Commit](https://img.shields.io/github/last-commit/krigs/odin)](https://github.com/krigs/odin/commits)
+[![GitHub issues](https://img.shields.io/github/issues/krigs/odin.svg)](https://github.com/Krigsexe/AI-Context-Engineering/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/krigs/odin.svg)](https://github.com/Krigsexe/AI-Context-Engineering/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/krigs/odin)](https://github.com/Krigsexe/AI-Context-Engineering/commits)
 
 ---
 
@@ -74,12 +74,12 @@
 ### 🇫🇷 Ajoutez vos captures d’écran ici pour illustrer l’interface, l’extension, ou l’utilisation d’ODIN.
 ### 🇬🇧 Add your screenshots here to showcase the interface, extension, or ODIN usage.
 
-![Exemple d’utilisation ODIN](docs/assets/odin_example_fr.png)
+
+![Exemple d’utilisation ODIN](image-1.png)
 *Exemple d’utilisation dans VSCode (FR) / Example usage in VSCode (EN)*
 
-![Extension Chrome ODIN](docs/assets/odin_extension_fr.png)
+![Extension Chrome ODIN](image.png)
 *Extension Chrome ODIN (FR/EN)*
-
 ---
 
 ## 🖼️ Schéma d’architecture / Architecture Diagram
