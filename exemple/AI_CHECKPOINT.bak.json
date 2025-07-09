@@ -1,5 +1,5 @@
 {
-  // 🇫🇷 Copie de sécurité du checkpoint principal / 🇬🇧 Backup copy of main checkpoint
+  "_comment": "🇫🇷 Copie de sécurité du checkpoint principal / 🇬🇧 Backup copy of main checkpoint",
   "state": {
     "last_action": "validation_contextuelle",
     "last_feedback": "Parfait",

@@ -1,11 +1,11 @@
 {
-  // 🇫🇷 État courant de l'IA / 🇬🇧 Current AI state
+  "_comment_1": "🇫🇷 État courant de l'IA / 🇬🇧 Current AI state",
   "state": {
     "last_action": "validation_contextuelle",
     "last_feedback": "Parfait",
     "timestamp": "2025-07-10T12:00:00Z"
   },
-  // 🇫🇷 Historique des feedbacks utilisateur / 🇬🇧 User feedback history
+  "_comment_2": "🇫🇷 Historique des feedbacks utilisateur / 🇬🇧 User feedback history",
   "feedback_log": [
     {
       "timestamp": "2025-07-10T11:59:00Z",
@@ -24,17 +24,17 @@
       "error_analysis": null
     }
   ],
-  // 🇫🇷 Patterns de réussite / 🇬🇧 Success patterns
+  "_comment_3": "🇫🇷 Patterns de réussite / 🇬🇧 Success patterns",
   "patterns": [
     "Vérification systématique des données avant action",
     "Rollback automatique en cas d'erreur"
   ],
-  // 🇫🇷 Anti-patterns (échecs évités) / 🇬🇧 Anti-patterns (avoided failures)
+  "_comment_4": "🇫🇷 Anti-patterns (échecs évités) / 🇬🇧 Anti-patterns (avoided failures)",
   "anti_patterns": [
     "Action sans validation préalable",
     "Suppression de code fonctionnel sans raison"
   ],
-  // 🇫🇷 Backup automatique / 🇬🇧 Automatic backup
+  "_comment_5": "🇫🇷 Backup automatique / 🇬🇧 Automatic backup",
   "backup": {
     "last_backup": "2025-07-10T12:00:00Z",
     "file": "AI_CHECKPOINT.bak.json"

@@ -7,8 +7,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/Krigsexe/AI-Context-Engineering?style=social)](https://github.com/Krigsexe/AI-Context-Engineering)
-[![CodeQL Advanced](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/codeql.yml/badge.svg)](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/codeql.yml)
-[![Bandit Scan](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/bandit.yml/badge.svg)](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/bandit.yml)
+[![JSON Validation](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/validate.yml/badge.svg)](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/validate.yml)
 
 </div>
 
