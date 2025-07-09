@@ -1,0 +1,42 @@
+{
+  // 🇫🇷 État courant de l'IA / 🇬🇧 Current AI state
+  "state": {
+    "last_action": "validation_contextuelle",
+    "last_feedback": "Parfait",
+    "timestamp": "2025-07-10T12:00:00Z"
+  },
+  // 🇫🇷 Historique des feedbacks utilisateur / 🇬🇧 User feedback history
+  "feedback_log": [
+    {
+      "timestamp": "2025-07-10T11:59:00Z",
+      "user_feedback": "Faux",
+      "context": "Test de validation contextuelle",
+      "result": "failure",
+      "learned_pattern": null,
+      "error_analysis": "Données manquantes détectées"
+    },
+    {
+      "timestamp": "2025-07-10T12:00:00Z",
+      "user_feedback": "Parfait",
+      "context": "Correction apportée, validation réussie",
+      "result": "success",
+      "learned_pattern": "Vérification systématique des données avant action",
+      "error_analysis": null
+    }
+  ],
+  // 🇫🇷 Patterns de réussite / 🇬🇧 Success patterns
+  "patterns": [
+    "Vérification systématique des données avant action",
+    "Rollback automatique en cas d'erreur"
+  ],
+  // 🇫🇷 Anti-patterns (échecs évités) / 🇬🇧 Anti-patterns (avoided failures)
+  "anti_patterns": [
+    "Action sans validation préalable",
+    "Suppression de code fonctionnel sans raison"
+  ],
+  // 🇫🇷 Backup automatique / 🇬🇧 Automatic backup
+  "backup": {
+    "last_backup": "2025-07-10T12:00:00Z",
+    "file": "AI_CHECKPOINT.bak.json"
+  }
+} 
