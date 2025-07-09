@@ -2,6 +2,20 @@
 **Par / By Julien Gelee aka Krigs**
 
 ---
+## Table des matières
+1. [Présentation](#-présentation--introduction)
+2. [Pourquoi ODIN ?](#-pourquoi-odin--why-odin)
+3. [Genèse et Philosophie](#-genèse-et-philosophie--genesis-and-philosophy)
+4. [Fonctionnalités Clés](#-fonctionnalités-clés--key-features)
+5. [6 Mois de Développement en Détail](#-6-mois-de-développement-en-détail--6-months-of-development-in-detail)
+6. [Étude du dossier `/prompts`](#-étude-du-dossier-prompts--prompts-folder-study)
+7. [Esprit du projet](#-esprit-du-projet-extrait-du-mail--project-spirit-from-the-email)
+8. [Structure du dépôt](#-structure-du-dépôt--repository-structure)
+9. [Comment démarrer ?](#-comment-démarrer--getting-started)
+10. [Licence](#-licence--license)
+11. [Remerciements](#-remerciements--acknowledgements)
+
+---
 
 ## 🇫🇷 Présentation / 🇬🇧 Introduction
 
@@ -143,11 +157,19 @@
 
 ```
 /
-├── agent/             # Scripts pour l'agent local (cryptage, etc.) / Local agent scripts (encryption, etc.)
 ├── docs/              # Documentation détaillée / Detailed documentation
-├── extension/         # Extension Chrome / Chrome extension
+│   ├── assets/        # Ressources visuelles pour la documentation / Visual assets for documentation
+│   └── PROJECT_PHILOSOPHY.md # Ce fichier / This file
+├── exemple/           # Exemples d'utilisation ODIN / ODIN usage examples
+│   ├── AI_CHECKPOINT.bak.json
+│   ├── AI_CHECKPOINT.json
+│   ├── learning_log.json
+│   └── README.md
 ├── prompts/           # Prompts structurés / Structured prompts
-│   ├── economic_models/ # Modèles économiques / Economic models
+│   ├── archive/       # Anciennes versions et prompts spécifiques / Old versions and specific prompts
+│   ├── ODIN.md        # Prompt principal (v5.1.0) / Main prompt (v5.1.0)
+│   └── README.md      # Explication des prompts / Explanation of prompts
+├── .github/           # Fichiers de configuration GitHub / GitHub configuration files
 ├── .gitignore         # Fichiers ignorés / Ignored files
 ├── LICENSE            # Licence / License
 └── README.md          # Présentation générale / General overview
@@ -158,7 +180,7 @@
 ## 🇫🇷 Comment démarrer ? / 🇬🇧 Getting Started
 
 1. **Clonez le dépôt / Clone the repo**  
-   `git clone [URL_DU_REPO_GITHUB]`
+   `git clone https://github.com/Krigsexe/AI-Context-Engineering.git`
 2. **Ouvrez dans votre IDE / Open in your IDE**  
    VSCode, Cursor, etc.
 3. **(Optionnel) Installez l’extension Chrome / (Optional) Install the Chrome extension**

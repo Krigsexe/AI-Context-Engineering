@@ -1,208 +1,277 @@
+<div align="center">
 
-# ODIN – Agent IA Autonome pour la Connaissance Universelle / Autonomous AI Agent for Universal Knowledge
-**Par / By Julien Gelee aka Krigs**
+# 🌟 ODIN: Autonomous AI Agent Framework
+### Universal Knowledge for AI-Powered Development
+
+**By Julien Gelee aka Krigs**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Krigsexe/AI-Context-Engineering/actions)
-[![Coverage Status](https://img.shields.io/badge/coverage-100%25-success)](https://github.com/Krigsexe/AI-Context-Engineering/coverage)
-[![Stars](https://img.shields.io/github/stars/krigs/odin?style=social)](https://github.com/Krigsexe/AI-Context-Engineering)
+[![GitHub Stars](https://img.shields.io/github/stars/Krigsexe/AI-Context-Engineering?style=social)](https://github.com/Krigsexe/AI-Context-Engineering)
+[![CodeQL](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/codeql.yml/badge.svg)](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/codeql.yml)
+[![Bandit Scan](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/bandit.yml/badge.svg)](https://github.com/Krigsexe/AI-Context-Engineering/actions/workflows/bandit.yml)
+
+</div>
+
+<p align="center">
+  <strong>🚀 Empowering everyone to build with AI, regardless of technical background</strong>
+</p>
+
+<p align="center">
+  <a href="QUICKSTART.md"><strong>📖 Quick Start Guide</strong></a> •
+  <a href="#-key-features"><strong>✨ Features</strong></a> •
+  <a href="docs/PROJECT_PHILOSOPHY.md"><strong>🧠 Philosophy</strong></a> •
+  <a href="exemple/"><strong>💡 Examples</strong></a> •
+  <a href="CONTRIBUTING.md"><strong>🤝 Contributing</strong></a>
+</p>
 
 ---
 
-## 🇫🇷 Présentation / 🇬🇧 Introduction
+## 📖 What is ODIN?
 
-> **ODIN** (pour "connaissance universelle") est un projet open source né de 6 mois de travail intensif (parfois 17h/jour !), pensé, codé et documenté par moi, **Julien Gelee aka Krigs**. Son but : rendre l’IA accessible à tous, même sans savoir coder, en injectant un système de prompts hybrides et de gestion de contexte directement dans l’IDE.
->
-> **ODIN** (for "universal knowledge") is an open-source project born from 6 months of intense work (sometimes 17h/day!), designed, coded, and documented by me, **Julien Gelee aka Krigs**. Its goal: make AI accessible to everyone, even non-coders, by injecting a hybrid prompt and context system directly into the IDE.
+**ODIN** (named after the Norse god of wisdom and knowledge) is an open-source framework born from 6 months of intensive research and development. It's designed to make AI truly accessible and reliable for everyone - from seasoned developers to creative entrepreneurs with no coding experience.
 
-**Si ce travail vous inspire, laissez une étoile sur GitHub ! / If you appreciate this work, leave a star on GitHub!** ⭐️
+At its core, ODIN is a sophisticated prompt engineering system that transforms any Large Language Model into an autonomous, self-correcting, and ultra-reliable development assistant. It's not just another AI tool - it's a complete methodology for building production-ready applications with AI.
 
----
+### 🎯 The Vision
 
-## 🏅 Badges supplémentaires / Extra Badges
+After exploring every possible flaw in generative AI - hallucinations, logical drifts, context loss, and more - I created ODIN to solve a fundamental problem: **How can we make AI work reliably and autonomously while remaining accessible to everyone?**
 
-[![GitHub issues](https://img.shields.io/github/issues/krigs/odin.svg)](https://github.com/Krigsexe/AI-Context-Engineering/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/krigs/odin.svg)](https://github.com/Krigsexe/AI-Context-Engineering/pulls)
-[![Last Commit](https://img.shields.io/github/last-commit/krigs/odin)](https://github.com/Krigsexe/AI-Context-Engineering/commits)
+The answer lies in this framework that combines:
+- **Structured prompts** with multi-layered security rules
+- **Persistent memory** through checkpoint systems
+- **Self-learning capabilities** with pattern recognition
+- **Absolute reliability** with zero tolerance for errors
 
----
-
-## 🧠 Pourquoi ODIN ? / Why ODIN?
-
-- **Référence à la connaissance universelle** : ODIN, dieu de la sagesse, symbolise l’ambition de rendre le savoir et la puissance de l’IA accessibles à tous.
-- **Hybrid Prompt & Context** : Un système qui combine prompts structurés et gestion contextuelle pour guider l’IA, éviter les dérives, et garantir la cohérence du projet.
-- **Pensé pour l’IDE** : ODIN s’intègre à la racine de n’importe quel projet, dans n’importe quel IDE, pour servir de socle à vos interactions IA.
-- **Partage sincère** : Ce projet est le fruit d’un travail de terrain, sans promesse miracle, mais avec une exigence de robustesse, de documentation et d’accessibilité.
-
-- **Reference to universal knowledge**: ODIN, god of wisdom, symbolizes the ambition to make knowledge and AI power accessible to all.
-- **Hybrid Prompt & Context**: A system combining structured prompts and contextual management to guide AI, avoid drifts, and ensure project coherence.
-- **IDE-centric**: ODIN integrates at the root of any project, in any IDE, as a foundation for your AI interactions.
-- **Sincere sharing**: This project is the result of hands-on work, with no miracle promises, but with a demand for robustness, documentation, and accessibility.
+If this work inspires you, **please leave a star on GitHub!** ⭐️
 
 ---
 
-## ✨ Philosophie et Mission / Philosophy & Mission
+## ✨ Key Features
 
-> Ce projet n’est ni une promesse, ni une solution miracle. C’est le fruit d’un travail de terrain, en solitaire, que je souhaite partager sans prétention. L’idée : permettre à l’IA de fonctionner quasi seule, de s’auto-corriger, s’auto-documenter, et de minimiser ses erreurs via une boucle de vérification systématique.
->
-> This project is neither a promise nor a miracle solution. It’s the result of hands-on, solitary work that I wish to share humbly. The idea: let AI work almost autonomously, self-correct, self-document, and minimize errors through a systematic verification loop.
+### 🛡️ Security & Reliability First
+- **Zero hallucination policy**: Every response must be based on verifiable sources
+- **Automatic rollback**: Instant recovery from any error
+- **File integrity validation**: Prevents unauthorized modifications
+- **Input sanitization**: Protection against malicious inputs
+
+### 🧠 Autonomous Learning System
+- **Binary feedback loop**: Simple "Faux/Parfait" (Wrong/Perfect) system
+- **Pattern recognition**: Learns from successes and failures
+- **Persistent memory**: Maintains context across sessions via checkpoint files
+- **Self-documentation**: Every action is automatically documented
+
+### 🔄 Advanced Context Management
+- **AI_CHECKPOINT.json**: Main state preservation
+- **Automatic backups**: Redundancy through `.bak` files
+- **Learning logs**: Complete history of all interactions
+- **Smart merging**: Intelligent conflict resolution
+
+### 📚 Documentation Synchronization
+- **Mandatory sync**: Code and documentation always stay aligned
+- **Duplicate detection**: Prevents documentation drift
+- **Automatic updates**: Documentation evolves with the codebase
 
 ---
 
-## 🏗️ Fonctionnalités Clés / Key Features
+## 🚀 Getting Started / Comment démarrer ?
 
-- **Prompts structurés et multirègles** (anti-biais, anti-hallucination, rollback, synchronisation doc/code)
-- **Gestion avancée du contexte** (mémoire persistante, pruning, validation contextuelle)
-- **Auto-correction et apprentissage** (logs, patterns, anti-patterns, feedback "Faux/Parfait")
-- **Extension Chrome** (injection de prompts dans ChatGPT, Gemini, Claude…)
-- **Sécurité & RGPD** (aucune donnée externe, logs locaux, conformité)
-- **Documentation automatique** (toutes les actions tracées, synchronisation obligatoire)
-- **Prêt à l’emploi pour non-développeurs** (aucune compétence technique requise pour démarrer)
+### 📋 Prerequisites / Prérequis
+- **🇬🇧** An AI tool (ChatGPT, Claude, or any local LLM) + Any modern IDE  
+- **🇫🇷** Un outil IA (ChatGPT, Claude, ou un LLM local) + N'importe quel IDE moderne  
+- **No coding experience required! / Aucune expérience de programmation requise !**
 
-- **Structured, multi-rule prompts** (anti-bias, anti-hallucination, rollback, doc/code sync)
-- **Advanced context management** (persistent memory, pruning, contextual validation)
-- **Self-correction and learning** (logs, patterns, anti-patterns, "Faux/Parfait" feedback)
-- **Chrome extension** (prompt injection into ChatGPT, Gemini, Claude…)
-- **Security & GDPR** (no external data, local logs, compliance)
-- **Automatic documentation** (all actions traced, mandatory sync)
-- **Ready for non-developers** (no technical skills required to start)
+### ⚡ Quick Start / Démarrage rapide
+
+**🇬🇧 English:**
+1. **Clone this repository** / **🇫🇷 Clonez ce dépôt** :
+   ```bash
+   git clone https://github.com/Krigsexe/AI-Context-Engineering.git
+   cd AI-Context-Engineering
+   ```
+
+2. **Load the ODIN prompt** / **🇫🇷 Chargez le prompt ODIN** :
+   - Open `prompts/ODIN.md` / Ouvrez `prompts/ODIN.md`
+   - Copy its content to your AI assistant / Copiez son contenu dans votre assistant IA
+
+3. **Start building** / **🇫🇷 Commencez à construire** :
+   - Give it a project idea / Donnez-lui une idée de projet
+   - Use "Parfait" or "Faux" feedback / Utilisez les feedbacks "Parfait" ou "Faux"
+   - Watch the magic happen! / Regardez la magie opérer !
+
+**📖 Need detailed guidance? / Besoin d'un guide détaillé ?**  
+👉 **[Complete 5-minute tutorial / Tutoriel complet de 5 minutes](QUICKSTART.md)**
+
+**💡 Want to see examples? / Envie de voir des exemples ?**  
+👉 **[Check the `exemple/` folder / Consultez le dossier `exemple/`](exemple/)**
 
 ---
 
-## 🖼️ Captures d’écran / Screenshots
+## ��️ Project Structure / Structure du Projet
 
-### 🇫🇷 L’interface, l’extension, ou l’utilisation d’ODIN.
-### 🇬🇧 Showcase the interface, extension, or ODIN usage.
+**🇬🇧 The repository is organized for clarity and ease of navigation.**  
+**🇫🇷 Le dépôt est organisé pour la clarté et la facilité de navigation.**
 
+```
+.
+├── .github/                       # GitHub configuration / Configuration GitHub
+│   ├── dependabot.yml             # Dependency management (disabled) / Gestion dépendances (désactivé)
+│   └── workflows/                 # CI/CD workflows (ready to activate) / Workflows CI/CD (prêts)
+├── docs/                          # Detailed documentation / Documentation détaillée
+│   ├── assets/                    # Images and visual resources / Images et ressources visuelles
+│   └── PROJECT_PHILOSOPHY.md      # The story behind ODIN / L'histoire d'ODIN
+├── exemple/                       # Live example of ODIN in action / Exemple concret d'ODIN
+│   ├── AI_CHECKPOINT.json         # AI state file / Fichier d'état IA
+│   ├── AI_CHECKPOINT.bak.json     # Backup state / Sauvegarde d'état
+│   ├── learning_log.json          # Learning history / Historique d'apprentissage
+│   └── README.md                  # Example documentation / Documentation exemple
+├── prompts/                       # The heart of ODIN / Le cœur d'ODIN
+│   ├── archive/                   # Historical versions / Versions historiques
+│   ├── ODIN.md                    # Main prompt (v5.1.0) / Prompt principal (v5.1.0)
+│   └── README.md                  # Prompt guide / Guide des prompts
+├── .gitignore                     # Git ignore rules / Règles Git ignore
+├── LICENSE                        # MIT License / Licence MIT
+├── README.md                      # You are here / Vous êtes ici
+└── SECURITY.md                    # Security policy / Politique de sécurité
+```
 
-![Exemple d’utilisation ODIN](image-1.png)
-
-*Exemple d’utilisation dans VSCode (FR) / Example usage in VSCode (EN)*
-
-![Extension Chrome ODIN](image.png)
-
-*Extension Chrome ODIN (FR/EN)*
 ---
 
-## 🖼️ Schéma d’architecture / Architecture Diagram
+## 🌟 Real-World Applications / Applications Réelles
+
+**🇬🇧 ODIN has already been battle-tested in production environments:**  
+**🇫🇷 ODIN a déjà été testé en conditions réelles de production :**
+
+- **🛒 E-commerce Platform / Plateforme E-commerce**: Self-adaptive web hosting solution / Solution d'hébergement web auto-adaptative
+- **🎮 GTA RP Server / Serveur GTA RP**: Fully prompt-driven game server / Serveur de jeu entièrement piloté par prompts
+- **🎯 Python → Blueprint Converter**: For Unreal Engine 5 development / Pour le développement Unreal Engine 5
+
+**🇬🇧 Each project was developed with minimal human intervention, showcasing ODIN's ability to handle complex, real-world applications.**  
+**🇫🇷 Chaque projet a été développé avec une intervention humaine minimale, démontrant la capacité d'ODIN à gérer des applications complexes du monde réel.**
+
+---
+
+## 💡 How It Works / Comment ça fonctionne
+
+<div align="center">
 
 ```mermaid
 flowchart TD
-    A[Utilisateur / User] -->|Prompt + Contexte| B(ODIN Agent)
+    A[User Input / Entrée Utilisateur] -->|Prompt + Context| B(ODIN Agent)
     B --> C{Validation}
-    C -- Données OK --> D[Action IA]
-    C -- Données manquantes --> E[Refus + Demande clarification]
-    D --> F[Documentation automatique]
-    F --> G[Logs / Checkpoints / Feedback]
-    G -->|Faux| C
-    G -->|Parfait| H[Apprentissage / Pattern]
-    H --> B
+    C -->|Valid / Valide| D[Execute Action / Exécuter Action]
+    C -->|Invalid / Invalide| E[Request Clarification / Demander Clarification]
+    D --> F[Auto-Documentation]
+    F --> G[Checkpoint Save / Sauvegarde Checkpoint]
+    G --> H{User Feedback / Feedback Utilisateur}
+    H -->|"Faux"| I[Rollback & Learn / Retour & Apprentissage]
+    H -->|"Parfait"| J[Save Pattern / Sauvegarder Pattern]
+    I --> B
+    J --> K[Next Task / Tâche Suivante]
 ```
 
----
+</div>
 
-## 📚 Documentation complète / Full Documentation
 
-- [docs/00_PROJECT_EVOLUTION.md](docs/00_PROJECT_EVOLUTION.md) – 🇫🇷🇬🇧 Histoire, philosophie, algorithmes, étude du dossier prompts, esprit du projet, etc.
-- [exemple/README.md](exemple/README.md) – 🇫🇷🇬🇧 Exemple complet d’utilisation, procédure autonome, fichiers générés, feedback, apprentissage.
+graph TB
+    subgraph "ODIN Framework"
+        A[User Input] --> B{ODIN Agent}
+        B --> C[Validation Layer]
+        C --> D{Source Check}
+        D -->|Valid Sources| E[Execution Engine]
+        D -->|Invalid Sources| F[Block & Request]
+        
+        E --> G[Action Execution]
+        G --> H[Auto Documentation]
+        H --> I[State Management]
+        
+        I --> J[(AI_CHECKPOINT.json)]
+        I --> K[(learning_log.json)]
+        I --> L[(patterns.json)]
+        
+        J --> M[Backup System]
+        M --> N[(AI_CHECKPOINT.bak.json)]
+        
+        G --> O{User Feedback}
+        O -->|"Faux"| P[Rollback]
+        P --> Q[Error Analysis]
+        Q --> R[(anti_patterns.json)]
+        R --> B
+        
+        O -->|"Parfait"| S[Pattern Learning]
+        S --> L
+        S --> T[Next Task]
+        T --> B
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#4fc3f7
+    style O fill:#ffeb3b
+    style J fill:#c8e6c9
+    style K fill:#c8e6c9
+    style L fill:#c8e6c9
+    style R fill:#ffcdd2
 
----
-
-## 🚀 Exemple d'utilisation / Usage Example
-
-Un dossier `exemple/` est fourni pour illustrer comment démarrer un projet ODIN, structurer un prompt, et obtenir une interaction robuste et documentée avec l'IA.
-
-A folder `exemple/` is provided to show how to start an ODIN project, structure a prompt, and get a robust, documented interaction with the AI.
-
-### 🇫🇷 Procédure autonome ODIN / 🇬🇧 ODIN Autonomous Procedure
-
-- **Checkpoints IA (`AI_CHECKPOINT.json`)** : Sauvegarde automatique de l'état, des feedbacks, des patterns de réussite et d'échec, et du contexte courant.
-- **Backup régulier (`AI_CHECKPOINT.bak.json`)** : Copie de sécurité automatique pour restaurer l'état en cas de problème.
-- **Journal d'apprentissage (`learning_log.json`)** : Historique détaillé de chaque session, feedback utilisateur ("Faux" ou "Parfait"), actions prises, analyse d'erreur, patterns appris.
-- **Feedback binaire** : Après chaque action, l'utilisateur donne un feedback "Faux" (correction immédiate, apprentissage) ou "Parfait" (validation, documentation, passage à l'étape suivante).
-- **Auto-correction** : En cas de "Faux", l'IA analyse l'erreur, applique une correction, et met à jour ses patterns.
-- **Documentation automatique** : Chaque action, correction, ou rollback est tracé dans les logs.
-
-#### 📂 Exemples de fichiers générés / Example of generated files
-
-- [`exemple/AI_CHECKPOINT.json`](exemple/AI_CHECKPOINT.json) : Checkpoint principal
-- [`exemple/AI_CHECKPOINT.bak.json`](exemple/AI_CHECKPOINT.bak.json) : Backup automatique
-- [`exemple/learning_log.json`](exemple/learning_log.json) : Journal d'apprentissage détaillé
-
----
-
-## 🗂️ Structure du Projet / Project Structure
-
-```text
-/
-├── docs/              # Documentation détaillée / Detailed documentation
-├── exemple/           # Exemples d'utilisation ODIN / ODIN usage examples
-├── prompts/           # Prompts structurés / Structured prompts
-├── .gitignore         # Fichiers ignorés / Ignored files
-├── LICENSE            # Licence / License
-└── README.md          # Présentation générale / General overview
-```
-
----
-
-## 🇫🇷 Comment démarrer ? / 🇬🇧 Getting Started
-
-1. **Clonez le dépôt / Clone the repo**  
-   `git clone [AI-Context-Engineering]`
-2. **Ouvrez dans votre IDE / Open in your IDE**  
-   VSCode, Cursor, etc.
-3. **(Optionnel) Installez l’extension Chrome / (Optional) Install the Chrome extension**
-4. **Utilisez les prompts du dossier `/prompts` / Use the `/prompts` folder prompts**
-5. **Testez les exemples du dossier `/exemple` / Try the `/exemple` folder examples**
-6. **Laissez une étoile si ce travail vous aide ! / Leave a star if this work helps you!** ⭐️
 
 ---
 
-## ❓ FAQ
+## 🤝 Contributing / Contribuer
 
-### 🇫🇷 Questions fréquentes
+**🇬🇧 ODIN is open source and contributions are welcome! Whether you're fixing bugs, improving documentation, or suggesting new features, your input is valuable.**
 
-**Q : ODIN fonctionne-t-il hors ligne ?**
-> Oui, ODIN est conçu pour fonctionner avec des modèles locaux et sans dépendance à des ressources externes.
+**🇫🇷 ODIN est open source et les contributions sont les bienvenues ! Que vous corrigiez des bugs, amélioriez la documentation, ou suggériez de nouvelles fonctionnalités, votre contribution est précieuse.**
 
-**Q : Puis-je utiliser ODIN sans savoir coder ?**
-> Absolument ! Toute la structure est pensée pour guider même les non-développeurs.
-
-**Q : Comment ODIN gère-t-il les erreurs ou les dérives IA ?**
-> Par feedback binaire (Faux/Parfait), rollback automatique, et apprentissage continu documenté.
-
-**Q : Puis-je contribuer ou adapter ODIN à mon propre workflow ?**
-> Oui, le projet est open source et toute contribution est la bienvenue !
-
-### 🇬🇧 Frequently Asked Questions
-
-**Q: Does ODIN work offline?**
-> Yes, ODIN is designed to work with local models and without external dependencies.
-
-**Q: Can I use ODIN without coding skills?**
-> Absolutely! The whole structure is designed to guide even non-developers.
-
-**Q: How does ODIN handle errors or AI drifts?**
-> Through binary feedback (Faux/Parfait), automatic rollback, and continuous documented learning.
-
-**Q: Can I contribute or adapt ODIN to my own workflow?**
-> Yes, the project is open source and all contributions are welcome!
+👉 **[Contributing Guidelines / Guide de Contribution](CONTRIBUTING.md)**
 
 ---
 
-## 🤝 Contribution
+## 📚 Documentation
 
-Ce projet est open source et les contributions sont les bienvenues ! N'hésitez pas à ouvrir une *issue* pour signaler un bug ou proposer une nouvelle fonctionnalité, ou une *pull request* pour contribuer directement au code.
-
-This project is open source and contributions are welcome! Feel free to open an issue to report a bug or suggest a new feature, or a pull request to contribute directly.
-
----
-
-## 🙏 Remerciements / Acknowledgements
-
-Merci à tous ceux qui croient au partage sincère, à la robustesse, et à l’accessibilité de l’IA pour tous.  
-Thanks to all who believe in sincere sharing, robustness, and AI accessibility for everyone.
+- **🇬🇧🇫🇷 [Project Philosophy / Philosophie du Projet](docs/PROJECT_PHILOSOPHY.md)**: The complete story behind ODIN / L'histoire complète d'ODIN
+- **🇬🇧🇫🇷 [Example Usage / Exemple d'Utilisation](exemple/README.md)**: Step-by-step guide with real examples / Guide étape par étape avec exemples réels
+- **🇬🇧🇫🇷 [Prompt Documentation / Documentation des Prompts](prompts/README.md)**: Understanding the prompt structure / Comprendre la structure des prompts
 
 ---
 
-*Julien Gelee aka Krigs – 2025* 
+## 🔒 Security / Sécurité
+
+**🇬🇧 We take security seriously. ODIN is designed with multiple layers of protection against prompt injection, malicious inputs, and unauthorized modifications.**
+
+**🇫🇷 Nous prenons la sécurité au sérieux. ODIN est conçu avec plusieurs couches de protection contre l'injection de prompts, les entrées malveillantes, et les modifications non autorisées.**
+
+👉 **[Security Policy / Politique de Sécurité](SECURITY.md)**
+
+---
+
+## 📄 License / Licence
+
+**🇬🇧 This project is licensed under the MIT License.**  
+**🇫🇷 Ce projet est sous licence MIT.**
+
+👉 **[LICENSE](LICENSE)**
+
+---
+
+## 🙏 Acknowledgments / Remerciements
+
+> **🇬🇧** "This project is neither a promise nor a miracle solution. It's the result of hands-on, solitary work that I wish to share humbly. The idea: let AI work almost autonomously, self-correct, self-document, and minimize errors through a systematic verification loop."
+>
+> **🇫🇷** "Ce projet n'est ni une promesse, ni une solution miracle. C'est le fruit d'un travail de terrain, en solitaire, que je souhaite partager sans prétention. L'idée : permettre à l'IA de fonctionner quasi seule, de s'auto-corriger, s'auto-documenter, et de minimiser ses erreurs via une boucle de vérification systématique."
+>
+> — Julien Gelee aka Krigs
+
+**🇬🇧 Special thanks to everyone who believes in making AI accessible, reliable, and beneficial for all.**  
+**🇫🇷 Merci spécialement à tous ceux qui croient à rendre l'IA accessible, fiable et bénéfique pour tous.**
+
+---
+
+<div align="center">
+
+**🇬🇧 Built with passion, shared with love**  
+**🇫🇷 Conçu avec passion, partagé avec amour**
+
+*🇬🇧 If ODIN helps you build something amazing, let us know!*  
+*🇫🇷 Si ODIN vous aide à construire quelque chose d'incroyable, faites-le nous savoir !* 🚀
+
+[⭐ Star this project](https://github.com/Krigsexe/AI-Context-Engineering) | [🐛 Report an issue](https://github.com/Krigsexe/AI-Context-Engineering/issues) | [💬 Join the discussion](https://github.com/Krigsexe/AI-Context-Engineering/discussions)
+
+</div>
