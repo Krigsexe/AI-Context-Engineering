@@ -7,35 +7,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-  validate-json:
+  validate:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
-    - name: Validate JSON files
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Run validation script
       run: |
-        echo "Validating JSON files..."
-        find . -name "*.json" -type f | while read json_file; do
-          echo "Checking $json_file"
-          if ! python -m json.tool "$json_file" > /dev/null 2>&1; then
-            echo "❌ Invalid JSON: $json_file"
-            exit 1
-          else
-            echo "✅ Valid JSON: $json_file"
-          fi
-        done
-        echo "All JSON files are valid!"
-        
-    - name: Validate Markdown files
-      run: |
-        echo "Checking Markdown files for basic syntax..."
-        find . -name "*.md" -type f | while read md_file; do
-          echo "Checking $md_file"
-          # Basic check for common markdown issues
-          if grep -q "```" "$md_file"; then
-            if ! grep -q "```$" "$md_file"; then
-              echo "Warning: Unclosed code block in $md_file"
-            fi
-          fi
-        done
-        echo "Markdown validation complete!"
+        chmod +x .github/scripts/validate.sh
+        .github/scripts/validate.sh

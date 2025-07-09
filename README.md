@@ -113,8 +113,11 @@ If this work inspires you, **please leave a star on GitHub!** ⭐️
 ```
 .
 ├── .github/                       # GitHub configuration / Configuration GitHub
-│   ├── dependabot.yml             # Dependency management (disabled) / Gestion dépendances (désactivé)
-│   └── workflows/                 # CI/CD workflows (ready to activate) / Workflows CI/CD (prêts)
+│   ├── scripts/                   # Validation scripts / Scripts de validation
+│   │   ├── validate.sh            # JSON & Markdown validation / Validation JSON & Markdown
+│   │   └── README.md              # Scripts documentation / Documentation des scripts
+│   └── workflows/                 # CI/CD workflows / Workflows CI/CD
+│       └── validate.yml           # Validation workflow / Workflow de validation
 ├── docs/                          # Detailed documentation / Documentation détaillée
 │   ├── assets/                    # Images and visual resources / Images et ressources visuelles
 │   └── PROJECT_PHILOSOPHY.md      # The story behind ODIN / L'histoire d'ODIN
@@ -130,7 +133,8 @@ If this work inspires you, **please leave a star on GitHub!** ⭐️
 ├── .gitignore                     # Git ignore rules / Règles Git ignore
 ├── LICENSE                        # MIT License / Licence MIT
 ├── README.md                      # You are here / Vous êtes ici
-└── SECURITY.md                    # Security policy / Politique de sécurité
+├── SECURITY.md                    # Security policy / Politique de sécurité
+└── SECURITY_STATUS.md             # Security status / État de sécurité
 ```
 
 ---
