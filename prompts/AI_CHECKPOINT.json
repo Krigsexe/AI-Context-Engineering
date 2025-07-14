@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI_CHECKPOINT",
+  "type": "object",
+  "required": ["version", "timestamp", "state", "integrity", "context"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^v\\d+\\.\\d+\\.\\d+$",
+      "description": "Version ODIN courante"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Horodatage ISO 8601"
+    },
+    "state": {
+      "type": "object",
+      "required": ["current_step", "progress", "last_action"],
+      "properties": {
+        "current_step": {
+          "type": "string",
+          "enum": ["VALIDATION", "ANALYSE", "EXECUTION", "LEARNING", "ARCHIVING", "FEEDBACK"]
+        },
+        "progress": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "last_action": {
+          "type": "object",
+          "properties": {
+            "type": {"type": "string"},
+            "timestamp": {"type": "string", "format": "date-time"},
+            "result": {"type": "string", "enum": ["SUCCESS", "ERROR", "PENDING"]},
+            "details": {"type": "string"}
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["hash_algorithm", "file_hashes", "validation_status"],
+      "properties": {
+        "hash_algorithm": {
+          "type": "string",
+          "enum": ["SHA256", "SHA512", "BLAKE2b"],
+          "default": "SHA256"
+        },
+        "file_hashes": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "string",
+              "pattern": "^[a-fA-F0-9]{64}$"
+            }
+          }
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": ["VALID", "INVALID", "PENDING", "CORRUPTED"]
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": ["project_type", "codebase_analysis", "active_patterns"],
+      "properties": {
+        "project_type": {
+          "type": "string",
+          "enum": ["WEB", "MOBILE", "DESKTOP", "API", "LIBRARY", "SCRIPT", "UNKNOWN"]
+        },
+        "codebase_analysis": {
+          "type": "object",
+          "properties": {
+            "languages": {"type": "array", "items": {"type": "string"}},
+            "frameworks": {"type": "array", "items": {"type": "string"}},
+            "architecture": {"type": "string"},
+            "complexity_score": {"type": "number", "minimum": 0, "maximum": 10}
+          }
+        },
+        "active_patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pattern_id": {"type": "string"},
+              "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+              "usage_count": {"type": "integer", "minimum": 0}
+            }
+          }
+        }
+      }
+    },
+    "rollback_points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "timestamp": {"type": "string", "format": "date-time"},
+          "description": {"type": "string"},
+          "file_states": {"type": "object"}
+        }
+      }
+    }
+  }
+}
