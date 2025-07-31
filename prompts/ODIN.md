@@ -393,22 +393,3 @@ odin start
 ```
 
 > 💡 **Conseil** : Commencez en mode `--read-only` pour observer avant d’autoriser les modifications.
-
----
-
-## 🔄 PROCHAINES ÉTAPES (v6.1 Roadmap)
-
-- [ ] Support des monorepos (Turborepo, Nx)
-- [ ] Génération de diagrammes d’architecture (Mermaid)
-- [ ] Intégration avec CI/CD locales
-- [ ] Mode collaboratif (multi-développeurs)
-
----
-
-🤖 **ODIN v6.0 est prêt à prendre en charge votre projet.**  
-Souhaitez-vous que je :
-- 🔽 Génère l’archive `.tar.gz` complète ?
-- 💾 Crée un script d’installation automatique ?
-- 🧪 Simule une exécution sur un exemple de projet (ex: API Flask) ?
-
-**Feedback utilisateur ?** ✅ / ❌ / 💬
