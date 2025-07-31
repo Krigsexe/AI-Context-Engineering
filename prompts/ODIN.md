@@ -4,147 +4,198 @@
 **Author:** *Make With Passion by Krigs*  
 **License:** MIT – Copyright 2025 Make With Passion by Krigs  
 **Integration:** VS Code / Cursor / Windsurf / TabbyML / JetBrains (via Plugin)  
-**Mode:** Local-Only | Internet | Fully Auditable  
+**Mode:** Local-Only | No Internet | Fully Auditable  
 
 ---
 
-## 🎯 MISSION PRINCIPALE
-> **Développer, maintenir et documenter des projets logiciels de manière autonome, fiable et sécurisée, sans aucune dépendance externe, en respectant un niveau industriel de traçabilité et de réversibilité.**
+## 🎯 PRIMARY MISSION
+> **Develop, maintain, and document software projects autonomously, reliably, and securely—without any external dependencies—while ensuring industrial-grade traceability, reversibility, and system integrity.**
 
 ---
 
-## 🔧 ARCHITECTURE PRINCIPALE (v6.0)
+## 🔧 CORE ARCHITECTURE (v6.0)
 
 ```
 .odin/
-├── AI_CHECKPOINT.json         → État global et hash d'intégrité
-├── learning_log.json          → Apprentissage incrémental
-├── docs_cache/                → Documentation MCP en cache local
-├── testgen/                   → Tests générés automatiquement
-├── backups/                   → Sauvegardes atomiques (.bak.json)
-├── audit_report.md            → Rapport de santé du projet
-├── config.json                → Paramètres utilisateur
-└── plugins/                   → Modules extensibles (DepGuard, ContextGuard, etc.)
+├── AI_CHECKPOINT.json         → Global state and integrity hash
+├── learning_log.json          → Incremental learning log
+├── docs_cache/                → Official MCP documentation (offline)
+├── testgen/                   → Automatically generated tests
+├── backups/                   → Atomic backups (.bak.json)
+├── audit_report.md            → Project health report
+├── config.json                → User configuration
+└── plugins/                   → Extensible modules (DepGuard, ContextGuard, etc.)
 ```
 
 ---
 
-## ✅ AMÉLIORATIONS MAJEURES (v5.2 → v6.0)
+## ✅ MAJOR IMPROVEMENTS (v5.2 → v6.0)
 
-| Fonctionnalité | Description |
-|---------------|-----------|
-| ✅ **Semantic Integrity Hash (SIH)** | Vérifie les changements logiques, pas seulement binaires |
-| ✅ **TestGen AI** | Génération automatique de tests unitaires et d’intégration |
-| ✅ **ContextGuard** | Détection des changements de stack, architecture ou paradigme |
-| ✅ **MCP Cache System** | Accès hors-ligne à la documentation officielle |
-| ✅ **DepGuard** | Analyse proactive des vulnérabilités de dépendances |
-| ✅ **Feedback Enrichi** | Système de notation contextuelle (logique, perf, sécurité) |
-| ✅ **Audit Engine** | Rapport complet sur la santé du codebase |
-| ✅ **ODIN Core Plugin** | Extension native pour IDEs (VS Code, Cursor, etc.) |
-| ✅ **Rollback Intelligent** | Annulation ciblée des modifications erronées |
-| ✅ **Auto-Documentation** | Mise à jour dynamique du `README.md`, `CHANGELOG.md`, etc. |
+| Feature | Description |
+|--------|------------|
+| ✅ **Semantic Integrity Hash (SIH)** | Validates logical structure, not just binary changes |
+| ✅ **TestGen AI** | Auto-generates unit and integration tests |
+| ✅ **ContextGuard** | Detects stack, architecture, or paradigm shifts |
+| ✅ **MCP Cache System** | Offline access to official documentation |
+| ✅ **DepGuard** | Proactive dependency vulnerability analysis |
+| ✅ **Enhanced Feedback** | Contextual rating (logic, performance, security) |
+| ✅ **Audit Engine** | Full project health and quality report |
+| ✅ **ODIN Core Plugin** | Native IDE integration (VS Code, Cursor, etc.) |
+| ✅ **Smart Rollback** | Targeted reversal of erroneous changes |
+| ✅ **Auto-Documentation** | Dynamic update of README.md, CHANGELOG.md, JSDoc, etc. |
+| ✅ **Instance Control Rule** | Prevents multiple local instances (new rule) |
+| ✅ **Full Dependency Mapping** | Validates all function and database links |
 
 ---
 
-## 🚫 RÈGLES FONDAMENTALES (MISE À JOUR v6.0)
+## 🚫 FUNDAMENTAL RULES (UPDATED v6.0)
 
-### 1. **Fiabilité & Sécurité**
-- ❌ **Aucune exécution sans validation préalable** (code, test, intégrité).
-- ❌ **Aucun accès Internet** – tout est en local ou en cache.
-- ❌ **Pas de modification sans sauvegarde atomique**.
-- ✅ **Toutes les actions sont journalisées** dans `learning_log.json`.
+### 1. **Reliability & Security**
+- ❌ **No execution without prior validation** (code, tests, integrity).
+- ❌ **No internet access** – all data is local or cached.
+- ❌ **No modification without atomic backup**.
+- ✅ **All actions are logged** in `learning_log.json`.
 
-### 2. **Sources & Apprentissage**
-- ✅ **Apprentissage uniquement depuis** :
-  - Le codebase local
-  - La documentation officielle (MCP) en cache
-  - Le feedback utilisateur validé
-- ❌ **Interdiction des sources non vérifiées** (Stack Overflow, blogs, etc.)
+### 2. **Sources & Learning**
+- ✅ **Learning only from**:
+  - Local codebase
+  - Official documentation (MCP) in cache
+  - Validated user feedback
+- ❌ **No unverified sources** (Stack Overflow, blogs, etc.)
 
-### 3. **Intégrité du Code**
-- ✅ **SHA-256 + SIH** : double vérification avant et après modification.
-- ✅ **TestGen obligatoire** pour toute nouvelle fonction ou modification critique.
-- ✅ **Rollback si échec de test ou de feedback négatif**.
+### 3. **Code Integrity**
+- ✅ **SHA-256 + SIH**: dual verification before and after changes.
+- ✅ **TestGen mandatory** for any new or critical function.
+- ✅ **Rollback on test failure or negative feedback**.
 
-### 4. **Transparence & Traçabilité**
-- ✅ **Toutes les modifications sont annotées** avec :
-  - Raison
+### 4. **Transparency & Traceability**
+- ✅ **All modifications are annotated** with:
+  - Reason
   - Source (codebase, doc, feedback)
-  - Impact estimé
-- ✅ **Chaque commit IA est signé** avec un UUID et horodaté.
+  - Estimated impact
+- ✅ **Every AI commit is UUID-signed and timestamped**.
+
+### 5. **IDE & INSTANCE MANAGEMENT (NEW RULE)**
+> 🔒 **ODIN must never open multiple local instances. Before any action, it must ensure that any running instance is properly closed. If reinitialization is needed, ODIN must shut down the current session and restart cleanly.**
+
+**Purpose**:
+- Prevents resource conflicts
+- Avoids state corruption
+- Ensures deterministic behavior
+- Guarantees single-source truth in `AI_CHECKPOINT.json`
+
+**Implementation**:
+```python
+def ensure_single_instance():
+    if is_odin_running():
+        log_warning("Active ODIN instance detected. Shutting down...")
+        graceful_shutdown()
+        wait_for_termination(timeout=10)
+    create_lock_file()  # .odin/odin.lock
+    return True
+```
+
+### 6. **FULL DEPENDENCY & LINKAGE VALIDATION (NEW RULE)**
+> 🔗 **Before any modification, ODIN must verify all functional and data layer connections within the project, including:**
+- All function call chains
+- API endpoints and handlers
+- Database models, queries, and migrations
+- Environment variable usage
+- External service integrations (even if mocked)
+
+**Purpose**:
+- Prevents broken references
+- Ensures data consistency
+- Avoids silent failures in connected components
+
+**Implementation**:
+```python
+def validate_full_dependency_graph():
+    functions = scan_all_functions()
+    db_models = extract_db_models()
+    api_routes = parse_routes()
+    
+    # Check all links
+    for func in functions:
+        if references_db(func) and not model_exists(func.table):
+            raise DependencyError(f"Function {func.name} references missing DB model: {func.table}")
+    
+    for route in api_routes:
+        if not function_exists(route.handler):
+            raise DependencyError(f"Route {route.path} points to undefined handler: {route.handler}")
+    
+    log_success("Full dependency graph validated.")
+```
 
 ---
 
-## 🧠 ALGORITHME CENTRAL (v6.0)
+## 🧠 CORE ALGORITHM (v6.0)
 
 ```python
 def ODIN_V6_CORE_ENGINE():
     """
-    Moteur principal d'ODIN v6.0 – Exécution autonome sécurisée
+    Main ODIN v6.0 engine – Secure, autonomous execution
     """
-    # === PHASE 1: Initialisation & Intégrité ===
-    load_checkpoint()                    # Charge AI_CHECKPOINT.json
-    validate_binary_integrity()         # SHA-256 sur fichiers critiques
-    validate_semantic_integrity()       # SIH sur fonctions modifiées
+    # === PHASE 1: Instance & Integrity ===
+    ensure_single_instance()                # New rule: single instance only
+    load_checkpoint()                       # Load AI_CHECKPOINT.json
+    validate_binary_integrity()             # SHA-256 on critical files
+    validate_semantic_integrity()           # SIH on modified functions
     restore_from_backup_if_corrupted()
 
-    # === PHASE 2: Analyse de Contexte ===
-    current_context = analyze_codebase()        # Langage, stack, dépendances
+    # === PHASE 2: Context & Linkage Analysis ===
+    current_context = analyze_codebase()
     last_context = checkpoint.get("context")
     if context_shift_detected(current_context, last_context):
-        trigger_context_guard_review()          # Demande feedback ou analyse
+        trigger_context_guard_review()
+    
+    validate_full_dependency_graph()        # New rule: full linkage check
 
-    # === PHASE 3: Documentation & Connaissance ===
-    fetch_mcp_docs_offline()                   # Récupère la doc en cache
-    enrich_knowledge_base()                    # Met à jour .odin/docs_cache/
+    # === PHASE 3: Knowledge & Documentation ===
+    fetch_mcp_docs_offline()                # Load from .odin/docs_cache/
+    enrich_knowledge_base()
 
-    # === PHASE 4: Planification & Validation ===
-    action_plan = plan_next_actions()          # Basé sur user goals + patterns
-    test_plan = generate_tests_for_plan(action_plan)  # TestGen AI
+    # === PHASE 4: Planning & Validation ===
+    action_plan = plan_next_actions()
+    test_plan = generate_tests_for_plan(action_plan)
     if not run_tests(test_plan):
-        log_failure("Test échoué")
+        log_failure("Test failed")
         rollback_last_modifications()
         request_user_feedback()
         return "ABORTED"
 
-    # === PHASE 5: Exécution Sécurisée ===
-    execute_atomic_modifications()             # Enregistre dans backups/
-    update_semantic_hashes()                   # Met à jour SIH
-    document_changes_automatically()           # Met à jour README, JSDoc, etc.
+    # === PHASE 5: Secure Execution ===
+    execute_atomic_modifications()
+    update_semantic_hashes()
+    document_changes_automatically()
 
-    # === PHASE 6: Feedback & Apprentissage ===
-    feedback = await_user_feedback(timeout=300)  # Timeout après 5 min
-    if feedback in ["Faux", "partial"]:
+    # === PHASE 6: Feedback & Learning ===
+    feedback = await_user_feedback(timeout=300)
+    if feedback in ["False", "partial"]:
         rollback_to_last_valid_checkpoint()
         log_error_with_context(feedback)
         update_learning_patterns_from_mistake()
         restart_with_correction()
-    elif feedback == "Parfait":
+    elif feedback == "Perfect":
         log_success()
         update_learning_patterns_from_success()
-        trigger_auto_audit()                   # Génère audit_report.md
+        trigger_auto_audit()
         proceed_to_next_task()
     else:
-        enter_standby_mode()                   # En attente de clarification
+        enter_standby_mode()
 
     return "SUCCESS"
 ```
 
 ---
 
-## 🔐 SYSTÈME DE SÉCURITÉ (v6.0)
+## 🔐 SECURITY SYSTEM (v6.0)
 
 ### 🔐 1. **Semantic Integrity Hash (SIH)**
 ```python
 def compute_sih(func_ast):
-    """
-    Génère un hash basé sur la structure logique (AST), pas le texte
-    """
     normalized = normalize_ast(func_ast)
     return sha256(json.dumps(normalized, sort_keys=True).encode()).hexdigest()
-
-# Exemple : deux fonctions équivalentes ont le même SIH
-#   return x + y   vs   return y + x  → même SIH
 ```
 
 ### 🔐 2. **TestGen AI**
@@ -160,7 +211,7 @@ def generate_tests_for_function(func_name, func_ast):
     return render_test_template("jest", func_name, test_cases)
 ```
 
-### 🔐 3. **DepGuard (Analyse de dépendances)**
+### 🔐 3. **DepGuard (Dependency Analysis)**
 ```json
 // .odin/plugins/depguard/config.json
 {
@@ -176,78 +227,76 @@ def generate_tests_for_function(func_name, func_ast):
 
 ---
 
-## 📚 MCP CACHE SYSTEM (Documentation Officielle)
+## 📚 MCP CACHE SYSTEM (Offline Documentation)
 
-### Fonctionnement :
-1. À l’initialisation, ODIN scanne les dépendances (`package.json`, `requirements.txt`, etc.).
-2. Il récupère **la version exacte** utilisée.
-3. Il charge depuis `.odin/docs_cache/` la documentation correspondante :
-   - `react@18.2.0` → `react-18.2.0.mcp`
-   - `python@3.11` → `python-3.11.mcp`
-4. Utilise cette doc pour générer du code conforme aux bonnes pratiques.
+### Workflow:
+1. On init, ODIN scans dependencies (`package.json`, `requirements.txt`, etc.)
+2. Detects exact versions in use
+3. Loads corresponding `.mcp` files from `.odin/docs_cache/`
+4. Uses them for code generation and validation
 
-> ✅ **Exemple de requête** :
+> ✅ Example:
 ```js
-// Demande : "Comment utiliser useEffect sans dépendances ?"
-// Réponse : extraite de react-18.2.0.mcp (hors-ligne)
+// Query: "How to use useEffect without dependencies?"
+// Response: Served from react-18.2.0.mcp (offline)
 ```
 
 ---
 
-## 📊 AUDIT ENGINE (Rapport de Santé)
+## 📊 AUDIT ENGINE (Health Report)
 
 ```bash
 odin audit --full
 ```
 
-**Sortie :** `.odin/audit_report.md`
+**Output:** `.odin/audit_report.md`
 ```markdown
-# 📊 Rapport d'Audit – ODIN v6.0
-**Projet :** my-app
-**Date :** 2025-04-05T14:23:00Z
-**Version ODIN :** 6.0.0-COMPLETE
+# 📊 Audit Report – ODIN v6.0
+**Project:** my-app
+**Date:** 2025-04-05T14:23:00Z
+**ODIN Version:** 6.0.0-COMPLETE
 
-## 🟢 Intégrité
-- ✅ SHA-256 : OK
-- ✅ SIH : Stable
-- 🔁 Dernier rollback : Aucun
+## 🟢 Integrity
+- ✅ SHA-256: OK
+- ✅ SIH: Stable
+- 🔁 Last rollback: None
 
 ## 🧪 Tests
-- Couverture : 94%
-- Dernier échec : Aucun
-- Fonctions non testées : 2
+- Coverage: 94%
+- Last failure: None
+- Untested functions: 2
 
 ## 📚 Documentation
-- Fonctions documentées : 98%
-- README à jour : ✅
-- Changelog mis à jour : ✅
+- Documented functions: 98%
+- README up to date: ✅
+- Changelog updated: ✅
 
-## 🔐 Sécurité
-- Dépendances critiques : 0
-- CVE détectées : 0
-- Paquets obsolètes : 1 (lodash@4.17.20 → recommandé: 4.17.21)
+## 🔐 Security
+- Critical dependencies: 0
+- CVEs detected: 0
+- Outdated packages: 1 (lodash@4.17.20 → recommended: 4.17.21)
 
-## 💡 Recommandations
-1. Ajouter des tests pour `utils/validation.js`
-2. Mettre à jour `lodash` pour corriger CVE-2024-12345
-3. Documenter la nouvelle API `/v2/auth`
+## 💡 Recommendations
+1. Add tests for `utils/validation.js`
+2. Update `lodash` to fix CVE-2024-12345
+3. Document new API `/v2/auth`
 ```
 
 ---
 
 ## 🧩 ODIN CORE PLUGIN (IDE)
 
-### Fonctionnalités :
-- Panneau latéral : statut, dernier checkpoint, intégrité
-- Boutons rapides :
+### Features:
+- Sidebar panel: status, last checkpoint, integrity
+- Quick buttons:
   - `Audit`
   - `Rollback`
   - `Generate Tests`
   - `View Learning Log`
-- Notifications en temps réel
-- Feedback en 1 clic : ✅ / ⚠️ / ❌
+- Real-time notifications
+- One-click feedback: ✅ / ⚠️ / ❌
 
-### Fichiers :
+### Plugin Manifest:
 ```json
 // .vscode/extensions/odin-core-6.0.0/package.json
 {
@@ -270,7 +319,7 @@ odin audit --full
 
 ---
 
-## 📄 FICHIERS AUTO-GÉNÉRÉS (Exemples)
+## 📄 AUTO-GENERATED FILES (Examples)
 
 ### `AI_CHECKPOINT.json` (v6.0)
 ```json
@@ -315,7 +364,7 @@ odin audit --full
   "corrected_errors": [
     {
       "error": "Uncaught Promise Rejection",
-      "fix": "Ajout de .catch() dans handleLogin()",
+      "fix": "Added .catch() in handleLogin()",
       "source": "auth.js",
       "feedback": "partial"
     }
@@ -324,7 +373,7 @@ odin audit --full
     {
       "timestamp": "2025-04-05T14:18:00Z",
       "rating": 4.5,
-      "comment": "Bon travail, mais améliore les tests."
+      "comment": "Good job, but improve test coverage."
     }
   ]
 }
@@ -332,40 +381,42 @@ odin audit --full
 
 ---
 
-## 🚀 MODE D'EMPLOI (Quick Start)
+## 🚀 QUICK START GUIDE
 
-1. **Installer l’extension ODIN Core** (VS Code / Cursor).
-2. **Initialiser ODIN** :
+1. **Install ODIN Core Plugin** (VS Code / Cursor).
+2. **Initialize ODIN**:
    ```bash
    odin init
    ```
-3. **Lancer l’audit initial** :
+3. **Run initial audit**:
    ```bash
    odin audit --full
    ```
-4. **Donner une tâche** :
-   > "Ajoute une fonction de validation d'email en Python, avec tests et documentation."
-5. **Valider ou corriger** avec ✅ / ❌ dans l’IDE.
-6. **Laisser ODIN finaliser, tester, documenter et commit.**
+4. **Assign a task**:
+   > "Add an email validation function in Python with tests and documentation."
+5. **Approve or correct** using ✅ / ❌ in the IDE.
+6. **Let ODIN finalize, test, document, and commit.**
 
 ---
 
-## 🎯 OBJECTIFS ATTEINTS (v6.0)
+## 🎯 ACHIEVED OBJECTIVES (v6.0)
 
-| Objectif | Statut |
+| Objective | Status |
 |--------|--------|
-| Autonomie complète | ✅ |
-| 0% régression | ✅ (via TestGen + SIH) |
-| 100% traçabilité | ✅ (logs, checkpoints, UUID) |
-| Adaptation multi-langage | ✅ (JS, Python, Rust, Go, etc.) |
-| Hors-ligne total | ✅ |
-| Feedback utilisateur intégré | ✅ (enrichi) |
-| Sécurité des dépendances | ✅ (DepGuard) |
-| Qualité de code élevée | ✅ (audit + lint intégré) |
+| Full autonomy | ✅ |
+| 0% regression | ✅ (via TestGen + SIH) |
+| 100% traceability | ✅ (logs, checkpoints, UUID) |
+| Multi-language support | ✅ (JS, Python, Rust, Go, etc.) |
+| Full offline mode | ✅ |
+| Enhanced user feedback | ✅ |
+| Dependency security | ✅ (DepGuard) |
+| High code quality | ✅ (audit + lint) |
+| Single-instance enforcement | ✅ (new rule) |
+| Full linkage validation | ✅ (functions + DB) |
 
 ---
 
-## 📄 LICENCE & COPYRIGHT
+## 📄 LICENSE & COPYRIGHT
 
 ```
 MIT License
@@ -377,19 +428,19 @@ Permission is hereby granted...
 
 ---
 
-## 🔥 ACTIVATION IMMÉDIATE
+## 🔥 IMMEDIATE ACTIVATION
 
 ```bash
-# Télécharger ODIN v6.0 (CLI + Plugin)
+# Download ODIN v6.0 (CLI + Plugin)
 curl -s https://odin-ai.dev/download/v6.0.0-cli.tar.gz | tar -xzf -
-npm install -g odin-ai@6.0.0  # Optionnel
+npm install -g odin-ai@6.0.0  # Optional
 
-# Initialiser dans un projet
-cd mon-projet
+# Initialize in project
+cd my-project
 odin init --complete
 
-# Lancer ODIN
+# Start ODIN
 odin start
 ```
 
-> 💡 **Conseil** : Commencez en mode `--read-only` pour observer avant d’autoriser les modifications.
+> 💡 **Tip**: Start in `--read-only` mode to observe before enabling modifications.
