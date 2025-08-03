@@ -253,7 +253,7 @@ MIT License - Copyright 2025 Make With Passion by Krigs
 ## 📞 Support
 
 - 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Krigsexe/AI-Context-Engineering/issues)
-- 📚 **Documentation**: [odin-ai.dev/docs](https://odin-ai.dev/docs)
+- 📚 **Documentation**: [odin-ai.dev/docs](https://proxitek.fr/invite)
 - 💬 **Community**: [Discord](https://proxitek.fr/invite)
 
 ---
