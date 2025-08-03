@@ -1,22 +1,53 @@
-# ODIN v6.0 CLI - Autonomous AI Codebase Assistant
+# 🤖 ODIN v6.0 - Autonomous AI Codebase Assistant (Complete Edition)
 
-[![Version](https://img.shields.io/badge/version-6.0.0-blue.svg)](https://github.com/makewithpassion/odin-ai)
+[![Version](https://img.shields.io/badge/version-6.0.0--COMPLETE-blue.svg)](https://github.com/makewithpassion/odin-ai)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-yellow.svg)](https://python.org)
+[![CLI](https://img.shields.io/badge/CLI-Cross--Platform-green.svg)](https://pypi.org/project/odin-ai/)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Extension-blue.svg)](https://marketplace.visualstudio.com/items?itemName=make-with-passion-by-krigs.odin-core)
 
-ODIN v6.0 Command Line Interface provides cross-platform access to the Autonomous AI Codebase Assistant functionality through three core commands: `init`, `audit`, and `rollback`.
+**ODIN v6.0** is a revolutionary autonomous AI codebase assistant that develops, maintains, and documents software projects with industrial-grade reliability, security, and traceability. Operating entirely offline with no external dependencies, ODIN provides comprehensive project management through both CLI and native IDE integration.
 
 ## 🚀 Quick Start
 
-### Installation via pip
+> **📚 Need detailed setup instructions?** See **[QUICKSTART.md](QUICKSTART.md)** for comprehensive 5-minute setup guide.
+
+### Method 1: CLI via pip (Recommended)
 
 ```bash
+# Install ODIN CLI globally
 pip install odin-ai
+
+# Verify installation
+odin --version
+# Expected output: ODIN v6.0.0-COMPLETE
 ```
 
-### Using pre-compiled executable (Windows)
+### Method 2: VS Code Extension + CLI Bundle
 
-Download the latest `odin.exe` from releases and add it to your PATH.
+1. **Install VS Code Extension:**
+   - Open VS Code → Extensions (`Ctrl+Shift+X`)
+   - Search for "**ODIN Core**"
+   - Install "**ODIN Core - Autonomous AI Codebase Assistant**"
+
+2. **Install CLI dependency:**
+   ```bash
+   pip install odin-ai
+   ```
+
+### Method 3: Pre-compiled Executables
+
+**Windows:**
+```bash
+curl -L https://github.com/makewithpassion/odin-ai/releases/download/v6.0.0-complete/odin-windows.exe -o odin.exe
+./odin.exe --version
+```
+
+**macOS/Linux:**
+```bash
+curl -L https://github.com/makewithpassion/odin-ai/releases/download/v6.0.0-complete/odin-unix.tar.gz | tar -xz
+chmod +x odin && sudo mv odin /usr/local/bin/
+```
 
 ## 📋 Commands
 
@@ -109,13 +140,52 @@ ODIN v6.0 implements multiple layers of security:
 - **Integrity Verification**: SHA-256 + Semantic Integrity Hash (SIH)
 - **Rollback Safety**: Always recoverable to last known good state
 
-## 🌐 Cross-Platform Support
+## 🧩 Core Plugins & Commands
 
-| Platform | Support | Installation Method |
-|----------|---------|-------------------|
-| Windows | ✅ Full | `pip install` or `.exe` |
-| macOS | ✅ Full | `pip install` or build from source |
-| Linux | ✅ Full | `pip install` or build from source |
+ODIN's functionality is extended through a powerful plugin system and a versatile set of commands.
+
+### VS Code Extension: ODIN Core
+- **Interactive Sidebar**: Real-time status, one-click actions (Audit, Rollback, TestGen), and feedback.
+- **Command Palette**: Access all core commands directly within the editor.
+- **Auto-Refresh**: Keeps project status constantly updated.
+
+| Command | Description |
+|---|---|
+| `odin.audit` | Run comprehensive project audit |
+| `odin.rollback` | Revert to previous valid state |
+| `odin.testgen` | Auto-generate tests for current file |
+| `odin.openLearningLog` | View ODIN's learning history |
+
+### 🎯 Core CLI Commands
+
+| Command | Description | Example |
+|---|---|---|
+| `odin init` | Initialize ODIN in your project | `odin init` |
+| `odin audit [--full]`| Run a health check and analysis | `odin audit --full` |
+| `odin rollback` | Restore the project to the last valid checkpoint | `odin rollback` |
+| `odin testgen <file>` | Generate tests for a specific file | `odin testgen src/app.py` |
+| `odin start` | Start autonomous mode | `odin start --interactive` |
+
+## 💻 Compatibility
+
+ODIN is designed for broad compatibility across operating systems, languages, and development environments.
+
+### Operating Systems
+
+| OS | CLI Support | VS Code Extension | Pre-built Binary |
+|---|---|---|---|
+| **Windows 10/11** | ✅ Full | ✅ Native | ✅ `.exe` available |
+| **macOS 10.15+** | ✅ Full | ✅ Native | ✅ Universal binary |
+| **Ubuntu 20.04+** | ✅ Full | ✅ Native | ✅ Static binary |
+
+### Supported Languages
+
+| Language | Feature Support |
+|---|---|
+| **JavaScript / TypeScript** | ✅ Full (TestGen, AST Analysis, Linting) |
+| **Python** | ✅ Full (Pytest/Unittest Generation, PEP Compliance) |
+| **Rust / Go / Java / C# / PHP** | ✅ Full (Build Tool Integration, Test Generation) |
+| **Ruby / Swift / Kotlin / Dart** | ⚠️ Basic (Dependency Detection, Basic Analysis) |
 
 ## 📖 Examples
 
