@@ -1,0 +1,108 @@
+# Hallucination Mapping - Single Source of Truth
+# Maps fictitious values to canonical replacements for automated refactor
+
+# GitHub URLs
+github_bad: https://github.com/makewithpassion/odin-ai
+github_good: https://github.com/Krigsexe/AI-Context-Engineering
+
+# Author Information
+author_bad: Make With Passion by Krigs
+author_good: Krigs
+
+# Domains (fictitious)
+domains_bad:
+  - odin-ai.dev
+  - makewithpassion.dev
+
+# Email Addresses (fictitious)
+emails_bad:
+  - contact@makewithpassion.dev
+
+# Project Names
+project_name_bad: ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)
+project_name_good: AI Context Engineering Framework
+
+# Version Information
+version_bad: 6.0.0-COMPLETE
+version_good: 1.0.0
+
+# Release Dates (fictitious)
+release_date_bad: 2025-04-05
+
+# License/Copyright (fictitious claims)
+copyright_bad: Copyright 2025 Make With Passion by Krigs
+copyright_good: Copyright 2024 Krigs
+
+# Download URLs (fictitious)
+download_urls_bad:
+  - https://odin-ai.dev/download/v6.0.0-cli.tar.gz
+
+# NPM Package Names (fictitious)
+npm_packages_bad:
+  - odin-ai@6.0.0
+
+# File Extensions/Formats (fictitious)
+file_extensions_bad:
+  - .mcp
+
+# Configuration Paths (potentially fictitious)
+config_paths_bad:
+  - .odin/
+  - .odin/AI_CHECKPOINT.json
+  - .odin/learning_log.json
+  - .odin/docs_cache/
+  - .odin/testgen/
+  - .odin/backups/
+  - .odin/audit_report.md
+  - .odin/config.json
+  - .odin/plugins/
+  - .odin/odin.lock
+
+# Command Names (fictitious)
+commands_bad:
+  - odin
+  - odin init
+  - odin audit
+  - odin start
+
+# VS Code Extension (fictitious)
+vscode_extension_bad: odin-core-6.0.0
+
+# Integration Claims (potentially fictitious)
+integrations_bad:
+  - VS Code / Cursor / Windsurf / TabbyML / JetBrains (via Plugin)
+
+# Mode Claims (potentially fictitious)
+modes_bad:
+  - Local-Only | No Internet | Fully Auditable
+
+# API Endpoints (fictitious examples)
+api_endpoints_bad:
+  - /v2/auth
+
+# Database References (fictitious examples)
+db_references_bad:
+  - cve-offline.json
+
+# Function Names (potentially fictitious)
+functions_bad:
+  - ODIN_V6_CORE_ENGINE()
+  - ensure_single_instance()
+  - validate_full_dependency_graph()
+  - compute_sih()
+  - generate_tests_for_function()
+
+# Architecture Claims (potentially exaggerated)
+architecture_claims_bad:
+  - Semantic Integrity Hash (SIH)
+  - TestGen AI
+  - ContextGuard
+  - MCP Cache System
+  - DepGuard
+  - Enhanced Feedback
+  - Audit Engine
+  - ODIN Core Plugin
+  - Smart Rollback
+  - Auto-Documentation
+  - Instance Control Rule
+  - Full Dependency Mapping

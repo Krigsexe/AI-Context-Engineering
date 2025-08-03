@@ -1,0 +1,47 @@
+{
+  "scan_metadata": {
+    "scan_date": "2025-08-03T21:16:50.172546",
+    "scanner_version": "6.0.0",
+    "mapping_file": "hallucination_mapping.yaml",
+    "total_patterns_searched": 48
+  },
+  "summary": {
+    "total_matches": 1,
+    "unique_files_affected": 1,
+    "pattern_types_found": 1,
+    "patterns_breakdown": {
+      "project_name_bad": 1
+    }
+  },
+  "grouped_results": {
+    "project_name_bad": [
+      {
+        "file_path": "AI-Context-Engineering/prompts/ODIN.md",
+        "line_number": 1,
+        "line_text": "# 🤖 **ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)**",
+        "pattern_type": "project_name_bad",
+        "pattern_value": "ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)",
+        "match_context": "# 🤖 **ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)**"
+      }
+    ]
+  },
+  "detailed_results": [
+    {
+      "file_path": "AI-Context-Engineering/prompts/ODIN.md",
+      "line_number": 1,
+      "line_text": "# 🤖 **ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)**",
+      "pattern_type": "project_name_bad",
+      "pattern_value": "ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)",
+      "match_context": "# 🤖 **ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)**"
+    }
+  ],
+  "recommendations": [
+    "🔧 1 files require cleanup",
+    "   📁 AI-Context-Engineering/prompts/ODIN.md: 1 matches (project_name_bad)",
+    "🎯 Priority cleanup order:",
+    "   1. README.md and documentation files",
+    "   2. Configuration files (.json, .yaml)",
+    "   3. Source code files",
+    "   4. Template and example files"
+  ]
+}
