@@ -259,7 +259,7 @@ Special thanks to the community for feedback, bug reports, and feature requests 
 
 ### 📞 SUPPORT
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/makewithpassion/odin-ai/issues)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Krigsexe/AI-Context-Engineering/issues)
 - 📚 **Documentation**: [odin-ai.dev/docs](https://odin-ai.dev/docs)
 - 💬 **Community**: [Discord Server](https://proxitek.fr/invite)
 - 📧 **Direct Support**: [contact@makewithpassion.dev](mailto:contact@makewithpassion.dev)

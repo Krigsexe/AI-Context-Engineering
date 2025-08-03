@@ -31,7 +31,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Make With Passion by Krigs",
     author_email="contact@makewithpassion.dev",
-    url="https://github.com/makewithpassion/odin-ai",
+    url="https://github.com/Krigsexe/AI-Context-Engineering",
     license="MIT",
     packages=find_packages(exclude=['tests*', 'docs*']),
     include_package_data=True,
@@ -66,8 +66,8 @@ setup(
     ],
     keywords="ai assistant codebase automation development cli",
     project_urls={
-        "Bug Reports": "https://github.com/makewithpassion/odin-ai/issues",
-        "Source": "https://github.com/makewithpassion/odin-ai",
+        "Bug Reports": "https://github.com/Krigsexe/AI-Context-Engineering/issues",
+        "Source": "https://github.com/Krigsexe/AI-Context-Engineering",
         "Documentation": "https://odin-ai.dev/docs",
     },
 )

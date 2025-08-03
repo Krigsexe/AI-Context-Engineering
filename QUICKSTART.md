@@ -36,7 +36,7 @@ odin --version
 **Windows:**
 ```bash
 # Download latest release
-curl -L https://github.com/makewithpassion/odin-ai/releases/download/v6.0.0-complete/odin-windows.exe -o odin.exe
+curl -L https://github.com/Krigsexe/AI-Context-Engineering/releases/download/v6.0.0-complete/odin-windows.exe -o odin.exe
 
 # Add to PATH or use directly
 ./odin.exe --version
@@ -45,7 +45,7 @@ curl -L https://github.com/makewithpassion/odin-ai/releases/download/v6.0.0-comp
 **macOS/Linux:**
 ```bash
 # Download and install
-curl -L https://github.com/makewithpassion/odin-ai/releases/download/v6.0.0-complete/odin-unix.tar.gz | tar -xz
+curl -L https://github.com/Krigsexe/AI-Context-Engineering/releases/download/v6.0.0-complete/odin-unix.tar.gz | tar -xz
 chmod +x odin
 sudo mv odin /usr/local/bin/
 ```
@@ -383,7 +383,7 @@ npm install -g odin-js-parser  # JavaScript/TypeScript
 
 ### Getting Help
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/makewithpassion/odin-ai/issues)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Krigsexe/AI-Context-Engineering/issues)
 - 📚 **Documentation**: [odin-ai.dev/docs](https://odin-ai.dev/docs)
 - 💬 **Community**: [Discord Server](https://proxitek.fr/invite)
 - 📧 **Direct Support**: [contact@makewithpassion.dev](mailto:contact@makewithpassion.dev)

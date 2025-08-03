@@ -1,6 +1,6 @@
 # 🤖 ODIN v6.0 - Autonomous AI Codebase Assistant (Complete Edition)
 
-[![Version](https://img.shields.io/badge/version-6.0.0--COMPLETE-blue.svg)](https://github.com/makewithpassion/odin-ai)
+[![Version](https://img.shields.io/badge/version-6.0.0--COMPLETE-blue.svg)](https://github.com/Krigsexe/AI-Context-Engineering)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-yellow.svg)](https://python.org)
 [![CLI](https://img.shields.io/badge/CLI-Cross--Platform-green.svg)](https://pypi.org/project/odin-ai/)
@@ -39,13 +39,13 @@ odin --version
 
 **Windows:**
 ```bash
-curl -L https://github.com/makewithpassion/odin-ai/releases/download/v6.0.0-complete/odin-windows.exe -o odin.exe
+curl -L https://github.com/Krigsexe/AI-Context-Engineering/releases/download/v6.0.0-complete/odin-windows.exe -o odin.exe
 ./odin.exe --version
 ```
 
 **macOS/Linux:**
 ```bash
-curl -L https://github.com/makewithpassion/odin-ai/releases/download/v6.0.0-complete/odin-unix.tar.gz | tar -xz
+curl -L https://github.com/Krigsexe/AI-Context-Engineering/releases/download/v6.0.0-complete/odin-unix.tar.gz | tar -xz
 chmod +x odin && sudo mv odin /usr/local/bin/
 ```
 
