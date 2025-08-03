@@ -1,0 +1,24 @@
+{
+  "replacement_metadata": {
+    "replacement_date": "2025-08-03T21:33:34.198895",
+    "replacer_version": "6.0.0",
+    "mapping_file": "hallucination_mapping.yaml",
+    "total_patterns_replaced": 30
+  },
+  "summary": {
+    "total_changes": 65,
+    "files_processed": 0,
+    "replacement_patterns": 30
+  },
+  "processed_files": [],
+  "replacement_map": {
+    "https://github.com/makewithpassion/odin-ai": "https://github.com/Krigsexe/AI-Context-Engineering",
+    "Make With Passion by Krigs": "Krigs",
+    "ODIN v6.0 – Autonomous AI Codebase Assistant (Complete Edition)": "AI Context Engineering Framework",
+    "6.0.0-COMPLETE": "1.0.0",
+    "Copyright 2025 Make With Passion by Krigs": "Copyright 2024 Krigs",
+    "odin-ai.dev": "# REMOVED: odin-ai.dev",
+    "makewithpassion.dev": "# REMOVED: makewithpassion.dev",
+    "contact@makewithpassion.dev": "# REMOVED: contact@makewithpassion.dev",
+    "https://odin-ai.dev/download/v6.0.0-cli.tar.gz": "# REMOVED: https://odin-ai.dev/download/v6.0.0-cli.tar.gz",
+    "odin-ai@6.0.0": "# REMOVED: odin-ai@6.0.0"
