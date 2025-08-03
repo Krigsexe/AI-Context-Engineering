@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://odin-ai.dev/schemas/checkpoint.schema.json",
+  "title": "ODIN AI Checkpoint Schema",
+  "description": "Schema for ODIN v6.0 AI_CHECKPOINT.json file",
+  "type": "object",
+  "required": [
+    "version",
+    "timestamp",
+    "current_state",
+    "last_action",
+    "integrity",
+    "context",
+    "test_coverage",
+    "session_id",
+    "instance_lock"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "ODIN version in semver format"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of last checkpoint"
+    },
+    "current_state": {
+      "type": "string",
+      "enum": ["initialized", "active", "standby", "error", "rollback"],
+      "description": "Current operational state"
+    },
+    "last_action": {
+      "type": "string",
+      "description": "Description of the last action performed"
+    },
+    "integrity": {
+      "type": "object",
+      "properties": {
+        "binary_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 hash of critical files"
+        },
+        "semantic_hash": {
+          "type": ["string", "null"],
+          "description": "Semantic integrity hash of code structure"
+        }
+      },
+      "required": ["binary_sha256", "semantic_hash"],
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": ["string", "null"],
+          "description": "Primary programming language"
+        },
+        "framework": {
+          "type": ["string", "null"],
+          "description": "Primary framework in use"
+        },
+        "architecture": {
+          "type": ["string", "null"],
+          "description": "Application architecture pattern"
+        }
+      },
+      "required": ["language", "framework", "architecture"],
+      "additionalProperties": false
+    },
+    "backup_ref": {
+      "type": ["string", "null"],
+      "description": "Reference to current backup file"
+    },
+    "test_coverage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Test coverage percentage"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Unique session identifier"
+    },
+    "instance_lock": {
+      "type": "boolean",
+      "description": "Whether instance lock is active"
+    }
+  },
+  "additionalProperties": false
+}

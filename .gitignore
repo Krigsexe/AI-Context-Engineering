@@ -1,0 +1,93 @@
+# ODIN v6.0 - Gitignore Configuration
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# VS Code Extension Node modules
+.vscode/extensions/odin-core/node_modules/
+.vscode/extensions/odin-core/out/
+.vscode/extensions/odin-core/*.vsix
+
+# ODIN Runtime files (sensitive)
+.odin/learning_log.json
+.odin/backups/*.bak.json
+.odin/cache/
+.odin/AI_CHECKPOINT.json
+
+# Keep ODIN structure and templates
+!.odin/README.md
+!.odin/config.json
+!.odin/templates/
+!.odin/schemas/
+!.odin/plugins/
+!.odin/testgen/
+!.odin/audit_report.md
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Package lock files (keep package.json)
+package-lock.json
+
+# Build artifacts
+build/
+dist/
+*.exe
+*.msi
+
+# Temporary files
+*.tmp
+*.temp
+.temp/
+temp/
+
+# Embedded repositories
+AI-Context-Engineering/

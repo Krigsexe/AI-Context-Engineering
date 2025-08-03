@@ -1,0 +1,5 @@
+typer[all]==0.9.0
+rich==13.7.0
+click==8.1.7
+pytest==7.4.3
+pytest-cov==4.1.0

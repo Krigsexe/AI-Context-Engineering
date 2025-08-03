@@ -1,0 +1,223 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://odin-ai.dev/schemas/config.schema.json",
+  "title": "ODIN Config Schema",
+  "description": "User-editable configurations for ODIN v6.0",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "odin": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "ODIN version in semver format"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["local-only", "online"],
+          "description": "Operating mode"
+        },
+        "auto_backup": {
+          "type": "boolean",
+          "description": "Enable auto backup"
+        },
+        "single_instance_only": {
+          "type": "boolean",
+          "description": "Ensure only one instance of ODIN runs"
+        },
+        "enforce_validation": {
+          "type": "boolean",
+          "description": "Enforce validation before actions"
+        }
+      },
+      "required": ["version", "mode", "auto_backup", "single_instance_only", "enforce_validation"],
+      "additionalProperties": false
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "require_integrity_check": {
+          "type": "boolean",
+          "description": "Require integrity checks"
+        },
+        "enable_semantic_hash": {
+          "type": "boolean",
+          "description": "Enable semantic integrity hashes"
+        },
+        "auto_rollback_on_failure": {
+          "type": "boolean",
+          "description": "Automatic rollback on failure"
+        },
+        "backup_retention_days": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of days to retain backups"
+        }
+      },
+      "required": ["require_integrity_check", "enable_semantic_hash", "auto_rollback_on_failure", "backup_retention_days"],
+      "additionalProperties": false
+    },
+    "testing": {
+      "type": "object",
+      "properties": {
+        "auto_generate_tests": {
+          "type": "boolean",
+          "description": "Automatically generate tests"
+        },
+        "min_coverage_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum coverage threshold"
+        },
+        "test_frameworks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of test frameworks"
+        },
+        "require_tests_for_new_functions": {
+          "type": "boolean",
+          "description": "Require tests for new functions"
+        }
+      },
+      "required": ["auto_generate_tests", "min_coverage_threshold", "test_frameworks", "require_tests_for_new_functions"],
+      "additionalProperties": false
+    },
+    "documentation": {
+      "type": "object",
+      "properties": {
+        "auto_update_readme": {
+          "type": "boolean",
+          "description": "Automatically update README.md"
+        },
+        "auto_update_changelog": {
+          "type": "boolean",
+          "description": "Automatically update CHANGELOG.md"
+        },
+        "generate_jsdoc": {
+          "type": "boolean",
+          "description": "Generate JSDoc for code"
+        },
+        "doc_languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported documentation languages"
+        }
+      },
+      "required": ["auto_update_readme", "auto_update_changelog", "generate_jsdoc", "doc_languages"],
+      "additionalProperties": false
+    },
+    "plugins": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of enabled plugins"
+        },
+        "auto_load": {
+          "type": "boolean",
+          "description": "Auto-load plugins at startup"
+        },
+        "plugin_directory": {
+          "type": "string",
+          "description": "Path to plugins directory"
+        }
+      },
+      "required": ["enabled", "auto_load", "plugin_directory"],
+      "additionalProperties": false
+    },
+    "cache": {
+      "type": "object",
+      "properties": {
+        "docs_cache_directory": {
+          "type": "string",
+          "description": "Directory for cached documentation"
+        },
+        "enable_offline_docs": {
+          "type": "boolean",
+          "description": "Enable access to offline docs"
+        },
+        "auto_cache_dependencies": {
+          "type": "boolean",
+          "description": "Automatically cache dependencies"
+        }
+      },
+      "required": ["docs_cache_directory", "enable_offline_docs", "auto_cache_dependencies"],
+      "additionalProperties": false
+    },
+    "feedback": {
+      "type": "object",
+      "properties": {
+        "request_feedback_after_major_changes": {
+          "type": "boolean",
+          "description": "Request feedback after major changes"
+        },
+        "feedback_timeout_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Timeout in seconds for feedback"
+        },
+        "auto_proceed_on_timeout": {
+          "type": "boolean",
+          "description": "Automatically proceed if feedback timeout occurs"
+        }
+      },
+      "required": ["request_feedback_after_major_changes", "feedback_timeout_seconds", "auto_proceed_on_timeout"],
+      "additionalProperties": false
+    },
+    "audit": {
+      "type": "object",
+      "properties": {
+        "auto_audit_interval_hours": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Interval in hours for automatic audits"
+        },
+        "generate_audit_reports": {
+          "type": "boolean",
+          "description": "Generate audit reports"
+        },
+        "audit_report_path": {
+          "type": "string",
+          "description": "File path for audit reports"
+        }
+      },
+      "required": ["auto_audit_interval_hours", "generate_audit_reports", "audit_report_path"],
+      "additionalProperties": false
+    },
+    "user_preferences": {
+      "type": "object",
+      "properties": {
+        "preferred_language": {
+          "type": "string",
+          "description": "User's preferred language for the interface"
+        },
+        "notification_level": {
+          "type": "string",
+          "enum": ["silent", "standard", "verbose"],
+          "description": "Level of notifications to provide"
+        },
+        "verbose_logging": {
+          "type": "boolean",
+          "description": "Enable verbose logging"
+        }
+      },
+      "required": ["preferred_language", "notification_level", "verbose_logging"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+
