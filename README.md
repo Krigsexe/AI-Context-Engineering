@@ -258,5 +258,17 @@ MIT License - Copyright 2025 Make With Passion by Krigs
 
 ---
 
+## Star History
+
+<a href="https://www.star-history.com/#Krigsexe/AI-Context-Engineering&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Krigsexe/AI-Context-Engineering&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Krigsexe/AI-Context-Engineering&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Krigsexe/AI-Context-Engineering&type=Timeline" />
+ </picture>
+</a>
+
+---
+
 **ODIN v6.0** - *Autonomous AI Codebase Assistant (Complete Edition)*  
 Copyright 2025 Make With Passion by Krigs
