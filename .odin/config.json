@@ -1,53 +1,11 @@
 {
-  "$schema": ".odin/schemas/config.schema.json",
-  "odin": {
-    "version": "6.0.0",
-    "mode": "local-only",
-    "auto_backup": true,
-    "single_instance_only": true,
-    "enforce_validation": true
+  "version": "6.1.0",
+  "slo": { "hallucination_max_rate": 0.005 },
+  "router": {
+    "low": { "reasoning_effort": "minimal", "double_pass": false, "grounded_only": true },
+    "med": { "reasoning_effort": "standard", "double_pass": true,  "grounded_only": true },
+    "high": { "reasoning_effort": "max",      "double_pass": true,  "grounded_only": true }
   },
-  "security": {
-    "require_integrity_check": true,
-    "enable_semantic_hash": true,
-    "auto_rollback_on_failure": true,
-    "backup_retention_days": 30
-  },
-  "testing": {
-    "auto_generate_tests": true,
-    "min_coverage_threshold": 80.0,
-    "test_frameworks": ["jest", "pytest", "go test", "cargo test"],
-    "require_tests_for_new_functions": true
-  },
-  "documentation": {
-    "auto_update_readme": true,
-    "auto_update_changelog": true,
-    "generate_jsdoc": true,
-    "doc_languages": ["en"]
-  },
-  "plugins": {
-    "enabled": ["DepGuard", "ContextGuard", "TestGen"],
-    "auto_load": true,
-    "plugin_directory": ".odin/plugins/"
-  },
-  "cache": {
-    "docs_cache_directory": ".odin/docs_cache/",
-    "enable_offline_docs": true,
-    "auto_cache_dependencies": true
-  },
-  "feedback": {
-    "request_feedback_after_major_changes": true,
-    "feedback_timeout_seconds": 300,
-    "auto_proceed_on_timeout": false
-  },
-  "audit": {
-    "auto_audit_interval_hours": 24,
-    "generate_audit_reports": true,
-    "audit_report_path": ".odin/audit_report.md"
-  },
-  "user_preferences": {
-    "preferred_language": "auto-detect",
-    "notification_level": "standard",
-    "verbose_logging": false
-  }
+  "allowed_tools": ["local_rag", "unit_tests", "integrity_check"],
+  "schema_guard": { "enabled": true }
 }

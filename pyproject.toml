@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "odin-ai"
+version = "6.1.0"
+description = "ODIN v6.1 – Autonomous AI Codebase Assistant (offline-first)"
+authors = [{name = "Krigs", email = "krigs@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+odin = "odin.cli:main"
+
+[tool.setuptools]
+packages = ["odin", "plugins", "testgen"]
