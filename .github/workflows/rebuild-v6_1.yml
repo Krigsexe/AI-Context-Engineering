@@ -11,9 +11,9 @@ jobs:
   rebuild:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      workflows: write
-      
+      contents: write   # OK
+      issues: write     # (optionnel) pour créer un rappel
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,7 +35,6 @@ jobs:
           from pathlib import Path
           from textwrap import dedent
 
-          # Directories
           Path('.github/workflows').mkdir(parents=True, exist_ok=True)
           Path('odin').mkdir(parents=True, exist_ok=True)
           Path('scripts').mkdir(parents=True, exist_ok=True)
@@ -43,7 +42,6 @@ jobs:
           Path('.odin/docs_cache').mkdir(parents=True, exist_ok=True)
           Path('.odin/backups').mkdir(parents=True, exist_ok=True)
 
-          # .gitignore
           Path('.gitignore').write_text(dedent('''\
           __pycache__/
           *.pyc
@@ -55,16 +53,12 @@ jobs:
           .odin/backups/
           '''), encoding='utf-8')
 
-          # LICENSE (abrégé)
           Path('LICENSE').write_text(dedent('''\
           MIT License
           Copyright (c) 2025 Make With Passion by Krigs
-          Permission is hereby granted, free of charge, to any person obtaining a copy
-          of this software and associated documentation files (the "Software"), to deal
-          in the Software without restriction...
+          Permission is hereby granted, free of charge, to any person obtaining a copy...
           '''), encoding='utf-8')
 
-          # README
           Path('README.md').write_text(dedent('''\
           # ODIN v6.1 — Autonomous AI Codebase Assistant (Offline-First)
 
@@ -75,10 +69,9 @@ jobs:
           - `odin audit --full` : audit intégrité (SHA-256 + SIH)
           - `odin rollback` : restaure le dernier backup
 
-          CI: voir `.github/workflows/ci.yml`.
+          CI désactivée ici à cause des permissions GitHub Apps (voir ci-dessous).
           '''), encoding='utf-8')
 
-          # pyproject
           Path('pyproject.toml').write_text(dedent('''\
           [build-system]
           requires = ["setuptools>=68", "wheel"]
@@ -96,7 +89,6 @@ jobs:
           odin = "odin.cli:main"
           '''), encoding='utf-8')
 
-          # .odin configs
           Path('.odin/config.json').write_text(dedent('''\
           {
             "version": "6.1.0",
@@ -122,7 +114,6 @@ jobs:
           }
           '''), encoding='utf-8')
 
-          # ODIN core (minimal)
           Path('odin/__init__.py').write_text('__version__ = "6.1.0"\\n', encoding='utf-8')
 
           Path('odin/utils.py').write_text(dedent('''\
@@ -309,8 +300,8 @@ jobs:
               assert h1 == h2
           '''), encoding='utf-8')
 
-          # CI workflow
-          Path('.github/workflows/ci.yml').write_text(dedent('''\
+          # IMPORTANT: on pousse CI en .txt pour éviter le blocage "workflows"
+          Path('.github/workflows/ci.yml.txt').write_text(dedent('''\
           name: ci
           on: [push, pull_request]
           jobs:
@@ -329,5 +320,5 @@ jobs:
       - name: Commit & push
         run: |
           git add -A
-          git -c user.name='odin-bot' -c user.email='bot@example.local' commit -m "ODIN v6.1: monorepo scaffold (orphan)"
+          git -c user.name='odin-bot' -c user.email='bot@example.local' commit -m "ODIN v6.1: monorepo scaffold (orphan, CI parked)"
           git push origin "${{ inputs.target_branch }}"
