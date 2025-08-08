@@ -1,0 +1,14 @@
+{
+  "instance": {
+    "locked": false,
+    "pid": null
+  },
+  "last_audit": {
+    "file_count": 34,
+    "sih_root": -5174629986412216191
+  },
+  "last_backup": "/workspace/AI-Context-Engineering/.odin/backups/20250808-125532",
+  "sih_root": -8464992706289832589,
+  "risk_profile": "low",
+  "commit": null
+}

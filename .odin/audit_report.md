@@ -1,3 +1,23 @@
-# ODIN Standard Audit Report
-- Integrity verified
-- Code quality checked
+# ODIN Audit Report (v6.1)
+
+- Files hashed: 34
+  - .gitignore: f27ac9e81b5a841a5cbd5d4f27d4d21841e17d9edb5454986806672b9a4a6953
+  - CHANGELOG.md: 95665cfba281f10f6eb3f3d9cd40147c8459bf71245de40e58ab8ab85778806d
+  - LICENSE: 768819c035c8e8255c7b470a6fa1fd940079b4940325bcaa8690f2562c3b4d7a
+  - QUICKSTART.md: 7cc3fb86666fae2daf0e6d7d92ce0f6c7076686dc7ea22003dce45262d46f2f2
+  - README.md: 2e71ecef0f8df83254cefbaefd63bc1c7634cbf45863d319077ddc89a4149c6e
+  - SECURITY.md: ba9643955bfcb04524a6fe5a8c2929b54abc2e67bb3480ce806e742d506e4dc9
+  - odin/__init__.py: 9dbd9063e25d735aa8128f553b99c61c343c0c0fac0b929a6610e8cda3eaa92a
+  - odin/adjudicator.py: 6c29611a0ee73a6b6316ecd7498d495efd50d49a25d5000a05d6927db8f6e536
+  - odin/audit_engine.py: e2fc412b0ee5ac34b0aab249483016d652c72c1bca02f670430432329ab5b7a8
+  - odin/backup.py: 74d32a77c3c2868af35137462ead8f1b236dea5245ebac67b887feaba096d17b
+  - odin/checkpoint.py: 3e23d5e6993c9c04456c2feedd10ce3de779116565a306ac40bad9a947e67fa9
+  - odin/cli.py: 7db67b32f9186de3af11aeab077d5d34cd4b6981e249ce36bb66e017022f7eac
+  - odin/context_guard.py: 585791bb004aab30835c90b5ac421405cf46d5938c03a85fc8fffb462a723953
+  - odin/grounded_only.py: dc98543bc21c26c2000796dfb2fac26078d579cfcc793074bb4509f4d7a4819c
+  - odin/integrity.py: 28a6e78cda993ca7ed373c4607238d1a3eb3abb9a0030399b406ac1ed32e8264
+  - odin/learning.py: c58c5463710272b38946dba2302ee513bdfd254946a3abeb1bf2122d8104308d
+  - odin/rollback.py: fe3944ebe47fe8f136838b79db854d836e9fb8bc0d9a4836416e93bd9741657b
+  - odin/router.py: 3c7e07709a0589527c5409a1216114de34b54009351029272efa2dc6f1ca60d6
+  - odin/schema_guard.py: aaa56ae26d6cdf3a0fb4701e3d08c4ddf064e902a0c58d1a546ee6c3d235d6b6
+  - odin/tms.py: 4c0c935e18199f0c2627f41433fba979ea81e398d3cdb48dc0d5f4e75b8666aa
