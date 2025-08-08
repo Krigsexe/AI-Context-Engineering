@@ -1,3 +1,5 @@
+GLOBAL RECONSTRUCT IN PROGESS ! Stay tuned :)
+
 # ODIN v6.1 - Le Gardien de vos Projets IA
 
 **ODIN (Overseer & Deployer for Intelligent Networks)** est un moteur de sécurité et de fiabilisation conçu pour patcher n'importe quel Grand Modèle de Langage (LLM), qu'il soit agentique ou non. Notre mission : permettre aux non-développeurs, créateurs et entrepreneurs de concrétiser leurs projets IA en toute confiance, sans régressions, hallucinations ou itérations dangereuses.
