@@ -1,241 +1,127 @@
-ODIN v6.1 — Autonomous AI Codebase Assistant (Offline‑First)
+# ODIN v6.1 - Le Gardien de vos Projets IA
 
-FR + EN • Zero‑Regression • Anti‑Hallucination • Fully Auditable • No Cloud Dependency
+**ODIN (Overseer & Deployer for Intelligent Networks)** est un moteur de sécurité et de fiabilisation conçu pour patcher n'importe quel Grand Modèle de Langage (LLM), qu'il soit agentique ou non. Notre mission : permettre aux non-développeurs, créateurs et entrepreneurs de concrétiser leurs projets IA en toute confiance, sans régressions, hallucinations ou itérations dangereuses.
 
-Version: 6.1.0  •  License: MIT  •  Author: Make With Passion by Krigs
+---
 
-🇫🇷 Résumé (pour tous)
+<p align="center">
+  <a href="#-english-version">English Version</a> • <a href="#-version-française">Version Française</a>
+</p>
 
-ODIN est un cadre open‑source qui sécurise l’usage d’un LLM (agent ou non) pour qu’un non‑développeur puisse concrétiser un projet sans régressions, sans hallucinations, et avec une traçabilité complète.
+---
 
-Idée centrale : Patch n’importe quel LLM grâce à des garde‑fous (CBI, Grounded‑Only, SIH, TestGen, Rollback, Audit), de sorte que le modèle ne puisse pas dériver en dehors du contexte validé.
+## 🇬🇧 English Version
 
-Atouts clés
+### 🤔 What is the Problem?
 
-✅ CBI — Clarify‑Before‑Iterate : si un point est ambigu, ODIN pose des questions et attend votre OK avant d’agir.
+Large Language Models (LLMs) are incredibly powerful, but using them for real-world projects is risky, especially for non-developers. Common issues include:
+*   **👻 Hallucinations**: The AI invents facts or code that looks plausible but is incorrect.
+*   **📉 Regressions**: An update that is supposed to improve one thing breaks ten others.
+*   **💥 Dangerous Iterations**: An autonomous agent gets stuck in a loop, consuming resources or performing harmful actions.
+*   **CONTEXTO CONFUSO**: The AI quickly loses track of the initial goal in long or complex tasks.
 
-✅ Grounded‑Only : le modèle ne s’appuie que sur des sources locales vérifiées (code, docs MCP en cache, feedback validé).
+These risks make it difficult for creators without a technical background to build reliable and safe AI-powered applications.
 
-✅ Offline‑First : pas d’Internet en exécution standard → reproductible, auditable, souverain.
+### ✨ Our Solution: ODIN v6.1
 
-✅ Anti‑régression : backups atomiques + rollback automatique en cas d’échec.
+ODIN acts as a protective layer around any LLM. It's not another LLM; it's a set of strict rules and intelligent processes that **supervise** the AI. It ensures that every action the AI wants to take is validated, safe, and aligned with the project's goals.
 
-✅ Intégrité forte : SHA‑256 + SIH (Semantic Integrity Hash basé AST) → la structure logique est garantie.
+The core idea is **Context Engineering**: we carefully prepare and manage all the information the AI needs, ensuring it never gets lost. [12, 13]
 
-✅ TestGen : génération de tests (unitaires/intégration) pour fiabiliser chaque évolution.
+### 🚀 Key Features (The ODIN Protocol)
 
-✅ Audit : rapport clair de l’état du projet et de ses empreintes de contrôle.
+ODIN operates based on a set of non-negotiable rules:
 
-Pour qui ?
+1.  **🛡️ Validation Before Execution**: Nothing is executed without a final check. ODIN simulates or verifies the outcome of an action before it's applied.
+2.  **⏪ Automatic Rollback**: If a change introduces an error or a regression, ODIN can automatically revert to the last stable state.
+3.  **🌐 Controlled Internet Access**: No uncontrolled browsing. The AI can only access pre-approved, verified sources of information.
+4.  ** offline-first ** : ODIN is designed to function primarily offline, using the internet only when necessary and under strict supervision.
+5.  **✍️ Full Traceability**: Every decision, action, and piece of data used by the AI is logged. You always know *why* the AI did what it did.
+6.  **🔗 Dependency & Binding Validation**: ODIN checks that all parts of the project (APIs, databases, internal modules) are correctly connected and communicating.
+7.  **📚 Verified Learning Only**: ODIN learns and updates itself exclusively from trusted and verified sources, preventing knowledge contamination.
+8.  **🎯 Single Instance Focus**: ODIN manages one project at a time to ensure its full attention and prevent context leakage between projects.
 
-Créateurs solo, PM, no‑code/low‑code, TPE/PME : livrer des features sans surprises.
+### 👥 Who is This For?
 
-Équipes techniques : cadre de sûreté pour intégrer un LLM sans risque de dérive.
+*   **Entrepreneurs** with an idea for an AI application but not the coding skills.
+*   **Creators and "No-Code" Makers** who want to build powerful and reliable AI tools.
+*   **Project Managers** who need to ensure their AI projects stay on track and on budget.
 
-🇬🇧 TL;DR (for everyone)
+### 🗺️ Project Roadmap
 
-ODIN is an open‑source framework that hardens any LLM (agentic or not) so non‑developers can ship features without regressions, without hallucinations, and with full auditability.
+1.  **📍 Phase 1: Foundation (We are here)**
+    *   [x] Finalize ODIN v6.1 core rules.
+    *   [x] Create this clear and comprehensive README.
+    *   [ ] Define the monorepo structure (`/docs`, `/src`, `/tests`, `/examples`).
+    *   [ ] Develop the core validation engine (the heart of ODIN).
 
-Highlights
+2.  **📍 Phase 2: Integration**
+    *   [ ] Create connectors for popular LLMs (OpenAI, Anthropic, Mistral, local models).
+    *   [ ] Develop the first user-friendly interface (CLI or simple Web UI).
 
-✅ CBI — Clarify‑Before‑Iterate: if something’s unclear, ODIN asks first and waits for approval.
+3.  **📍 Phase 3: Autonomy & Community**
+    *   [ ] Implement the full auto-rollback and supervised learning features.
+    *   [ ] Release the first public version and open up for community contributions.
 
-✅ Grounded‑Only: model only uses verified local sources (codebase, cached MCP docs, validated feedback).
+### 🤝 How to Contribute
 
-✅ Offline‑First: no Internet at runtime → reproducible, auditable, sovereign.
+Currently, the project is in its foundational phase, primarily driven by the core agent. Once we reach Phase 3, we will open up for contributions. Stay tuned!
 
-✅ Zero‑regression mindset: atomic backups + automatic rollback on failures.
+---
 
-✅ Strong integrity: SHA‑256 + SIH (AST‑based semantic hashing).
+## 🇫🇷 Version Française
 
-✅ TestGen: unit/integration tests generated to secure changes.
+### 🤔 Quel est le Problème ?
 
-✅ Audit: clear health report and integrity fingerprints.
+Les Grands Modèles de Langage (LLM) sont incroyablement puissants, mais leur utilisation pour des projets réels est risquée, surtout pour les non-développeurs. Les problèmes courants incluent :
+*   **👻 Hallucinations** : L'IA invente des faits ou du code qui semble plausible mais est incorrect.
+*   **📉 Régressions** : Une mise à jour censée améliorer une chose en casse dix autres.
+*   **💥 Itérations Dangereuses** : Un agent autonome se coince dans une boucle, consommant des ressources ou effectuant des actions nuisibles.
+*   **CONTEXTO CONFUS**: L'IA perd rapidement le fil de l'objectif initial dans les tâches longues ou complexes.
 
-🧠 Principes & Garanties / Principles & Guarantees
+Ces risques empêchent les créateurs sans bagage technique de construire des applications IA fiables et sûres.
 
-CBI — Clarify‑Before‑Iterate (règle prioritaire)
+### ✨ Notre Solution : ODIN v6.1
 
-Si une consigne est ambiguë, risquée ou impacte l’historique, ODIN liste les inconnues, pose des questions fermées, puis attend la validation explicite (✅/⚠️/❌) avant toute itération.
+ODIN agit comme une couche de protection autour de n'importe quel LLM. Ce n'est pas un autre LLM ; c'est un ensemble de règles strictes et de processus intelligents qui **supervisent** l'IA. Il s'assure que chaque action que l'IA veut entreprendre est validée, sûre et alignée avec les objectifs du projet.
 
-Grounded‑Only (Sources bornées)
+L'idée centrale est l'**Ingénierie de Contexte** (Context Engineering) : nous préparons et gérons soigneusement toutes les informations dont l'IA a besoin, pour qu'elle ne se perde jamais. [12, 13]
 
-Exécution standard sans Internet. Sources autorisées : code local, docs officielles MCP en cache, retours utilisateurs validés.
+### 🚀 Fonctionnalités Clés (Le Protocole ODIN)
 
-Intégrité & Réversibilité
+ODIN fonctionne sur la base d'un ensemble de règles non négociables :
 
-Double vérification : SHA‑256 + SIH.
+1.  **🛡️ Validation avant Exécution** : Rien n'est exécuté sans une vérification finale. ODIN simule ou vérifie le résultat d'une action avant de l'appliquer.
+2.  **⏪ Rollback Automatique** : Si un changement introduit une erreur ou une régression, ODIN peut automatiquement revenir au dernier état stable.
+3.  **🌐 Accès Internet Contrôlé** : Pas de navigation non contrôlée. L'IA ne peut accéder qu'à des sources d'information pré-approuvées et vérifiées.
+4.  ** offline-first ** : ODIN est conçu pour fonctionner principalement hors ligne, n'utilisant Internet qu'en cas de nécessité et sous surveillance stricte.
+5.  **✍️ Traçabilité Totale** : Chaque décision, action et donnée utilisée par l'IA est enregistrée. Vous savez toujours *pourquoi* l'IA a fait ce qu'elle a fait.
+6.  **🔗 Validation des Dépendances et Liaisons** : ODIN vérifie que toutes les parties du projet (API, bases de données, modules internes) sont correctement connectées et communiquent bien.
+7.  **📚 Apprentissage Vérifié Uniquement** : ODIN n'apprend et ne se met à jour qu'à partir de sources de confiance et vérifiées, empêchant la contamination des connaissances.
+8.  **🎯 Instance Unique** : ODIN gère un seul projet à la fois pour garantir sa pleine attention et éviter les fuites de contexte entre les projets.
 
-Backups atomiques avant modification, rollback auto si tests/feedback négatifs.
+### 👥 Pour Qui ?
 
-Traçabilité & Transparence
+*   Les **entrepreneurs** qui ont une idée d'application IA mais pas les compétences en code.
+*   Les **créateurs et adeptes du "No-Code"** qui veulent construire des outils IA puissants et fiables.
+*   Les **chefs de projet** qui doivent s'assurer que leurs projets IA respectent les objectifs et le budget.
 
-AI_CHECKPOINT.json (état), learning_log.json (journal), audit_report.md (rapport), commits signés/horodatés.
+### 🗺️ Feuille de Route du Projet
 
-Instance unique & Liaisons complètes
+1.  **📍 Phase 1 : Fondation (Nous sommes ici)**
+    *   [x] Finaliser les règles du cœur d'ODIN v6.1.
+    *   [x] Créer ce README clair et complet.
+    *   [ ] Définir la structure du monorepo (`/docs`, `/src`, `/tests`, `/examples`).
+    *   [ ] Développer le moteur de validation principal (le cœur d'ODIN).
 
-.odin/odin.lock pour empêcher les instances multiples.
+2.  **📍 Phase 2 : Intégration**
+    *   [ ] Créer des connecteurs pour les LLM populaires (OpenAI, Anthropic, Mistral, modèles locaux).
+    *   [ ] Développer la première interface utilisateur simple (CLI ou interface web basique).
 
-Validation des liaisons : chaînes d’appels, endpoints/handlers, modèles DB, variables d’env, intégrations.
+3.  **📍 Phase 3 : Autonomie & Communauté**
+    *   [ ] Implémenter les fonctionnalités complètes de rollback automatique et d'apprentissage supervisé.
+    *   [ ] Publier la première version publique et ouvrir aux contributions de la communauté.
 
-🧩 Architecture (monorepo)
+### 🤝 Comment Contribuer
 
-.odin/
-  ├─ AI_CHECKPOINT.json      # état courant & intégrité
-  ├─ config.json             # paramètres (SLO, router, policies)
-  ├─ learning_log.json       # journal d’apprentissage
-  ├─ audit_report.md         # rapport d’audit
-  ├─ backups/                # sauvegardes atomiques
-  └─ docs_cache/             # docs officielles MCP hors‑ligne
-odin/
-  ├─ cli.py                  # CLI (init, audit, rollback)
-  ├─ integrity.py            # SHA‑256 + SIH (AST)
-  ├─ audit_engine.py         # génération du rapport
-  ├─ checkpoint.py           # scaffold + fichiers d’état
-  └─ utils.py                # utilitaires
-plugins/                     # extensions (ex: DepGuard, ContextGuard)
-tests/                       # tests unitaires / intégration
-README.md, LICENSE, CHANGELOG.md, SECURITY.md, pyproject.toml
-
-🚀 Démarrage rapide (FR)
-
-Prérequis : Python 3.10+ (recommandé 3.11)
-
-# 1) Installer ODIN localement
-pip install -e .
-
-# 2) Vérifier la version
-odin --version
-
-# 3) Initialiser le projet (crée backup + fichiers .odin)
-odin init
-
-# 4) Lancer un audit d’intégrité
-odin audit --full    # ou: odin audit
-
-# 5) Créer votre demande dans TASKS.md (exemple)
-echo "Ajouter une fonction validate_email() + tests" >> TASKS.md
-
-# 6) Laisser ODIN poser ses QUESTIONS (CBI)… puis répondez ✅/⚠️/❌
-
-Exemple concret (non‑développeur)
-
-Vous décrivez en une phrase ce que vous voulez (ex.: « Ajoute une validation d’email avec tests unitaires »).
-
-ODIN pose 3–5 questions simples (format attendu, lib acceptées, cas limites…).
-
-Vous répondez par oui/non ou choix A/B.
-
-ODIN crée un backup, modifie le code, génère des tests, exécute, puis documente.
-
-En cas d’échec → rollback immédiat et rapport clair.
-
-🚀 Quick Start (EN)
-
-Requirements: Python 3.10+ (preferably 3.11)
-
-pip install -e .
-odin --version
-odin init
-odin audit --full    # or: odin audit
-
-echo "Add validate_email() with unit tests" >> TASKS.md
-# ODIN will ask CBI questions → answer and approve before execution
-
-🛠️ CLI (v6.1, minimal)
-
-odin init            # crée le scaffold .odin + premier backup
-odin audit [--full]  # calcule les empreintes (SHA‑256 + SIH) et produit .odin/audit_report.md
-odin rollback        # restaure le dernier backup atomique
-
-D’autres sous‑commandes (TestGen, DepGuard, ContextGuard, Router…) peuvent exister selon votre version.
-
-⚙️ Configuration (.odin/config.json)
-
-{
-  "version": "6.1.0",
-  "slo": { "hallucination_max_rate": 0.005 },
-  "router": {
-    "low":  { "reasoning_effort": "minimal",  "double_pass": false, "grounded_only": true },
-    "med":  { "reasoning_effort": "standard", "double_pass": true,  "grounded_only": true },
-    "high": { "reasoning_effort": "max",      "double_pass": true,  "grounded_only": true }
-  },
-  "allowed_tools": ["local_rag","unit_tests","integrity_check"],
-  "schema_guard": { "enabled": true }
-}
-
-slo.hallucination_max_rate : objectif de taux d’hallucination (SLO) visé.
-
-router : profils d’effort de raisonnement (double‑pass, grounded_only).
-
-allowed_tools : outils autorisés localement.
-
-schema_guard : validation de schémas/contrats (si applicable).
-
-🧪 Tests
-
-python -m pytest -q
-
-Astuce: créez un requirements-dev.txt avec pytest (et pytest-cov si besoin) pour standardiser l’installation.
-
-🔐 Anti‑Hallucination & Anti‑Régression — Comment ça marche ?
-
-Grounded‑Only : ODIN ne produit que ce qu’il peut justifier par des sources validées (code/doc cache/feedback).
-
-CBI : ODIN s’arrête et questionne dès qu’une ambiguïté/risk est détectée.
-
-SIH (AST) : deux codes logiquement identiques → même hash, même intégrité.
-
-TestGen : les chemins critiques sont couverts par des tests.
-
-Backups + Rollback : si un test échoue, retour état n‑1 immédiat.
-
-Audit : état, empreintes, recommandations → tout est traçable.
-
-🧭 Bonnes pratiques (FR/EN)
-
-Décrivez votre demande en langage simple, en listant 3 critères d’acceptation.
-
-Répondez aux questions CBI sans ambigüité (oui/non, A/B, valeurs concrètes).
-
-Validez chaque jalon. N’avancez pas si un doute persiste.
-
-Conservez le dépôt offline tant que possible pour la reproductibilité.
-
-❓ FAQ
-
-Q. Puis‑je utiliser Internet ?R. En mode standard, non. ODIN est offline‑first. Vous pouvez autoriser ponctuellement une consultation officielle (docs langage/framework), qui sera mise en cache.
-
-Q. Et si je ne suis pas développeur ?R. C’est l’objectif d’ODIN : vous décrivez ce que vous voulez, ODIN pose les questions, sécurise, teste, documente et revient en arrière si nécessaire.
-
-Q. Et si tout casse ?R. Rollback automatique au dernier backup + rapport d’audit pour comprendre pourquoi.
-
-🤝 Contribuer
-
-Issues : bugs, idées, questions.
-
-PRs : tests inclus, documentation à jour, aucune régression.
-
-Respectez CBI et la charte de contribution (à venir).
-
-🗺️ Roadmap (extrait)
-
-v6.1.x : durcissement CBI, packs de tests, exemples guided‑mode (non‑dev).
-
-v6.2 : Adjudicator/Double‑Pass, Router étendu, TestGen enrichi, plugins DepGuard/ContextGuard par défaut.
-
-📚 Glossaire
-
-CBI : Clarify‑Before‑Iterate (poser des questions avant d’agir).
-
-Grounded‑Only : pas de sources non vérifiées.
-
-SIH : Semantic Integrity Hash (hash de l’AST pour garantir la logique).
-
-TestGen : génération automatique de tests.
-
-MCP cache : documentation officielle stockée hors‑ligne.
-
-📄 Licence
-
-MIT © 2025 Make With Passion by Krigs
+Actuellement, le projet est dans sa phase de fondation, pilotée principalement par l'agent principal. Une fois que nous aurons atteint la Phase 3, nous ouvrirons les contributions. Restez à l'écoute !
