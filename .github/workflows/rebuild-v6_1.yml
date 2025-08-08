@@ -2,266 +2,331 @@ name: Rebuild to ODIN v6.1 (monorepo)
 on:
   workflow_dispatch:
     inputs:
-      branch:
+      target_branch:
         description: "Target orphan branch"
         default: "v6.1"
         required: true
+
 jobs:
   rebuild:
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-      actions: write
-    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
+        with:
+          fetch-depth: 0
 
       - name: Create orphan branch
         run: |
-          git checkout --orphan "${{ inputs.branch }}"
+          set -euo pipefail
+          git checkout --orphan "${{ inputs.target_branch }}"
           git rm -rf . || true
+          git clean -fdx
           find . -mindepth 1 -maxdepth 1 ! -name ".git" -exec rm -rf {} +
 
-      - name: Scaffold ODIN v6.1 (offline-first)
-        shell: bash
+      - name: Scaffold ODIN v6.1 (offline-first, monorepo)
         run: |
           set -euo pipefail
-          mkdir -p odin scripts tests .odin/backups .odin/docs_cache .github/workflows
-          cat > .gitignore << "EOF"
-__pycache__/
-*.pyc
-.env
-.venv/
-build/
-dist/
-.pytest_cache/
-.odin/backups/
-EOF
-          cat > LICENSE << "EOF"
-MIT License
-Copyright (c) 2025 Make With Passion by Krigs
-Permission is hereby granted, free of charge, to any person obtaining a copy...
-EOF
-          cat > README.md << "EOF"
-# ODIN v6.1 — Autonomous AI Codebase Assistant (Offline-First)
-Monorepo propre basé sur ODIN v6.x (SIH + TestGen + Rollback + Audit + Grounded-Only).
-## Commands
-- \`odin init\` : initialise .odin + premier backup
-- \`odin audit --full\` : audit intégrité (SHA-256 + SIH)
-- \`odin rollback\` : restaure le dernier backup
-EOF
-          cat > pyproject.toml << "EOF"
-[build-system]
-requires = ["setuptools>=68","wheel"]
-build-backend = "setuptools.build_meta"
-[project]
-name="odin-ai"
-version="6.1.0"
-description="ODIN v6.1 – Autonomous AI Codebase Assistant (offline-first)"
-readme="README.md"
-license={text="MIT"}
-requires-python=">=3.9"
-[project.scripts]
-odin="odin.cli:main"
-EOF
-          mkdir -p .odin
-          cat > .odin/config.json << "EOF"
-{
-  "version": "6.1.0",
-  "slo": { "hallucination_max_rate": 0.005 },
-  "router": {
-    "low":  { "reasoning_effort": "minimal",  "double_pass": false, "grounded_only": true },
-    "med":  { "reasoning_effort": "standard", "double_pass": true,  "grounded_only": true },
-    "high": { "reasoning_effort": "max",      "double_pass": true,  "grounded_only": true }
-  },
-  "allowed_tools": ["local_rag","unit_tests","integrity_check"],
-  "schema_guard": { "enabled": true }
-}
-EOF
-          cat > .odin/AI_CHECKPOINT.json << "EOF"
-{
-  "instance": {"locked": false, "pid": null},
-  "last_audit": null,
-  "last_backup": null,
-  "sih_root": null,
-  "risk_profile": "low",
-  "commit": null
-}
-EOF
-          cat > odin/__init__.py << "EOF"
-__all__ = ["__version__"]
-__version__ = "6.1.0"
-EOF
-          cat > odin/utils.py << "EOF"
-from pathlib import Path
-import json, hashlib
-ROOT = Path.cwd()
-ODIN_DIR = ROOT/".odin"
-BACKUPS = ODIN_DIR/"backups"
-def read_json(p: Path, default):
-    return default if not p.exists() else json.loads(p.read_text(encoding="utf-8"))
-def write_json(p: Path, obj):
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(obj, indent=2, ensure_ascii=False)+"\n", encoding="utf-8")
-def sha256_bytes(data: bytes) -> str:
-    import hashlib; h = hashlib.sha256(); h.update(data); return h.hexdigest()
-def sha256_file(p: Path) -> str:
-    return sha256_bytes(p.read_bytes())
-EOF
-          cat > odin/checkpoint.py << "EOF"
-from pathlib import Path
-from .utils import ODIN_DIR, write_json
-AI_CHECKPOINT = ODIN_DIR/"AI_CHECKPOINT.json"
-CONFIG = ODIN_DIR/"config.json"
-LEARNING_LOG = ODIN_DIR/"learning_log.json"
-AUDIT_REPORT = ODIN_DIR/"audit_report.md"
-LOCK = ODIN_DIR/"odin.lock"
-DEFAULTS = {
-  "AI_CHECKPOINT.json": {
-    "instance": {"locked": False, "pid": None},
-    "last_audit": None, "last_backup": None,
-    "sih_root": None, "risk_profile": "low", "commit": None
-  },
-  "config.json": {
-    "version": "6.1.0",
-    "slo": {"hallucination_max_rate": 0.005},
-    "router": {
-      "low": {"reasoning_effort": "minimal","double_pass": False,"grounded_only": True},
-      "med": {"reasoning_effort": "standard","double_pass": True,"grounded_only": True},
-      "high":{"reasoning_effort": "max","double_pass": True,"grounded_only": True}
-    },
-    "allowed_tools": ["local_rag","unit_tests","integrity_check"],
-    "schema_guard": {"enabled": True}
-  },
-  "learning_log.json": {"entries": []}
-}
-def ensure_scaffold():
-  ODIN_DIR.mkdir(exist_ok=True)
-  for name, default in DEFAULTS.items():
-    p = ODIN_DIR/name
-    if not p.exists(): write_json(p, default)
-  (ODIN_DIR/"backups").mkdir(exist_ok=True)
-  (ODIN_DIR/"docs_cache").mkdir(exist_ok=True)
-  (ODIN_DIR/"audit_report.md").touch(exist_ok=True)
-EOF
-          cat > odin/integrity.py << "EOF"
-import ast, os
-from pathlib import Path
-from .utils import sha256_file, sha256_bytes
-IGNORES = {".git",".odin","backups","__pycache__"}
-def is_python(p: Path)->bool: return p.suffix==".py"
-def normalize_python_ast(src: str)->str:
-  tree = ast.parse(src)
-  return ast.dump(tree, annotate_fields=True, include_attributes=False)
-def semantic_hash_file(p: Path)->str:
-  if is_python(p):
-    try: return sha256_bytes(normalize_python_ast(p.read_text(encoding="utf-8")).encode("utf-8"))
-    except Exception: pass
-  return sha256_file(p)
-def walk_files(root: Path)->list[Path]:
-  out=[]
-  for base, dirs, files in os.walk(root):
-    basep=Path(base); dirs[:]=[d for d in dirs if d not in IGNORES]
-    for f in files:
-      p=basep/f
-      if any(part in IGNORES for part in p.parts): continue
-      out.append(p)
-  return sorted(out)
-def project_sih(root: Path)->dict[str,str]:
-  return {str(p): semantic_hash_file(p) for p in walk_files(root)}
-EOF
-          cat > odin/audit_engine.py << "EOF"
-from pathlib import Path
-from .integrity import project_sih
-from .checkpoint import ensure_scaffold, AUDIT_REPORT
-HEADER = "# ODIN Audit Report (v6.1)\\n\\n"
-def run_audit(root: Path)->dict:
-  ensure_scaffold()
-  sih = project_sih(root)
-  body=[HEADER, f"- Files hashed: {len(sih)}\\n"]
-  for i, (k,v) in enumerate(sih.items()):
-    if i>=20: break
-    body.append(f"  - {k}: {v}\\n")
-  AUDIT_REPORT.write_text("".join(body), encoding="utf-8")
-  return {"file_count": len(sih), "sih_root": hash(tuple(sorted(sih.values())))}
-EOF
-          cat > odin/cli.py << "EOF"
-import argparse, shutil, time
-from pathlib import Path
-from .checkpoint import ensure_scaffold
-from .integrity import project_sih
-from .audit_engine import run_audit
-from .utils import BACKUPS
-def cmd_init(args):
-  ensure_scaffold()
-  sih = project_sih(Path.cwd())
-  ts = time.strftime("%Y%m%d-%H%M%S"); dest = BACKUPS/ts
-  for rel in sih.keys():
-    p=Path(rel); d=dest/p; d.parent.mkdir(parents=True, exist_ok=True)
-    if p.exists(): shutil.copy2(p,d)
-  print(f"✅ ODIN initialized. Backup at {dest}")
-def cmd_audit(args):
-  out=run_audit(Path.cwd()); print(f"✅ Audit complete. Files: {out['file_count']}")
-def cmd_rollback(args):
-  bdir=BACKUPS
-  if not bdir.exists(): print("⚠️  No backups"); return
-  cands=sorted([p for p in bdir.iterdir() if p.is_dir()])
-  if not cands: print("⚠️  No backups"); return
-  b=cands[-1]
-  for p in b.rglob("*"):
-    if p.is_dir(): continue
-    rel=p.relative_to(b); dst=Path.cwd()/rel; dst.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(p,dst)
-  print(f"✅ Restored from {b}")
-def build_parser():
-  p=argparse.ArgumentParser(prog="odin", description="ODIN v6.1 – Offline-First")
-  s=p.add_subparsers(dest="cmd", required=True)
-  s.add_parser("init").set_defaults(fn=cmd_init)
-  s.add_parser("audit").set_defaults(fn=cmd_audit)
-  s.add_parser("rollback").set_defaults(fn=cmd_rollback)
-  return p
-def main():
-  parser=build_parser(); args=parser.parse_args(); args.fn(args)
-if __name__=="__main__": main()
-EOF
-          cat > tests/test_integrity.py << "EOF"
-from pathlib import Path
-from odin.integrity import semantic_hash_file
-def test_semantic_hash_stable(tmp_path: Path):
-  p = tmp_path/"a.py"
-  p.write_text("x=1\n# comment\nx=1\n")
-  h1 = semantic_hash_file(p)
-  p.write_text("x=1\n# other\nx=1\n")
-  h2 = semantic_hash_file(p)
-  assert h1 == h2
-EOF
-          cat > .github/workflows/ci.yml << "EOF"
-name: ci
-on: [push, pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
-      - run: pip install -e .
-      - run: python -m pytest -q
-EOF
+          python - <<'PY'
+          from pathlib import Path
+          from textwrap import dedent
+
+          # Directories
+          Path('.github/workflows').mkdir(parents=True, exist_ok=True)
+          Path('odin').mkdir(parents=True, exist_ok=True)
+          Path('scripts').mkdir(parents=True, exist_ok=True)
+          Path('tests').mkdir(parents=True, exist_ok=True)
+          Path('.odin/docs_cache').mkdir(parents=True, exist_ok=True)
+          Path('.odin/backups').mkdir(parents=True, exist_ok=True)
+
+          # .gitignore
+          Path('.gitignore').write_text(dedent('''\
+          __pycache__/
+          *.pyc
+          .env
+          .venv/
+          build/
+          dist/
+          .pytest_cache/
+          .odin/backups/
+          '''), encoding='utf-8')
+
+          # LICENSE (abrégé)
+          Path('LICENSE').write_text(dedent('''\
+          MIT License
+          Copyright (c) 2025 Make With Passion by Krigs
+          Permission is hereby granted, free of charge, to any person obtaining a copy
+          of this software and associated documentation files (the "Software"), to deal
+          in the Software without restriction...
+          '''), encoding='utf-8')
+
+          # README
+          Path('README.md').write_text(dedent('''\
+          # ODIN v6.1 — Autonomous AI Codebase Assistant (Offline-First)
+
+          Monorepo propre basé sur ODIN v6.x (SIH + TestGen + Rollback + Audit + Grounded-Only).
+
+          ## Commands
+          - `odin init` : initialise .odin + premier backup
+          - `odin audit --full` : audit intégrité (SHA-256 + SIH)
+          - `odin rollback` : restaure le dernier backup
+
+          CI: voir `.github/workflows/ci.yml`.
+          '''), encoding='utf-8')
+
+          # pyproject
+          Path('pyproject.toml').write_text(dedent('''\
+          [build-system]
+          requires = ["setuptools>=68", "wheel"]
+          build-backend = "setuptools.build_meta"
+
+          [project]
+          name = "odin-ai"
+          version = "6.1.0"
+          description = "ODIN v6.1 – Autonomous AI Codebase Assistant (offline-first)"
+          readme = "README.md"
+          license = {text = "MIT"}
+          requires-python = ">=3.9"
+
+          [project.scripts]
+          odin = "odin.cli:main"
+          '''), encoding='utf-8')
+
+          # .odin configs
+          Path('.odin/config.json').write_text(dedent('''\
+          {
+            "version": "6.1.0",
+            "slo": { "hallucination_max_rate": 0.005 },
+            "router": {
+              "low":  { "reasoning_effort": "minimal",  "double_pass": false, "grounded_only": true },
+              "med":  { "reasoning_effort": "standard", "double_pass": true,  "grounded_only": true },
+              "high": { "reasoning_effort": "max",      "double_pass": true,  "grounded_only": true }
+            },
+            "allowed_tools": ["local_rag","unit_tests","integrity_check"],
+            "schema_guard": { "enabled": true }
+          }
+          '''), encoding='utf-8')
+
+          Path('.odin/AI_CHECKPOINT.json').write_text(dedent('''\
+          {
+            "instance": {"locked": false, "pid": null},
+            "last_audit": null,
+            "last_backup": null,
+            "sih_root": null,
+            "risk_profile": "low",
+            "commit": null
+          }
+          '''), encoding='utf-8')
+
+          # ODIN core (minimal)
+          Path('odin/__init__.py').write_text('__version__ = "6.1.0"\\n', encoding='utf-8')
+
+          Path('odin/utils.py').write_text(dedent('''\
+          from pathlib import Path
+          import json, hashlib
+
+          ROOT = Path.cwd()
+          ODIN_DIR = ROOT/".odin"
+          BACKUPS = ODIN_DIR/"backups"
+
+          def read_json(p: Path, default):
+              return default if not p.exists() else json.loads(p.read_text(encoding="utf-8"))
+
+          def write_json(p: Path, obj):
+              p.parent.mkdir(parents=True, exist_ok=True)
+              p.write_text(json.dumps(obj, indent=2, ensure_ascii=False)+"\\n", encoding="utf-8")
+
+          def sha256_bytes(data: bytes) -> str:
+              h = hashlib.sha256(); h.update(data); return h.hexdigest()
+
+          def sha256_file(p: Path) -> str:
+              return sha256_bytes(p.read_bytes())
+          '''), encoding='utf-8')
+
+          Path('odin/checkpoint.py').write_text(dedent('''\
+          from pathlib import Path
+          from .utils import ODIN_DIR, write_json
+
+          AI_CHECKPOINT = ODIN_DIR/"AI_CHECKPOINT.json"
+          CONFIG = ODIN_DIR/"config.json"
+          LEARNING_LOG = ODIN_DIR/"learning_log.json"
+          AUDIT_REPORT = ODIN_DIR/"audit_report.md"
+          LOCK = ODIN_DIR/"odin.lock"
+
+          DEFAULTS = {
+            "AI_CHECKPOINT.json": {
+              "instance": {"locked": False, "pid": None},
+              "last_audit": None, "last_backup": None,
+              "sih_root": None, "risk_profile": "low", "commit": None
+            },
+            "config.json": {
+              "version": "6.1.0",
+              "slo": {"hallucination_max_rate": 0.005},
+              "router": {
+                "low": {"reasoning_effort": "minimal", "double_pass": False, "grounded_only": True},
+                "med": {"reasoning_effort": "standard","double_pass": True,  "grounded_only": True},
+                "high":{"reasoning_effort": "max",     "double_pass": True,  "grounded_only": True}
+              },
+              "allowed_tools": ["local_rag","unit_tests","integrity_check"],
+              "schema_guard": {"enabled": True}
+            },
+            "learning_log.json": {"entries": []}
+          }
+
+          def ensure_scaffold():
+              ODIN_DIR.mkdir(exist_ok=True)
+              for name, default in DEFAULTS.items():
+                  p = ODIN_DIR/name
+                  if not p.exists(): write_json(p, default)
+              (ODIN_DIR/"backups").mkdir(exist_ok=True)
+              (ODIN_DIR/"docs_cache").mkdir(exist_ok=True)
+              (ODIN_DIR/"audit_report.md").touch(exist_ok=True)
+          '''), encoding='utf-8')
+
+          Path('odin/integrity.py').write_text(dedent('''\
+          import ast, os
+          from pathlib import Path
+          from .utils import sha256_file, sha256_bytes
+
+          IGNORES = {".git", ".odin", "backups", "__pycache__"}
+
+          def is_python(p: Path) -> bool: return p.suffix == ".py"
+
+          def normalize_python_ast(src: str) -> str:
+              tree = ast.parse(src)
+              return ast.dump(tree, annotate_fields=True, include_attributes=False)
+
+          def semantic_hash_file(p: Path) -> str:
+              if is_python(p):
+                  try: return sha256_bytes(normalize_python_ast(p.read_text(encoding="utf-8")).encode("utf-8"))
+                  except Exception: pass
+              return sha256_file(p)
+
+          def walk_files(root: Path) -> list[Path]:
+              out = []
+              for base, dirs, files in os.walk(root):
+                  basep = Path(base)
+                  dirs[:] = [d for d in dirs if d not in IGNORES]
+                  for f in files:
+                      p = basep/f
+                      if any(part in IGNORES for part in p.parts): continue
+                      out.append(p)
+              return sorted(out)
+
+          def project_sih(root: Path) -> dict[str, str]:
+              return {str(p): semantic_hash_file(p) for p in walk_files(root)}
+          '''), encoding='utf-8')
+
+          Path('odin/audit_engine.py').write_text(dedent('''\
+          from pathlib import Path
+          from .integrity import project_sih
+          from .checkpoint import ensure_scaffold, AUDIT_REPORT
+
+          HEADER = "# ODIN Audit Report (v6.1)\\n\\n"
+
+          def run_audit(root: Path) -> dict:
+              ensure_scaffold()
+              sih = project_sih(root)
+              body = [HEADER, f"- Files hashed: {len(sih)}\\n"]
+              for i, (k, v) in enumerate(sih.items()):
+                  if i >= 20: break
+                  body.append(f"  - {k}: {v}\\n")
+              AUDIT_REPORT.write_text("".join(body), encoding="utf-8")
+              return {"file_count": len(sih), "sih_root": hash(tuple(sorted(sih.values())))}
+          '''), encoding='utf-8')
+
+          Path('odin/cli.py').write_text(dedent('''\
+          import argparse, shutil, time
+          from pathlib import Path
+          from .checkpoint import ensure_scaffold
+          from .integrity import project_sih
+          from .audit_engine import run_audit
+          from .utils import BACKUPS
+
+          def cmd_init(args):
+              ensure_scaffold()
+              sih = project_sih(Path.cwd())
+              ts = time.strftime("%Y%m%d-%H%M%S")
+              dest = BACKUPS/ts
+              for rel in sih.keys():
+                  p = Path(rel)
+                  d = dest/p
+                  d.parent.mkdir(parents=True, exist_ok=True)
+                  if p.exists(): shutil.copy2(p, d)
+              print(f"✅ ODIN initialized. Backup at {dest}")
+
+          def cmd_audit(args):
+              out = run_audit(Path.cwd())
+              print(f"✅ Audit complete. Files: {out['file_count']}")
+
+          def cmd_rollback(args):
+              bdir = BACKUPS
+              if not bdir.exists():
+                  print("⚠️  No backups"); return
+              cands = sorted([p for p in bdir.iterdir() if p.is_dir()])
+              if not cands:
+                  print("⚠️  No backups"); return
+              b = cands[-1]
+              for p in b.rglob("*"):
+                  if p.is_dir(): continue
+                  rel = p.relative_to(b)
+                  dst = Path.cwd()/rel
+                  dst.parent.mkdir(parents=True, exist_ok=True)
+                  shutil.copy2(p, dst)
+              print(f"✅ Restored from {b}")
+
+          def build_parser():
+              p = argparse.ArgumentParser(prog="odin", description="ODIN v6.1 – Offline-First")
+              s = p.add_subparsers(dest="cmd", required=True)
+              s.add_parser("init").set_defaults(fn=cmd_init)
+              s.add_parser("audit").set_defaults(fn=cmd_audit)
+              s.add_parser("rollback").set_defaults(fn=cmd_rollback)
+              return p
+
+          def main():
+              parser = build_parser()
+              args = parser.parse_args()
+              args.fn(args)
+
+          if __name__ == "__main__":
+              main()
+          '''), encoding='utf-8')
+
+          Path('tests/test_integrity.py').write_text(dedent('''\
+          from pathlib import Path
+          from odin.integrity import semantic_hash_file
+
+          def test_semantic_hash_stable(tmp_path: Path):
+              p = tmp_path/"a.py"
+              p.write_text("x=1\\n# comment\\nx=1\\n")
+              h1 = semantic_hash_file(p)
+              p.write_text("x=1\\n# other\\nx=1\\n")
+              h2 = semantic_hash_file(p)
+              assert h1 == h2
+          '''), encoding='utf-8')
+
+          # CI workflow
+          Path('.github/workflows/ci.yml').write_text(dedent('''\
+          name: ci
+          on: [push, pull_request]
+          jobs:
+            test:
+              runs-on: ubuntu-latest
+              steps:
+                - uses: actions/checkout@v4
+                - uses: actions/setup-python@v5
+                  with:
+                    python-version: "3.11"
+                - run: pip install -e .
+                - run: python -m pytest -q
+          '''), encoding='utf-8')
+          PY
 
       - name: Commit & push
         run: |
           git add -A
           git -c user.name='odin-bot' -c user.email='bot@example.local' commit -m "ODIN v6.1: monorepo scaffold (orphan)"
-          git push origin "${{ inputs.branch }}"
-
-      - name: Open PR (optional safety)
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: "propose-${{ inputs.branch }}"
-          title: "Propose ${{
-            inputs.branch
-          }} as new default (ODIN v6.1 monorepo)"
-          body: "Review CI, then switch default branch to `${{ inputs.branch }}` in Settings → Branches. No merge required."
+          git push origin "${{ inputs.target_branch }}"
