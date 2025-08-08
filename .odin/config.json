@@ -1,0 +1,11 @@
+{
+  "version": "6.1.0",
+  "slo": { "hallucination_max_rate": 0.005 },
+  "router": {
+    "low":  { "reasoning_effort": "minimal",  "double_pass": false, "grounded_only": true },
+    "med":  { "reasoning_effort": "standard", "double_pass": true,  "grounded_only": true },
+    "high": { "reasoning_effort": "max",      "double_pass": true,  "grounded_only": true }
+  },
+  "allowed_tools": ["local_rag","unit_tests","integrity_check"],
+  "schema_guard": { "enabled": true }
+}
