@@ -12,7 +12,8 @@ DEFAULTS = {
   "AI_CHECKPOINT.json": {
     "instance": {"locked": False, "pid": None},
     "last_audit": None, "last_backup": None,
-    "sih_root": None, "risk_profile": "low", "commit": None
+    "sih_root": None, "risk_profile": "low", "commit": None,
+    "sih_snapshot": {}, "context_sig": None
   },
   "config.json": {
     "version": "6.1.0",

@@ -7,8 +7,10 @@
     "file_count": 34,
     "sih_root": -5174629986412216191
   },
-  "last_backup": "/workspace/AI-Context-Engineering/.odin/backups/20250808-125532",
-  "sih_root": -8464992706289832589,
+  "last_backup": "/workspace/.odin/backups/20250824-013204",
+  "sih_root": 5740354900026072187,
   "risk_profile": "low",
-  "commit": null
+  "commit": null,
+  "sih_snapshot": {},
+  "context_sig": "4027cde5adae7b4f0a368d25bfea25e3a5c0b6d0840a1dd5f5a870b3e883392f"
 }
