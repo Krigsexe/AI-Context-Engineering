@@ -7,9 +7,13 @@
 from .intake import IntakeAgent
 from .dev import DevAgent
 from .retrieval import RetrievalAgent
+from .review import ReviewAgent
+from .architect import ArchitectAgent
 
 __all__ = [
     "IntakeAgent",
     "DevAgent",
     "RetrievalAgent",
+    "ReviewAgent",
+    "ArchitectAgent",
 ]

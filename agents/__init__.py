@@ -41,8 +41,10 @@ from .shared import (
 )
 
 # Import agent implementations (triggers registration)
-from .cognitive import IntakeAgent, DevAgent, RetrievalAgent
+from .cognitive import IntakeAgent, DevAgent, RetrievalAgent, ReviewAgent, ArchitectAgent
 from .oracle import OracleCodeAgent
+from .execution import TestAgent, SecurityAgent
+from .system import CheckpointAgent, AuditAgent
 
 __version__ = "7.0.0"
 
@@ -82,9 +84,18 @@ __all__ = [
     "IntegrityMonitor",
     "semantic_hash_file",
     "project_sih",
-    # Agents
+    # Cognitive Agents
     "IntakeAgent",
     "DevAgent",
     "RetrievalAgent",
+    "ReviewAgent",
+    "ArchitectAgent",
+    # Oracle Agents
     "OracleCodeAgent",
+    # Execution Agents
+    "TestAgent",
+    "SecurityAgent",
+    # System Agents
+    "CheckpointAgent",
+    "AuditAgent",
 ]
