@@ -23,8 +23,8 @@ class DeepSeekProvider(BaseLLMProvider):
 
     def __init__(
         self,
-        api_key: str = None,
-        model: str = None,
+        api_key: Optional[str] = None,
+        model: Optional[str] = None,
         timeout: int = 120
     ):
         self.api_key = api_key or os.getenv("DEEPSEEK_API_KEY")

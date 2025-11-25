@@ -21,8 +21,8 @@ class OllamaProvider(BaseLLMProvider):
 
     def __init__(
         self,
-        base_url: str = None,
-        model: str = None,
+        base_url: Optional[str] = None,
+        model: Optional[str] = None,
         timeout: int = 300
     ):
         self.base_url = base_url or os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")

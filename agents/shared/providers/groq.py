@@ -24,8 +24,8 @@ class GroqProvider(BaseLLMProvider):
 
     def __init__(
         self,
-        api_key: str = None,
-        model: str = None,
+        api_key: Optional[str] = None,
+        model: Optional[str] = None,
         timeout: int = 60
     ):
         self.api_key = api_key or os.getenv("GROQ_API_KEY")
