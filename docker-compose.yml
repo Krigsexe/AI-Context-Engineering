@@ -1,0 +1,318 @@
+# =============================================================================
+# ODIN v7.0 - Docker Compose Configuration
+# =============================================================================
+# Start: docker compose up -d
+# Stop:  docker compose down
+# Logs:  docker compose logs -f
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Infrastructure Services
+  # ---------------------------------------------------------------------------
+
+  # PostgreSQL - State Store
+  postgres:
+    image: postgres:16-alpine
+    container_name: odin-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-odin}
+      POSTGRES_USER: ${POSTGRES_USER:-odin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_in_production}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-odin}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # Redis - Message Bus & Cache
+  redis:
+    image: redis:7-alpine
+    container_name: odin-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # Neo4j - Knowledge Graph (Optional)
+  neo4j:
+    image: neo4j:5.14-community
+    container_name: odin-neo4j
+    profiles: ["knowledge-graph"]
+    environment:
+      NEO4J_AUTH: ${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-change_me_in_production}
+      NEO4J_PLUGINS: '["apoc"]'
+    volumes:
+      - neo4j_data:/data
+    ports:
+      - "7474:7474"  # HTTP
+      - "7687:7687"  # Bolt
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7474"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # LLM Server (Local)
+  # ---------------------------------------------------------------------------
+
+  # Ollama - Local LLM Server
+  ollama:
+    image: ollama/ollama:latest
+    container_name: odin-ollama
+    profiles: ["local-llm"]
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    # GPU Support (uncomment if you have NVIDIA GPU)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # Core Services
+  # ---------------------------------------------------------------------------
+
+  # Orchestrator (Go)
+  orchestrator:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    container_name: odin-orchestrator
+    environment:
+      - POSTGRES_URL=postgres://${POSTGRES_USER:-odin}:${POSTGRES_PASSWORD:-change_me_in_production}@postgres:5432/${POSTGRES_DB:-odin}?sslmode=disable
+      - REDIS_URL=redis://redis:6379
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - PORT=${ORCHESTRATOR_PORT:-9000}
+    ports:
+      - "${ORCHESTRATOR_PORT:-9000}:9000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # API Server (TypeScript/Node.js)
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: odin-api
+    environment:
+      - POSTGRES_URL=postgres://${POSTGRES_USER:-odin}:${POSTGRES_PASSWORD:-change_me_in_production}@postgres:5432/${POSTGRES_DB:-odin}
+      - REDIS_URL=redis://redis:6379
+      - API_SECRET_KEY=${API_SECRET_KEY:-generate_secure_key_minimum_32_chars}
+      - PORT=${API_PORT:-8000}
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      - orchestrator
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # Agents (Python)
+  # ---------------------------------------------------------------------------
+
+  # Base agent image (shared dependencies)
+  agent-base:
+    build:
+      context: ./agents
+      dockerfile: Dockerfile.base
+    image: odin-agent-base:latest
+    profiles: ["build-only"]
+
+  # Intake Agent
+  agent-intake:
+    build:
+      context: ./agents
+      dockerfile: intake/Dockerfile
+    container_name: odin-agent-intake
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - ODIN_LLM_PROVIDER=${ODIN_LLM_PROVIDER:-ollama}
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - AGENT_NAME=intake
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # Retrieval Agent
+  agent-retrieval:
+    build:
+      context: ./agents
+      dockerfile: retrieval/Dockerfile
+    container_name: odin-agent-retrieval
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_URL=postgres://${POSTGRES_USER:-odin}:${POSTGRES_PASSWORD:-change_me_in_production}@postgres:5432/${POSTGRES_DB:-odin}
+      - ODIN_LLM_PROVIDER=${ODIN_LLM_PROVIDER:-ollama}
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - AGENT_NAME=retrieval
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # Dev Agent
+  agent-dev:
+    build:
+      context: ./agents
+      dockerfile: dev/Dockerfile
+    container_name: odin-agent-dev
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - ODIN_LLM_PROVIDER=${ODIN_LLM_PROVIDER:-ollama}
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - AGENT_NAME=dev
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # MCP Agent (Checkpoints)
+  agent-mcp:
+    build:
+      context: ./agents
+      dockerfile: mcp/Dockerfile
+    container_name: odin-agent-mcp
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_URL=postgres://${POSTGRES_USER:-odin}:${POSTGRES_PASSWORD:-change_me_in_production}@postgres:5432/${POSTGRES_DB:-odin}
+      - AGENT_NAME=mcp
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # Approbation Agent (Human-in-the-loop)
+  agent-approbation:
+    build:
+      context: ./agents
+      dockerfile: approbation/Dockerfile
+    container_name: odin-agent-approbation
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_URL=postgres://${POSTGRES_USER:-odin}:${POSTGRES_PASSWORD:-change_me_in_production}@postgres:5432/${POSTGRES_DB:-odin}
+      - AGENT_NAME=approbation
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # Oracle Code Agent
+  agent-oracle-code:
+    build:
+      context: ./agents
+      dockerfile: oracle_code/Dockerfile
+    container_name: odin-agent-oracle-code
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - AGENT_NAME=oracle_code
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - odin-network
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # CLI (for interactive use)
+  # ---------------------------------------------------------------------------
+
+  cli:
+    build:
+      context: ./cli
+      dockerfile: Dockerfile
+    container_name: odin-cli
+    profiles: ["cli"]
+    environment:
+      - API_URL=http://api:${API_PORT:-8000}
+    depends_on:
+      - api
+    networks:
+      - odin-network
+    stdin_open: true
+    tty: true
+
+# -----------------------------------------------------------------------------
+# Volumes
+# -----------------------------------------------------------------------------
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  neo4j_data:
+    driver: local
+  ollama_data:
+    driver: local
+
+# -----------------------------------------------------------------------------
+# Networks
+# -----------------------------------------------------------------------------
+networks:
+  odin-network:
+    driver: bridge
+    name: odin-network

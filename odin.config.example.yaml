@@ -1,0 +1,250 @@
+# =============================================================================
+# ODIN v7.0 - Configuration File
+# =============================================================================
+# Copy this file to odin.config.yaml and customize for your setup
+# cp odin.config.example.yaml odin.config.yaml
+#
+# See docs/USER_CONFIGURATION.md for complete reference
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# LLM Configuration
+# -----------------------------------------------------------------------------
+llm:
+  # Primary provider (used for main tasks)
+  # Options: ollama, anthropic, openai, google, groq, mistral, together,
+  #          huggingface, deepseek, xai, vllm, custom
+  primary:
+    provider: ollama
+    model: qwen2.5:7b
+    temperature: 0.2
+    max_tokens: 4096
+    timeout: 300
+
+  # Fallback chain (tried in order if primary fails)
+  # Uncomment and configure as needed
+  # fallback:
+  #   - provider: groq
+  #     model: llama-3.1-70b-versatile
+  #   - provider: anthropic
+  #     model: claude-3-haiku-20240307
+
+  # Consensus oracle (multiple models for verification)
+  consensus:
+    enabled: true
+    min_agreement: 0.67
+    providers:
+      - provider: ollama
+        model: qwen2.5:7b
+      - provider: ollama
+        model: llama3.1:8b
+      # Add more models for stronger consensus
+      # - provider: ollama
+      #   model: deepseek-coder:6.7b
+
+  # Task-specific model overrides (optional)
+  # specialized:
+  #   code_generation:
+  #     provider: ollama
+  #     model: deepseek-coder:6.7b
+  #     temperature: 0.1
+  #   code_review:
+  #     provider: anthropic
+  #     model: claude-3-5-sonnet-20241022
+
+# -----------------------------------------------------------------------------
+# Confidence Thresholds
+# -----------------------------------------------------------------------------
+confidence:
+  high_confidence: 0.95      # Respond directly
+  moderate_confidence: 0.60   # Respond with caveats
+  low_confidence: 0.40        # Refuse, ask questions
+  min_sources: 1
+
+  # Require oracle validation for these task types
+  require_oracle:
+    - code_generation
+    - security_review
+    - deployment
+
+# -----------------------------------------------------------------------------
+# Agent Configuration
+# -----------------------------------------------------------------------------
+agents:
+  # Enable/disable specific agents
+  # Full list: intake, retrieval, verification, reasoning, critique,
+  #            formulation, calibration, pertinence, approbation, apprentissage,
+  #            dev, refacto, tests, verif_syntax, verif_security, verif_performance,
+  #            code_review, documentation, build, deploy, monitoring, indexation,
+  #            research_web, research_codebase, architecture,
+  #            oracle_code, oracle_kg, oracle_temporal, oracle_consensus, oracle_human,
+  #            mcp, backup, integrity, context_guard, router, scheduler, health,
+  #            metrics, logger, config
+  enabled:
+    # Cognitive agents
+    - intake
+    - retrieval
+    - verification
+    - reasoning
+    - critique
+    - formulation
+    # Execution agents
+    - dev
+    - tests
+    - verif_syntax
+    - research_codebase
+    # Oracles
+    - oracle_code
+    # System agents
+    - mcp
+    - approbation
+    - apprentissage
+
+  settings:
+    critique:
+      aggressiveness: medium  # low, medium, high
+
+    approbation:
+      require_approval:
+        - file_deletion
+        - deployment
+        - database_migration
+        - security_changes
+
+    apprentissage:
+      auto_learn: true
+      require_validation: true
+
+# -----------------------------------------------------------------------------
+# Oracle Configuration
+# -----------------------------------------------------------------------------
+oracles:
+  code:
+    enabled: true
+    linters:
+      python: [pylint, flake8]
+      javascript: [eslint]
+      typescript: [eslint]
+    type_checkers:
+      python: mypy
+      typescript: tsc
+    security_scanners:
+      python: [bandit]
+    test_runner: true
+
+  knowledge_graph:
+    enabled: false  # Requires Neo4j
+    provider: neo4j
+    auto_populate: false
+
+  temporal:
+    enabled: true
+    freshness_limits:
+      tech: 90        # Days
+      security: 30
+      legal: 180
+      general: 365
+
+  consensus:
+    enabled: true
+    min_models: 2
+    max_models: 5
+
+# -----------------------------------------------------------------------------
+# Checkpoint & Rollback
+# -----------------------------------------------------------------------------
+checkpoints:
+  auto_checkpoint:
+    - file_modification
+    - code_generation
+    - refactoring
+
+  retention:
+    max_checkpoints: 100
+    max_age_days: 30
+
+  storage: postgresql
+
+# -----------------------------------------------------------------------------
+# Feedback & Learning
+# -----------------------------------------------------------------------------
+feedback:
+  options:
+    - value: perfect
+      label: "Perfect"
+      action: archive_pattern
+    - value: acceptable
+      label: "Acceptable"
+      action: log_improvement
+    - value: false
+      label: "False/Incorrect"
+      action: rollback_and_log
+
+  auto_rollback_on_false: true
+  require_reason_on_false: true
+
+# -----------------------------------------------------------------------------
+# Privacy & Security
+# -----------------------------------------------------------------------------
+privacy:
+  log_retention_days: 90
+  log_prompts: true
+  log_responses: true
+  anonymize_logs: false
+
+  # Cloud providers you trust (remove others)
+  allowed_cloud_providers:
+    - anthropic
+    - openai
+    - google
+    - groq
+    - mistral
+    - together
+    - deepseek
+
+  # Patterns never sent to cloud providers
+  sensitive_patterns:
+    - "*.env"
+    - "*credentials*"
+    - "*secret*"
+    - "*.pem"
+    - "*.key"
+
+# -----------------------------------------------------------------------------
+# Performance
+# -----------------------------------------------------------------------------
+performance:
+  max_parallel_agents: 5
+  cache_enabled: true
+  cache_ttl_seconds: 3600
+
+  rate_limit:
+    requests_per_minute: 60
+    tokens_per_minute: 100000
+
+# -----------------------------------------------------------------------------
+# User Interface
+# -----------------------------------------------------------------------------
+ui:
+  language: en              # en, fr
+  verbosity: normal         # quiet, normal, verbose, debug
+  colors: true
+  show_confidence: true
+  show_reasoning: false
+  show_sources: true
+
+# -----------------------------------------------------------------------------
+# Integrations
+# -----------------------------------------------------------------------------
+integrations:
+  git:
+    auto_commit: false
+    commit_message_prefix: "[ODIN]"
+
+  vscode:
+    enabled: true
+    show_inline_suggestions: true
+
+  ci:
+    fail_on_low_confidence: true
+    confidence_threshold: 0.80
