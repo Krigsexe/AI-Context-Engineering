@@ -295,6 +295,58 @@ APRÈS :
   → Apprend des erreurs
 ```
 
+# ANALOGIE.md
+
+## Pourquoi cette page ?
+Cette section vise à fournir des analogies claires pour expliquer la philosophie "LLM augmenté" d’ODIN : pourquoi il ne s’agit PAS de “créer un meilleur LLM”, mais de **l’augmenter** via un système disciplinaire multi-agents.
+
+---
+
+## 1. LLM seul = cerveau & intuition brute
+
+- Capacité massive de mémorisation : “Il a tout lu”
+- Processus : prédit mot suivant via corrélation statistique
+- Défauts majeurs : hallucine, confond, improvise, ne sait pas dire “je ne sais pas”, pas de conscience de l’incertitude
+
+---
+
+## 2. ODIN = exocortex disciplinaire
+
+- Autour du LLM, ODIN pose :
+    - Des **oracles externes** : tests, knowledge graphs, humains
+    - Des **agents critiques** : questionnement, validation, rollback
+    - Une **mémoire structurée** : faits sourcés, expériences validées, feedback consigné
+    - Un **workflow strict** : planification, classement confiance, output validé
+- **Résultat** : le “cerveau” du LLM n’est plus livré à lui-même : il est contrôlé, audité, auto-corrigé
+
+---
+
+## 3. Analogie (humain)
+| Sans Exocortex  | Avec ODIN         |
+|-----------------|------------------|
+| Répond vite, souvent faux | Répond réfléchi, modulé, expliqué |
+| Devine s’il ne sait pas  | Avoue qu’il ne sait pas, cherche de l’aide |
+| Accumule les erreurs     | Corrige, rollback, apprend du feedback |
+| Pas de mémoire externe durable | Archive, documente, explique |
+
+---
+
+## 4. Ce que ça signifie pour l’architecture
+
+- On ne touche JAMAIS au LLM (Qwen, Llama, etc.) : il reste inchangé
+- Toute la valeur d’ODIN est dans la **couche agentique**, *ajoutée autour*
+    - Retrieval, critique, vérification, consensus, validation humaine
+    - Règles anti-dérive, trace complète, rollback, apprentissage supervisé
+
+---
+
+## 5. Work in progress — R&D (Novembre 2025)
+
+Ce fichier s’enrichit : toute nouvelle expérience, feedback, ou publication théorique pourra venir améliorer l’analogie.
+
+---
+
+
 **La structure atomique du LLM** = les neurones et connections (inchangé).
 
 **Le système qu'on ajoute** = la discipline et processus qui le rend fiable.
