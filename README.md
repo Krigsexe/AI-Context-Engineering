@@ -1,5 +1,3 @@
----
-
 <div align="center">
 
 [![Visitors Badge](https://api.visitorbadge.io/api/VisitorHit?user=Krigsexe&repo=AI-Context-Engineering&countColor=%237B1E7A)](https://github.com/Krigsexe/AI-Context-Engineering)
