@@ -1,314 +1,342 @@
-# ODIN v7.0 - Analyse du Repository Existant
+# ODIN v7.0 - Phase 0 Analysis Document
 
 **Date**: 2025-11-25
-**Version analysee**: ODIN v6.1.0
-**Objectif**: Refonte complete vers framework multi-agents orchestre
+**Current Version**: ODIN v6.1.0
+**Target Version**: ODIN v7.0
+**Status**: Awaiting validation before Phase 1
 
 ---
 
-## 1. Etat des Lieux
+## 1. Current State Analysis / Analyse de l'Etat Actuel
 
-### 1.1 Structure Actuelle
+### 1.1 Repository Structure
 
 ```
 AI-Context-Engineering/
-├── odin/                    # Package principal (monolithique)
-│   ├── __init__.py          # Version 6.1.0
-│   ├── cli.py               # CLI argparse (init, audit, rollback, start, backups)
-│   ├── checkpoint.py        # Gestion checkpoints JSON
-│   ├── router.py            # Profils de risque (low/med/high)
-│   ├── integrity.py         # Hachage semantique (SIH)
-│   ├── audit_engine.py      # Moteur d'audit
-│   ├── backup.py            # Creation backups
-│   ├── rollback.py          # Restauration backups
-│   ├── learning.py          # Logging apprentissage
-│   ├── context_guard.py     # Signature contexte
-│   ├── utils.py             # Utilitaires (JSON, hash)
-│   ├── grounded_only.py     # (non implemente)
-│   ├── schema_guard.py      # (non implemente)
-│   ├── tms.py               # (non implemente)
-│   └── adjudicator.py       # (non implemente)
-├── plugins/                 # Plugins (squelettes)
-│   ├── contextguard/        # Validation contexte (placeholder)
-│   └── depguard/            # Validation deps (placeholder)
-├── testgen/                 # Generateur tests (placeholder)
-├── tests/                   # Tests pytest (3 fichiers)
-├── scripts/                 # Scripts bash
-├── .odin/                   # Configuration runtime
-│   ├── AI_CHECKPOINT.json   # Etat checkpoint
-│   ├── config.json          # Configuration
-│   ├── learning_log.json    # Log apprentissage
-│   ├── audit_report.md      # Rapport audit
-│   └── backups/             # Sauvegardes
+├── odin/                    # Monolithic Python package
+│   ├── __init__.py          # v6.1.0
+│   ├── cli.py               # CLI: init, audit, rollback, start, backups
+│   ├── checkpoint.py        # JSON-based checkpoints
+│   ├── router.py            # Risk profiles (low/med/high)
+│   ├── integrity.py         # Semantic hashing (SIH) - CRITICAL
+│   ├── audit_engine.py      # Audit engine
+│   ├── backup.py            # Backup creation
+│   ├── rollback.py          # Backup restoration
+│   ├── learning.py          # Learning log
+│   ├── context_guard.py     # Context signature
+│   ├── utils.py             # Utilities (JSON, hash)
+│   ├── grounded_only.py     # NOT IMPLEMENTED
+│   ├── schema_guard.py      # NOT IMPLEMENTED
+│   ├── tms.py               # NOT IMPLEMENTED
+│   └── adjudicator.py       # NOT IMPLEMENTED
+├── plugins/                 # Skeleton plugins
+├── testgen/                 # Skeleton test generator
+├── tests/                   # 3 pytest files
+├── scripts/                 # Bash scripts
+├── .odin/                   # Runtime config
 └── .github/workflows/       # CI/CD
 ```
 
-### 1.2 Fonctionnalites Implementees
+### 1.2 Implemented Features Status
 
-| Fonctionnalite | Statut | Fichier | Notes |
-|----------------|--------|---------|-------|
-| CLI (init/audit/rollback/start) | OK | `cli.py` | Fonctionnel |
-| Checkpoints JSON | OK | `checkpoint.py` | File-based, pas DB |
-| Hachage semantique Python | OK | `integrity.py` | AST normalization |
-| Backup/Restore | OK | `backup.py`, `rollback.py` | Copies physiques |
-| Audit diff | OK | `audit_engine.py` | Detecte added/removed/modified |
-| Profils risque | OK | `router.py` | low/med/high |
-| Context signature | OK | `context_guard.py` | Hash global projet |
-| Lock instance | OK | `checkpoint.py` | Fichier .lock |
-| Tests unitaires | Partiel | `tests/` | 3 fichiers basiques |
-| Plugins | Squelette | `plugins/` | Non implementes |
-| Grounded-only | Non | `grounded_only.py` | Vide |
-| Schema guard | Non | `schema_guard.py` | Vide |
-| TMS (Truth Management) | Non | `tms.py` | Vide |
-| Adjudicator | Non | `adjudicator.py` | Vide |
-| Integration LLM | Non | - | Aucune |
-| API REST | Non | - | Aucune |
-| Docker | Non | - | Aucun |
-| Multi-agents | Non | - | Monolithique |
-
-### 1.3 Technologies Actuelles
-
-- **Langage**: Python 3.9+
-- **CLI**: argparse (basique)
-- **Stockage**: Fichiers JSON locaux
-- **Tests**: pytest
-- **CI/CD**: GitHub Actions (basique)
-- **Packaging**: setuptools via pyproject.toml
+| Feature | Status | File | Notes |
+|---------|--------|------|-------|
+| CLI (init/audit/rollback/start) | OK | `cli.py` | Functional |
+| JSON Checkpoints | OK | `checkpoint.py` | File-based |
+| Semantic Hashing (SIH) | OK | `integrity.py` | AST normalization |
+| Backup/Restore | OK | `backup.py`, `rollback.py` | Physical copies |
+| Audit diff | OK | `audit_engine.py` | Detects changes |
+| Risk profiles | OK | `router.py` | low/med/high |
+| Context signature | OK | `context_guard.py` | Global hash |
+| Instance lock | OK | `checkpoint.py` | Lock file |
+| Unit tests | Partial | `tests/` | 3 basic files |
+| LLM Integration | NO | - | None |
+| REST API | NO | - | None |
+| Docker | NO | - | None |
+| Multi-agents | NO | - | Monolithic |
 
 ---
 
-## 2. Ce qui doit etre CONSERVE
+## 2. Validated Technical Decisions / Decisions Techniques Validees
 
-### 2.1 Concepts Fondamentaux (valeur metier)
+### 2.1 Multi-Language Stack
 
-1. **Philosophie anti-hallucination** - Core value d'ODIN
-2. **Validation avant execution** - Principe non-negociable
-3. **Rollback automatique** - Securite critique
-4. **Tracabilite totale** - Audit trail
-5. **Apprentissage verifie** - Knowledge management
-6. **Instance unique** - Isolation projet
+| Component | Language | Version | Justification |
+|-----------|----------|---------|---------------|
+| Orchestrator | Go | 1.21+ | Native concurrency (goroutines), performance, standalone binary |
+| Agents | Python | 3.11+ | AI ecosystem (LangChain, transformers), RAG, embeddings |
+| API | TypeScript | Node 20 LTS | Async performance, type safety, extensible |
+| CLI | Go | 1.21+ | Native binary, cross-platform |
 
-### 2.2 Code Reutilisable
+**Sources**: Go concurrency model, Python AI ecosystem dominance, TypeScript enterprise adoption
 
-| Module | Reutilisation | Adaptation Requise |
-|--------|--------------|-------------------|
-| `integrity.py` | 100% | Ajouter plus de types fichiers |
-| `utils.py` | 90% | Abstraire paths |
-| `backup.py` | 70% | Adapter pour volumes Docker |
-| `audit_engine.py` | 80% | Enrichir metriques |
-| `context_guard.py` | 80% | Etendre markers |
+### 2.2 Infrastructure Stack
 
-### 2.3 Regles de Configuration
+| Layer | Technology | Version | Role |
+|-------|------------|---------|------|
+| Message Bus | Redis Streams | 7.2+ | Pub/sub async, request/response |
+| State Store | PostgreSQL | 16+ | Tasks, checkpoints, feedback (ACID) |
+| Cache | Redis | 7.2+ | Session, hot data |
+| Vector DB | FAISS | latest | Embeddings, RAG |
+| LLM Server | Ollama | latest | Local models |
+| Container | Docker Compose | 2.x | Multi-service orchestration |
 
-Le fichier `.odin/config.json` contient des concepts cles:
-- Profils de risque (low/med/high)
-- SLO hallucination max (0.005)
-- Outils autorises
-- Schema guard
+### 2.3 Default LLM
 
----
+- **Primary**: Qwen 2.5 7B (balance performance/resources)
+- **Optional**: DeepSeek Coder 6.7B (code-specialized)
+- **Extensible**: Llama 3.1 8B, Mistral 7B via `.env`
 
-## 3. Ce qui doit etre REFACTORISE
+### 2.4 Migration Strategy
 
-### 3.1 Architecture Monolithique -> Multi-Agents
+**Code to migrate**:
+- `odin/integrity.py` -> `agents/shared/integrity.py` (semantic hashing, tested, quality code)
+- Associated tests -> `tests/unit/agents/test_integrity.py`
 
-| Actuel | Cible v7.0 |
-|--------|------------|
-| Package Python unique | 30+ agents Docker independants |
-| Execution sequentielle | Orchestration parallele |
-| Stockage fichiers | PostgreSQL + Redis |
-| CLI seule | API + CLI + IDE plugins |
-| Pas de LLM | Ollama/vLLM integration |
+**Code to abandon**:
+- Current CLI (replaced by Go CLI)
+- JSON checkpoints (replaced by PostgreSQL)
+- Unimplemented modules (grounded_only, schema_guard, tms, adjudicator)
 
-### 3.2 Modules a Refactoriser
+**Git strategy**:
+```bash
+# 1. Tag and preserve v6.1
+git tag v6.1.0
+git checkout -b legacy/v6.1
 
-1. **`cli.py`** -> Agent CLI + API FastAPI
-2. **`checkpoint.py`** -> Agent MCP + StateStore PostgreSQL
-3. **`router.py`** -> Orchestrator + Router sophistique
-4. **`audit_engine.py`** -> Agent Audit + Monitoring
-5. **`learning.py`** -> Agent Apprentissage + Feedback loop
-
-### 3.3 Flux de Donnees
-
-**Actuel**:
-```
-User -> CLI -> File System -> Response
-```
-
-**Cible v7.0**:
-```
-User -> API/CLI -> Orchestrator -> Message Bus (Redis)
-                        |
-    +-------------------+-------------------+
-    |         |         |         |         |
-  Agent1   Agent2   Agent3   AgentN   LLM Server
-    |         |         |         |         |
-    +-------------------+-------------------+
-                        |
-              State Store (PostgreSQL)
+# 2. Main branch: new structure
+git checkout main
+# Migrate integrity.py
+# Build new structure
 ```
 
 ---
 
-## 4. Ce qui doit etre CREE (nouveau)
-
-### 4.1 Infrastructure
-
-| Composant | Description | Priorite |
-|-----------|-------------|----------|
-| `docker-compose.yml` | Orchestration services | P0 |
-| `install.sh` | Installation one-click | P0 |
-| PostgreSQL | Base etat persistant | P0 |
-| Redis | Message bus + cache | P0 |
-| Ollama | LLM server local | P0 |
-
-### 4.2 Agents a Creer
-
-| Agent | Role | Priorite |
-|-------|------|----------|
-| `orchestrator` | Hub central, routing | P0 |
-| `dev` | Generation code | P0 |
-| `mcp` | Checkpoints, rollback | P0 |
-| `approbation` | Validation humaine | P0 |
-| `pertinence` | Evaluation pertinence | P1 |
-| `research_codebase` | Analyse codebase | P1 |
-| `research_web` | Recherche web | P1 |
-| `verif_syntax` | Validation syntaxe | P1 |
-| `verif_security` | Scan securite | P1 |
-| `tests` | Generation/execution tests | P1 |
-| `code_review` | Review qualite | P1 |
-| `documentation` | Maj documentation | P2 |
-| `indexation` | Embeddings RAG | P2 |
-| `refacto` | Refactoring code | P2 |
-| `build` | Build projet | P2 |
-| `deploy` | Deploiement | P2 |
-| `monitoring` | Surveillance swarm | P2 |
-| `architecture` | Analyse archi | P3 |
-| `verif_performance` | Profiling | P3 |
-| `apprentissage` | Feedback loop | P3 |
-
-### 4.3 Shared Components
-
-| Composant | Description |
-|-----------|-------------|
-| `llm_client.py` | Abstraction LLM (Ollama, vLLM, OpenAI) |
-| `message_bus.py` | Redis Pub/Sub wrapper |
-| `state_store.py` | SQLAlchemy ORM PostgreSQL |
-| `vector_store.py` | FAISS/Milvus pour RAG |
-| `base_agent.py` | Classe abstraite agent |
-
-### 4.4 Interfaces
-
-| Interface | Description |
-|-----------|-------------|
-| API FastAPI | REST endpoints |
-| CLI Typer | Interface terminal |
-| VS Code Extension | Integration IDE |
-
----
-
-## 5. Risques et Points d'Attention
-
-### 5.1 Risques Techniques
-
-| Risque | Impact | Mitigation |
-|--------|--------|------------|
-| Complexite Docker multi-services | Moyen | Documentation + healthchecks |
-| Performance LLM local sans GPU | Haut | Supporter mode CPU (lent mais fonctionnel) |
-| Synchronisation agents | Moyen | Redis Streams + timeouts |
-| Migration donnees existantes | Bas | Script migration optionnel |
-
-### 5.2 Points Critiques
-
-1. **Compatibilite ascendante**: Conserver possibilite CLI standalone
-2. **Installation one-click**: Doit fonctionner meme sans Docker (mode degrade)
-3. **Offline-first**: Tout doit marcher sans internet apres setup initial
-4. **Performances**: LLM 7B doit tourner sur machine 16GB RAM
-
----
-
-## 6. Recommandations
-
-### 6.1 Stack Technologique Recommandee
-
-| Composant | Recommandation | Alternative |
-|-----------|----------------|-------------|
-| LLM local | Qwen 2.5 7B | DeepSeek Coder, Llama 3.1 |
-| LLM server | Ollama | vLLM (si GPU avancee) |
-| Orchestration | Custom Python + Redis | LangGraph, Celery |
-| Message Bus | Redis Streams | RabbitMQ |
-| Database | PostgreSQL 16 | SQLite (mode simple) |
-| API | FastAPI | Flask |
-| CLI | Typer | Click |
-| IDE Plugin | VS Code d'abord | JetBrains plus tard |
-
-### 6.2 Strategie de Migration
+## 3. Target Architecture / Architecture Cible
 
 ```
-Phase 0: Analyse (CURRENT) ✓
-Phase 1: Architecture + Structure
-Phase 2: Infrastructure Docker
-Phase 3: Core Components (shared + base_agent)
-Phase 4: Orchestrator
-Phase 5: API + CLI
-Phase 6: Documentation + Tests E2E
+┌─────────────────────────────────────────────────────────────┐
+│                      INTERFACES                              │
+│     CLI (Go)  |  API REST (TS/Fastify)  |  IDE Plugins      │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│                   ORCHESTRATOR (Go)                           │
+│   - State Machine (workflow FSM)                              │
+│   - Router (task -> agent sequence)                           │
+│   - Message Bus Publisher/Subscriber                          │
+└──────────────────────────┬───────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│               MESSAGE BUS (Redis Streams)                     │
+│     Channels: tasks:new, agent:*, response:*                  │
+└──────────────────────────┬───────────────────────────────────┘
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+┌─────────────────────────────────────────────────────────────┐
+│              30+ SPECIALIZED AGENTS (Python)                 │
+│                                                              │
+│  P0 (MVP):     dev, mcp, approbation, research_codebase     │
+│  P1:           verif_syntax, verif_security, tests,         │
+│                code_review, pertinence, research_web        │
+│  P2:           documentation, indexation, refacto,          │
+│                build, deploy, monitoring                    │
+│  P3:           architecture, verif_performance,             │
+│                apprentissage                                │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    INFRASTRUCTURE                             │
+│   PostgreSQL 16  |  Redis 7  |  FAISS  |  Ollama            │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 7. Questions de Clarification
+## 4. Anti-Hallucination Framework / Framework Anti-Hallucination
 
-Avant de commencer Phase 1, j'ai besoin de validation sur les points suivants:
+### 4.1 Root Causes (Validated Research)
 
-### Q1: LLM Local par Defaut
-**Options:**
-- A) Qwen 2.5 7B (recommande, bon equilibre)
-- B) Llama 3.1 8B (Meta, tres populaire)
-- C) DeepSeek Coder 6.7B (specialise code)
-- D) Mistral 7B (francophone)
+1. **Pre-training architecture**: LLMs predict next token (statistical), not truth
+2. **Probabilistic generation**: Even temp=0 does not eliminate hallucinations
+3. **Dataset gaps**: Biased/incomplete data leads to plausible but false patterns
+4. **Systemic issue**: Reward functions incentivize guessing over admitting uncertainty
 
-### Q2: Stack d'Orchestration
-**Options:**
-- A) Custom Python + Redis Pub/Sub (simple, controle total)
-- B) LangGraph (framework LangChain, plus structure)
-- C) Celery + Redis (battle-tested, complexe)
+**Sources**:
+- arxiv.org/html/2402.05201v1
+- arxiv.org/abs/2509.04664
+- en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)
 
-### Q3: Integrations IDE Prioritaires
-**Options:**
-- A) VS Code uniquement (Phase 1)
-- B) VS Code + JetBrains (Phase 1)
-- C) Aucune IDE (CLI/API seulement Phase 1)
+### 4.2 Defense-in-Depth (3 Layers)
 
-### Q4: Mode Installation
-**Options:**
-- A) Docker obligatoire (simplifie setup)
-- B) Docker + mode natif Python fallback
-- C) Mode natif Python principal, Docker optionnel
+| Layer | Techniques |
+|-------|------------|
+| Input | Query optimization, context filtering, verified source anchoring |
+| Design | RAG, Chain-of-Thought prompting, separation research/generation |
+| Output | Fact verification, guardrails, cite sources or "I don't know" |
 
-### Q5: Niveau Documentation
-**Options:**
-- A) Debutant (pas a pas detaille)
-- B) Intermediaire (concepts + exemples)
-- C) Expert (reference technique)
+**Sources**:
+- redhat.com/en/blog/when-llms-day-dream-hallucinations-how-prevent-them
+- kapa.ai/blog/ai-hallucination
 
-### Q6: Conservation Code Existant
-**Options:**
-- A) Migration complete (refactoring total)
-- B) Conserver odin/ comme mode "lite" + nouveau v7
-- C) Fork: garder v6.1 sur branch, v7 sur main
+### 4.3 ODIN Rules (Non-Negotiable)
 
----
+```
+ABSOLUTE RULES:
+- ZERO hallucination: sources or "I don't know"
+- ZERO deletion without validation
+- ALWAYS ask if ambiguous
+- ALWAYS checkpoint before major modification
 
-## 8. Prochaines Etapes
+WORKFLOW:
+ANALYZE -> QUESTION -> PLAN -> VALIDATE -> IMPLEMENT (atomic) -> TEST -> CHECKPOINT -> DOCUMENT
 
-En attente de validation:
-
-1. [ ] Reponses aux questions Q1-Q6
-2. [ ] Validation de ce document ANALYSIS.md
-3. [ ] Autorisation de proceder a Phase 1
-
-**Checkpoint**: `cp_000_analysis_complete`
+FEEDBACK LOOP:
+- "False" -> rollback + log + anti-pattern rule
+- "Perfect" -> archive + favor pattern rule
+```
 
 ---
 
-*Document genere par Claude Code - Phase 0 ODIN v7.0*
+## 5. Remaining Clarification Questions / Questions de Clarification
+
+### Q1: Deployment Mode
+
+**Question**: What is the deployment target?
+
+| Option | Description | Impact |
+|--------|-------------|--------|
+| A | 100% local only (offline-first strict) | No network config, max privacy |
+| B | Local + optional remote access (tunnel/VPN) | Network setup, auth required |
+| C | Hybrid (local dev + optional cloud) | More complex architecture |
+
+**Recommendation**: A (100% local) aligns with ODIN philosophy
+
+---
+
+### Q2: MVP Agents Priority
+
+**Question**: Which agents are CRITICAL for MVP (v7.0.0)?
+
+**Proposed MVP set (5 agents)**:
+1. `research_codebase` - Analyze existing code
+2. `dev` - Generate code
+3. `verif_syntax` - Validate syntax
+4. `mcp` - Checkpoints/rollback
+5. `approbation` - Human validation
+
+**Alternative**: All 30 agents in v1.0 (longer timeline)
+
+| Option | Agents | Timeline |
+|--------|--------|----------|
+| A | MVP (5 agents) | Shorter, validate core first |
+| B | Core (10 agents) | Medium |
+| C | Full (30 agents) | Longer, complete from start |
+
+---
+
+### Q3: IDE Integration Priority
+
+**Question**: IDE plugins in Phase 1?
+
+| Option | Description |
+|--------|-------------|
+| A | VS Code only | Focus quality, largest market share |
+| B | VS Code + JetBrains | Broader reach, more work |
+| C | CLI/API only (IDE Phase 2) | Fastest MVP, defer plugins |
+
+**Recommendation**: C (CLI/API first, IDE Phase 2)
+
+---
+
+### Q4: Tests & CI/CD
+
+**Question**: Test coverage level?
+
+| Option | Scope |
+|--------|-------|
+| A | Unit tests only | Fast feedback |
+| B | Unit + Integration | Good coverage |
+| C | Unit + Integration + E2E | Complete but slower |
+
+**CI/CD**:
+| Option | Platform |
+|--------|----------|
+| A | GitHub Actions | Native, simple |
+| B | GitLab CI | Alternative |
+| C | Manual | No automation |
+
+**Recommendation**: B (Unit + Integration), A (GitHub Actions)
+
+---
+
+### Q5: Documentation
+
+**Question**: Documentation scope?
+
+**Languages**:
+| Option | Languages |
+|--------|-----------|
+| A | English only | International reach |
+| B | Bilingual EN/FR | Current style |
+| C | Multilingual | More maintenance |
+
+**Level**:
+| Option | Target Audience |
+|--------|-----------------|
+| A | Expert (assumes Docker/Python/Go) | Minimal docs |
+| B | Intermediate (explains concepts) | Balanced |
+| C | Beginner (step-by-step) | Comprehensive |
+
+**Recommendation**: B (EN/FR), B (Intermediate)
+
+---
+
+## 6. Implementation Phases / Phases d'Implementation
+
+| Phase | Objective | Deliverables |
+|-------|-----------|--------------|
+| 0 | Analysis & Validation | This document, Q1-Q5 answers |
+| 1 | Infrastructure | Monorepo structure, Docker Compose, install.sh |
+| 2 | Orchestrator | Go orchestrator, router, state machine |
+| 3 | Agents MVP | BaseAgent, dev, mcp, approbation agents |
+| 4 | API | TypeScript/Fastify REST API |
+| 5 | CLI | Go CLI with Cobra |
+| 6 | Documentation | Full docs, tests, README |
+
+---
+
+## 7. Checkpoints
+
+| ID | Phase | Description |
+|----|-------|-------------|
+| cp_000 | 0 | Analysis complete, decisions validated |
+| cp_001 | 1 | Infrastructure ready, Docker works |
+| cp_002 | 2 | Orchestrator functional |
+| cp_003 | 3 | MVP agents operational |
+| cp_004 | 4 | API endpoints working |
+| cp_005 | 5 | CLI functional |
+| cp_006 | 6 | Production ready |
+
+---
+
+## 8. Awaiting Validation / En Attente de Validation
+
+Before proceeding to Phase 1, please confirm:
+
+1. [ ] Q1: Deployment mode (A/B/C)
+2. [ ] Q2: MVP agents scope (A/B/C)
+3. [ ] Q3: IDE priority (A/B/C)
+4. [ ] Q4: Tests level (A/B/C) + CI/CD (A/B/C)
+5. [ ] Q5: Documentation languages (A/B/C) + level (A/B/C)
+
+**Response format**: `Q1:A, Q2:A, Q3:C, Q4:B+A, Q5:B+B`
+
+---
+
+*Document generated by Claude Code - ODIN v7.0 Phase 0*
+*Last updated: 2025-11-25*
