@@ -22,13 +22,18 @@
 
 ## 1. System Overview
 
-### 1.1 Core Principle
+### 1.1 Core Principles
 
-ODIN v7.0 is a **hybrid cognitive system** combining:
-- **Neural**: LLM-based agents for language understanding and generation
+**User Sovereignty**: The user ALWAYS chooses their LLM provider, deployment model, and privacy level.
+
+ODIN v7.0 is a **provider-agnostic hybrid cognitive system** combining:
+- **Neural**: LLM-based agents (ANY provider: Anthropic, OpenAI, Google, Groq, Ollama, vLLM, HuggingFace, etc.)
 - **Symbolic**: Knowledge graph for verified facts
 - **Procedural**: Deterministic oracles for validation
 - **Human**: Approval loops for critical decisions
+
+See [LLM_PROVIDERS.md](./LLM_PROVIDERS.md) for complete provider list.
+See [USER_CONFIGURATION.md](./USER_CONFIGURATION.md) for configuration guide.
 
 ### 1.2 Anti-Hallucination Philosophy
 
