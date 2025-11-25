@@ -257,7 +257,8 @@ Respond in JSON format with keys: vulnerabilities, risk_level (critical/high/med
 
         code = input_data.get("code", "")
         language = input_data.get("language", "python")
-        security_requirements = input_data.get("security_requirements", [])
+        # Reserved for future use with custom security requirement checks
+        _security_requirements = input_data.get("security_requirements", [])
 
         if not code:
             return AgentResult(

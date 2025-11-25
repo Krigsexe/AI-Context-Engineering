@@ -21,9 +21,9 @@ class HuggingFaceProvider(BaseLLMProvider):
 
     def __init__(
         self,
-        api_key: str = None,
-        model: str = None,
-        endpoint: str = None,
+        api_key: Optional[str] = None,
+        model: Optional[str] = None,
+        endpoint: Optional[str] = None,
         timeout: int = 120
     ):
         self.api_key = api_key or os.getenv("HF_API_KEY")

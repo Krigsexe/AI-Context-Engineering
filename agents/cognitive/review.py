@@ -289,8 +289,8 @@ Standards to check: {standards_str}"""
         # Calculate basic metrics
         lines = code.split('\n')
         total_lines = len(lines)
-        code_lines = len([l for l in lines if l.strip() and not l.strip().startswith('#')])
-        comment_lines = len([l for l in lines if l.strip().startswith('#')])
+        code_lines = len([line for line in lines if line.strip() and not line.strip().startswith('#')])
+        comment_lines = len([line for line in lines if line.strip().startswith('#')])
 
         # Function/class count (basic)
         function_count = len(re.findall(r'\bdef\s+\w+', code))

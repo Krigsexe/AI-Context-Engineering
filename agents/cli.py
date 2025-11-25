@@ -11,7 +11,6 @@ import asyncio
 import json
 import logging
 import os
-import sys
 from pathlib import Path
 from typing import Optional
 
@@ -125,7 +124,7 @@ def cmd_list(args):
             temp = object.__new__(agent_class)
             try:
                 desc = agent_class.description.fget(temp)
-            except:
+            except Exception:
                 desc = "No description"
             print(f"  {agent_name:20} - {desc}")
 

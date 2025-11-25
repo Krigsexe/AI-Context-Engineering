@@ -10,7 +10,7 @@ import json
 import time
 import uuid
 import logging
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional, AsyncIterator
 from enum import Enum
 

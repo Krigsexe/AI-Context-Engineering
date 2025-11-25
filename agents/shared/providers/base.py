@@ -44,7 +44,7 @@ class BaseLLMProvider(ABC):
         temperature: float = 0.2,
         max_tokens: int = 4096,
         stop: Optional[List[str]] = None,
-        **kwargs
+        **kwargs: Any
     ) -> LLMResponse:
         """
         Generate a response from the LLM.
@@ -91,7 +91,7 @@ class BaseLLMProvider(ABC):
         self,
         messages: List[Message],
         max_retries: int = 3,
-        **kwargs
+        **kwargs: Any
     ) -> LLMResponse:
         """
         Generate with automatic retry on failure.
@@ -107,7 +107,7 @@ class BaseLLMProvider(ABC):
         Raises:
             Exception: If all retries fail
         """
-        last_error = None
+        last_error: Optional[Exception] = None
         for attempt in range(max_retries):
             try:
                 return self.generate(messages, **kwargs)
@@ -115,7 +115,9 @@ class BaseLLMProvider(ABC):
                 last_error = e
                 if attempt < max_retries - 1:
                     time.sleep(2 ** attempt)  # Exponential backoff
-        raise last_error
+        if last_error is not None:
+            raise last_error
+        raise RuntimeError("No retries attempted")
 
     def count_tokens(self, text: str) -> int:
         """
