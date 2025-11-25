@@ -62,8 +62,8 @@ def normalize_python_ast(source: str) -> str:
 
     Preserving only structural semantics.
     """
-    source = textwrap.dedent(source)
-    source = re.sub(r'^\s+', '', source, flags=re.MULTILINE)
+    # Only dedent and strip leading/trailing whitespace, preserving internal indentation
+    source = textwrap.dedent(source).strip()
     tree = ast.parse(source)
     return ast.dump(tree, annotate_fields=True, include_attributes=False)
 

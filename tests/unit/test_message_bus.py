@@ -12,6 +12,13 @@ from agents.shared.message_bus import (
     MessageBus,
 )
 
+# Check if redis is available
+try:
+    import redis
+    REDIS_AVAILABLE = True
+except ImportError:
+    REDIS_AVAILABLE = False
+
 
 class TestMessage:
     """Test Message dataclass."""
@@ -147,6 +154,7 @@ class TestMessageBusInitialization:
         assert bus._stream_name("tasks") == "odin:tasks"
         assert bus._stream_name("results") == "odin:results"
 
+    @pytest.mark.skipif(not REDIS_AVAILABLE, reason="redis package not installed")
     def test_subscribe_handler(self):
         """Test handler subscription."""
         bus = MessageBus()
@@ -160,6 +168,7 @@ class TestMessageBusInitialization:
         assert "channel:task" in bus._handlers
         assert handler in bus._handlers["channel:task"]
 
+    @pytest.mark.skipif(not REDIS_AVAILABLE, reason="redis package not installed")
     def test_subscribe_wildcard(self):
         """Test wildcard subscription."""
         bus = MessageBus()

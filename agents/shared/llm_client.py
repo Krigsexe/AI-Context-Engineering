@@ -6,7 +6,7 @@
 
 import os
 import logging
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 from .providers import (
     BaseLLMProvider,

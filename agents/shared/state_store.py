@@ -747,12 +747,12 @@ class InMemoryStateStore:
     ) -> List[AgentLog]:
         logs = self._logs.copy()
         if agent_id:
-            logs = [l for l in logs if l.agent_id == agent_id]
+            logs = [log for log in logs if log.agent_id == agent_id]
         if task_id:
-            logs = [l for l in logs if l.task_id == task_id]
+            logs = [log for log in logs if log.task_id == task_id]
         if level:
-            logs = [l for l in logs if l.level == level]
-        return sorted(logs, key=lambda l: l.timestamp, reverse=True)[:limit]
+            logs = [log for log in logs if log.level == level]
+        return sorted(logs, key=lambda log: log.timestamp, reverse=True)[:limit]
 
     def record_metric(
         self,

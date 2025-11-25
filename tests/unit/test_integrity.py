@@ -58,18 +58,15 @@ class TestASTNormalization:
 
     def test_normalize_simple_function(self):
         """Test normalization of simple function."""
-        code = '''
-def hello():
-    print("hello")
-'''
+        code = "def hello():\n    print('hello')\n"
         result = normalize_python_ast(code)
         assert "FunctionDef" in result
         assert "hello" in result
 
     def test_normalize_removes_whitespace_differences(self):
         """Test that whitespace differences are normalized."""
-        code1 = "def f():\n    return 1"
-        code2 = "def f():\n        return 1"
+        code1 = "def f():\n    return 1\n"
+        code2 = "def f():\n        return 1\n"
 
         # Both should produce same AST
         result1 = normalize_python_ast(code1)
