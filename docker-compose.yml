@@ -146,6 +146,20 @@ services:
       - odin-network
     restart: unless-stopped
 
+  # Frontend Dashboard (React)
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: odin-web
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - odin-network
+    restart: unless-stopped
+
   # ---------------------------------------------------------------------------
   # Agents (Python)
   # ---------------------------------------------------------------------------

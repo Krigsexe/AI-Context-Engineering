@@ -1,0 +1,40 @@
+# =============================================================================
+# ODIN v7.0 - Agent Base Image
+# =============================================================================
+# Shared base image containing common dependencies
+# =============================================================================
+
+FROM python:3.11-slim-bookworm
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements file from root context (needs to be built from root)
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Create non-root user for security
+RUN groupadd -r odin && useradd -r -g odin odin \
+    && chown -R odin:odin /app
+
+# Switch to non-root user
+USER odin
+
+# Default command (overridden by specific agents)
+CMD ["python", "-c", "print('ODIN Agent Base Image')"]
