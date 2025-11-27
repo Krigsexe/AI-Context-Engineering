@@ -1,135 +1,172 @@
-# Turborepo starter
+# ✳ ODIN Framework
 
-This Turborepo starter is maintained by the Turborepo core team.
+**Orchestrated Development Intelligence Network**
 
-## Using this example
+A complete Context Engineering & Multi-Agent framework for reliable AI-assisted development.
 
-Run the following command:
+## 🎯 Overview
 
-```sh
-npx create-turbo@latest
+ODIN is a dual-purpose framework:
+
+### **PARTIE A: Documentation Website**
+
+- Next.js showcase website
+- Auto-synced documentation from GitHub
+- Deployed on Vercel with Neon database
+- Features, guides, and API reference
+
+### **PARTIE B: CLI Framework**
+
+- Installable CLI tool (`npx @odin/cli init`)
+- Patches your existing dev projects
+- Compatible with Claude, Cursor, Windsurf, Aider, Continue, Cline, Roo-Cline
+- 100% local data storage (SQLite)
+- Provider-agnostic LLM support
+
+## 🚀 Quick Start
+
+### Install ODIN in Your Project
+
+```bash
+# Using npx (recommended)
+npx @odin/cli init
+
+# Or install globally
+pnpm add -g @odin/cli
+odin init
 ```
 
-## What's inside?
+### Select Your LLM Provider
 
-This Turborepo includes the following packages/apps:
+ODIN supports:
 
-### Apps and Packages
+- 🏠 **Ollama** (Local - No API key)
+- ☁️ **Anthropic** (Claude)
+- ☁️ **OpenAI** (GPT)
+- ☁️ **Google** (Gemini)
+- ☁️ **Groq** (Fast Inference)
+- ☁️ **xAI** (Grok)
+- ☁️ **Mistral**
+- ☁️ **Together AI**
+- ☁️ **DeepSeek**
+- ☁️ **HuggingFace**
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## 📦 What Gets Installed
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+ODIN injects itself **inside** your existing AI tool directory:
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+.claude/odin/          # or .cursor/odin, .windsurf/odin, etc.
+├── config.yaml        # LLM provider configuration
+├── orchestrator.md    # Main orchestrator agent
+├── rules/             # 30+ architecture rules
+│   ├── no-hardcoded-secrets.md
+│   ├── code-review-required.md
+│   └── checkpoint-before-refactor.md
+├── agents/            # Agent definitions
+│   ├── dev.yaml
+│   ├── security.yaml
+│   └── ...
+├── db/
+│   └── odin.db        # Local SQLite database
+├── memory-bank/       # Persistent project context
+├── archives/          # Session history
+├── index/             # Semantic index
+└── security/          # Security policies
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 🎨 Features
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+### Multi-Agent Architecture
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+- **Cognitive Agents**: Dev, Review, Architecture
+- **Oracle Agents**: Code execution, verification
+- **Execution Agents**: Tests, Security scanning
+- **System Agents**: Checkpoints, Audit trails
 
-### Develop
+### Anti-Hallucination Framework
 
-To develop all apps and packages, run the following command:
+- 5-level confidence system (AXIOM → UNKNOWN)
+- Source attribution required
+- Oracle verification for code
+- Multi-model consensus
 
-```
-cd my-turborepo
+### 100% Local Data
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+- SQLite database for memory
+- No external dependencies (except chosen LLM)
+- Complete data sovereignty
+- Works offline with Ollama
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+### Checkpoint & Rollback
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+- Automatic checkpoints before major changes
+- Semantic integrity hashing
+- One-command rollback
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+## 📚 CLI Commands
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+```bash
+# Initialize ODIN
+odin init
 
-### Remote Caching
+# Check status
+odin status
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+# View configuration
+odin config
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+# List agents
+odin agents --verbose
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+# Sync with latest framework
+odin sync
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## 🏗️ Monorepo Structure
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+odin-framework/
+├── apps/
+│   ├── web/           # Next.js documentation site
+│   └── docs/          # Additional docs app
+├── packages/
+│   ├── cli/           # CLI tool (this package)
+│   ├── core/          # Shared logic
+│   └── patch/         # Patch templates
+├── docs/              # Markdown documentation
+└── turbo.json         # Turborepo config
 ```
 
-## Useful Links
+## 🌐 Website
 
-Learn more about the power of Turborepo:
+Visit [odin-framework.vercel.app](https://odin-framework.vercel.app) for:
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+- Complete documentation
+- Interactive examples
+- Architecture guides
+- Best practices
+
+## 🤝 Contributing
+
+Contributions welcome! See [CONTRIBUTING.md](../../CONTRIBUTING.md)
+
+## 📄 License
+
+MIT License - see [LICENSE](../../LICENSE)
+
+## 🙏 Credits
+
+Created by **Julien Gelée (Krigs)**
+
+Inspired by:
+
+- Constitutional AI (Anthropic)
+- Multi-Agent Systems (Microsoft, LangChain)
+- Aerospace & medical device engineering discipline
+
+---
+
+**⭐ Star us on GitHub!**
+
+Built with ❤️ for the open-source AI community
