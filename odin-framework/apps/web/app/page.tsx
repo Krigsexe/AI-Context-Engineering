@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Terminal, Shield, GitBranch, Github } from "lucide-react"
+import { TerminalDemo } from "@/components/terminal-demo"
 
 export default function Home() {
   return (
@@ -32,32 +33,8 @@ export default function Home() {
             </div>
 
             {/* Terminal Preview */}
-            <div className="mt-16 w-full max-w-3xl bg-card border border-cyan-500/20 rounded-xl shadow-2xl shadow-cyan-500/10 overflow-hidden text-left hover-lift">
-              <div className="bg-muted/50 px-4 py-3 border-b border-cyan-500/20 flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <div className="ml-2 text-xs text-muted-foreground font-mono">odin-cli — 80x24</div>
-              </div>
-              <div className="p-6 font-mono text-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-cyan-500">➜</span>
-                  <span className="text-cyan-400">npx @odin/cli init</span>
-                </div>
-                <div className="text-muted-foreground mb-4">
-                  <span className="text-cyan-500">✳</span> ODIN Framework Initialization<br /><br />
-                  Detecting environment... <span className="text-cyan-500">✓ Detected: Cursor</span><br />
-                  Project: my-awesome-app<br />
-                </div>
-                <div className="text-foreground mb-2">
-                  ? Select LLM provider:
-                </div>
-                <div className="text-cyan-500">
-                  ❯ Ollama (Local) 🏠<br />
-                  <span className="text-muted-foreground">&nbsp;&nbsp;Anthropic (Claude) ☁️</span><br />
-                  <span className="text-muted-foreground">&nbsp;&nbsp;OpenAI (GPT) ☁️</span>
-                </div>
-              </div>
+            <div className="mt-16 w-full max-w-3xl">
+              <TerminalDemo />
             </div>
           </div>
         </div>

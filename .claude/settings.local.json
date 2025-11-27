@@ -12,7 +12,10 @@
       "Bash(git commit:*)",
       "Bash(git push)",
       "Bash(git add:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(cmd //c \"taskkill /PID 27512 /F\")",
+      "Bash(cmd //c \"taskkill /PID 10816 /F\")",
+      "Bash(cmd //c \"taskkill /PID 11280 /F\")"
     ],
     "deny": [],
     "ask": []

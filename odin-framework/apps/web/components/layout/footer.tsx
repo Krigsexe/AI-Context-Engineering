@@ -11,7 +11,15 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="text-center md:text-left">
                         <p className="text-muted-foreground text-sm mb-2">
-                            Built with ❤️ by Julien Gelée (Krigs) and the Open Source Community.
+                            Built with passion by Julien Gelee{" "}
+                            <Link
+                                href="https://github.com/Krigsexe"
+                                target="_blank"
+                                className="group/krigs inline-flex"
+                            >
+                                <span className="text-cyan-400 group-hover/krigs:text-cyan-300 group-hover/krigs:drop-shadow-[0_0_12px_rgba(0,255,255,0.9)] transition-all duration-300">(Krigs)</span>
+                            </Link>
+                            {" "}and the Open Source Community.
                         </p>
                         <p className="text-muted-foreground text-xs">
                             Released under MIT License. The code is yours.
@@ -22,9 +30,9 @@ export function Footer() {
                         <Link
                             href="https://github.com/Krigsexe/AI-Context-Engineering"
                             target="_blank"
-                            className="text-muted-foreground hover:text-cyan-500 transition-colors"
+                            className="group p-2 rounded-lg transition-all"
                         >
-                            <Github className="h-5 w-5" />
+                            <Github className="h-5 w-5 text-foreground group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.8)] transition-all" />
                         </Link>
                         <div className="h-4 w-px bg-border" />
                         <ThemeToggle variant="outline" />

@@ -74,7 +74,7 @@ export function Navbar() {
                             onBlur={() => setTimeout(() => setIsOpen(false), 150)}
                             className="group flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg transition-all border border-cyan-500/20 hover:border-cyan-500/40"
                         >
-                            <Code className="h-4 w-4 text-foreground group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.8)] transition-all" />
+                            <Code className="h-4 w-4 text-cyan-400 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.8)] transition-all" />
                             <span className="hidden sm:inline text-foreground group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.8)] transition-all">Explore</span>
                             <ChevronDown className={`h-4 w-4 text-foreground group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.8)] transition-all duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                         </button>
