@@ -1,0 +1,59 @@
+// ODIN Framework Database Schema
+// PostgreSQL on Neon
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+// Blog Topics - Fully Anonymous
+model Topic {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text
+  category  String   @default("general")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  comments  Comment[]
+
+  @@index([category])
+  @@index([createdAt])
+}
+
+// Anonymous Comments on Topics
+model Comment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  topicId   String
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([topicId])
+}
+
+// Chat Sessions for ODIN Bot (Anonymous)
+model ChatSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages  ChatMessage[]
+}
+
+// Chat Messages
+model ChatMessage {
+  id        String      @id @default(cuid())
+  role      String      // "user" or "assistant"
+  content   String      @db.Text
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId])
+}
