@@ -5,7 +5,8 @@ export default {
   earlyAccess: true,
   schema: path.join(__dirname, "schema.prisma"),
 
-  migrate: {
+  // For prisma db push and prisma migrate
+  datasource: {
     async adapter() {
       const connectionString = process.env.DATABASE_URL
       if (!connectionString) {

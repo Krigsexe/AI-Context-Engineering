@@ -5,7 +5,15 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "DATABASE_URL",
+        "REDIS_URL",
+        "GROQ_API_KEY",
+        "POSTGRES_URL",
+        "POSTGRES_PRISMA_URL",
+        "DATABASE_URL_UNPOOLED"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]
