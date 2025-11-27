@@ -2,5 +2,19 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "buildCommand": "pnpm turbo run build --filter=web",
-  "outputDirectory": "apps/web/.next"
+  "outputDirectory": "apps/web/.next",
+  "crons": [
+    {
+      "path": "/api/workers/github-sync",
+      "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/workers/moderator",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/workers/publisher",
+      "schedule": "0 * * * *"
+    }
+  ]
 }

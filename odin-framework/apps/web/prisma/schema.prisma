@@ -58,3 +58,75 @@ model ChatMessage {
   @@index([sessionId])
 }
 
+// ============================================
+// AGENTIC WORKERS SYSTEM
+// ============================================
+
+// Synced content from GitHub (docs, PRs, releases)
+model SyncedContent {
+  id          String   @id @default(cuid())
+  type        String   // "doc", "pr", "release", "issue"
+  source      String   // "github:owner/repo"
+  externalId  String   // GitHub ID
+  title       String
+  content     String   @db.Text
+  url         String
+  metadata    String?  @db.Text // JSON metadata
+  version     String?
+  syncedAt    DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([source, externalId])
+  @@index([type])
+  @@index([source])
+  @@index([syncedAt])
+}
+
+// Moderation queue for community content
+model ModerationQueue {
+  id           String   @id @default(cuid())
+  contentType  String   // "topic", "comment", "contribution"
+  contentId    String   // Reference to the content
+  content      String   @db.Text // Snapshot of content for analysis
+  status       String   @default("pending") // "pending", "approved", "rejected", "flagged"
+  score        Int?     // AI confidence score 0-100
+  reason       String?  @db.Text // Rejection/flag reason
+  analyzedBy   String?  // Worker ID that analyzed
+  analyzedAt   DateTime?
+  createdAt    DateTime @default(now())
+
+  @@index([status])
+  @@index([contentType])
+  @@index([createdAt])
+}
+
+// Moderation decision logs (audit trail)
+model ModerationLog {
+  id          String   @id @default(cuid())
+  queueId     String
+  action      String   // "auto_approve", "auto_reject", "flag_review", "manual_approve", "manual_reject"
+  score       Int
+  analysis    String   @db.Text // AI analysis JSON
+  workerId    String
+  createdAt   DateTime @default(now())
+
+  @@index([queueId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+// Worker execution tracking
+model WorkerRun {
+  id          String    @id @default(cuid())
+  workerId    String    // "github-sync", "moderator", "publisher"
+  status      String    @default("running") // "running", "success", "failed"
+  itemsProcessed Int    @default(0)
+  errors      String?   @db.Text
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  @@index([workerId])
+  @@index([status])
+  @@index([startedAt])
+}
+
