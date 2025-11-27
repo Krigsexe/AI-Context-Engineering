@@ -5,16 +5,8 @@
   "outputDirectory": "apps/web/.next",
   "crons": [
     {
-      "path": "/api/workers/github-sync",
-      "schedule": "0 */6 * * *"
-    },
-    {
-      "path": "/api/workers/moderator",
-      "schedule": "*/15 * * * *"
-    },
-    {
-      "path": "/api/workers/publisher",
-      "schedule": "0 * * * *"
+      "path": "/api/workers/run-all",
+      "schedule": "0 6 * * *"
     }
   ]
 }
