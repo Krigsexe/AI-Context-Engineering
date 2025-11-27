@@ -15,9 +15,13 @@ export function Footer() {
                             <Link
                                 href="https://github.com/Krigsexe"
                                 target="_blank"
-                                className="group/krigs inline-flex"
+                                className="group/krigs inline-flex font-mono"
                             >
-                                <span className="text-cyan-400 group-hover/krigs:text-cyan-300 group-hover/krigs:drop-shadow-[0_0_12px_rgba(0,255,255,0.9)] transition-all duration-300">(Krigs)</span>
+                                <span className="text-foreground">&lt;/</span>
+                                <span className="text-cyan-400 group-hover/krigs:text-cyan-300 group-hover/krigs:drop-shadow-[0_0_12px_rgba(0,255,255,0.9)] transition-all duration-300">Krigs</span>
+                                <span className="text-foreground">.</span>
+                                <span className="text-cyan-400 group-hover/krigs:text-cyan-300 group-hover/krigs:drop-shadow-[0_0_12px_rgba(0,255,255,0.9)] transition-all duration-300">exe</span>
+                                <span className="text-foreground">&gt;</span>
                             </Link>
                             {" "}and the Open Source Community.
                         </p>
